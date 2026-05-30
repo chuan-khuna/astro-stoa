@@ -65,6 +65,14 @@ export const en: StoicContent = {
       text: "Make the best use of what is in your power, and take the rest as it happens.",
       author: "Epictetus, <em>Enchiridion</em>",
     },
+    controlSort: {
+      heading: "Sort it yourself",
+      intro:
+        "Name something troubling you right now, then file it where it belongs. Watch how much of your worry lands in the right-hand column — and how little of it you can actually move.",
+      placeholder: "What's weighing on you?",
+      inControlLabel: "In my control",
+      notInControlLabel: "Not up to me",
+    },
   },
 
   stoicTriangle: {

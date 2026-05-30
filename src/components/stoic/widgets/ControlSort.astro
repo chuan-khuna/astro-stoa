@@ -1,0 +1,111 @@
+---
+interface Props {
+  placeholder?: string;
+  inControlLabel?: string;
+  notInControlLabel?: string;
+}
+const {
+  placeholder = "What's weighing on you?",
+  inControlLabel = "In my control",
+  notInControlLabel = "Not up to me",
+} = Astro.props;
+---
+
+<div class="mt-3 flex flex-col gap-4" data-control-sort>
+  <div class="flex flex-col gap-2">
+    <input
+      type="text"
+      data-cs-input
+      placeholder={placeholder}
+      class="w-full font-body text-sm text-ink bg-paper-2 border border-rule px-3 py-2.5 placeholder:text-muted/50 focus:outline-none focus:border-neutral transition-colors"
+    />
+    <div class="flex gap-2">
+      <button
+        type="button"
+        data-cs-add="in"
+        class="flex-1 font-body text-xs tracking-[0.12em] uppercase border border-rule px-3 py-1.5 text-muted hover:text-ink hover:border-neutral transition-colors"
+      >
+        {inControlLabel}
+      </button>
+      <button
+        type="button"
+        data-cs-add="out"
+        class="flex-1 font-body text-xs tracking-[0.12em] uppercase border border-rule px-3 py-1.5 text-muted hover:text-ink hover:border-neutral transition-colors"
+      >
+        {notInControlLabel}
+      </button>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-2 border-l border-t border-rule">
+    <div class="border-r border-b border-rule p-3">
+      <p class="font-body text-xs tracking-[0.12em] uppercase text-muted mb-2.5">
+        {inControlLabel}
+      </p>
+      <ul data-cs-list="in" class="space-y-1.5"></ul>
+    </div>
+    <div class="border-r border-b border-rule p-3">
+      <p class="font-body text-xs tracking-[0.12em] uppercase text-muted mb-2.5">
+        {notInControlLabel}
+      </p>
+      <ul data-cs-list="out" class="space-y-1.5"></ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-control-sort]").forEach((root) => {
+    const input = root.querySelector<HTMLInputElement>("[data-cs-input]")!;
+    const lists: Record<string, HTMLElement> = {
+      in: root.querySelector<HTMLElement>('[data-cs-list="in"]')!,
+      out: root.querySelector<HTMLElement>('[data-cs-list="out"]')!,
+    };
+
+    const addItem = (kind: "in" | "out") => {
+      const text = input.value.trim();
+      if (!text) {
+        input.focus();
+        return;
+      }
+
+      const li = document.createElement("li");
+      li.className =
+        "group flex items-start gap-2 font-body text-sm text-ink leading-snug";
+      // The in-control column gets an accent tick — that's where your energy belongs.
+      li.classList.add(kind === "in" ? "text-ink" : "text-muted");
+
+      const remove = document.createElement("button");
+      remove.type = "button";
+      remove.setAttribute("aria-label", "Remove");
+      remove.className =
+        "shrink-0 leading-none text-muted/40 hover:text-accent transition-colors";
+      remove.textContent = "×";
+      remove.addEventListener("click", () => li.remove());
+
+      const span = document.createElement("span");
+      span.textContent = text;
+
+      li.append(remove, span);
+      lists[kind].appendChild(li);
+
+      input.value = "";
+      input.focus();
+    };
+
+    root
+      .querySelectorAll<HTMLButtonElement>("[data-cs-add]")
+      .forEach((btn) =>
+        btn.addEventListener("click", () =>
+          addItem(btn.dataset.csAdd as "in" | "out"),
+        ),
+      );
+
+    // Enter files to "in my control" — the side worth acting on.
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        addItem("in");
+      }
+    });
+  });
+</script>

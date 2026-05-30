@@ -12,7 +12,14 @@ export type TextWidget = {
   rows?: number;
 };
 
-export type StoicWidget = TimerWidget | TextWidget;
+export type ControlSortWidget = {
+  type: "control";
+  placeholder: string;
+  inControlLabel: string;
+  notInControlLabel: string;
+};
+
+export type StoicWidget = TimerWidget | TextWidget | ControlSortWidget;
 
 export interface Virtue {
   name: string;
@@ -65,6 +72,13 @@ export interface StoicContent {
     howToApplyHeading: string;
     howToApplyParagraphs: string[];
     quote: { text: string; author: string };
+    controlSort: {
+      heading: string;
+      intro: string;
+      placeholder: string;
+      inControlLabel: string;
+      notInControlLabel: string;
+    };
   };
   stoicTriangle: {
     heading: string;

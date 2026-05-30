@@ -1,6 +1,7 @@
 ---
 import CountdownTimer from "@/components/stoic/widgets/CountdownTimer.astro";
 import TextEntry from "@/components/stoic/widgets/TextEntry.astro";
+import ControlSort from "@/components/stoic/widgets/ControlSort.astro";
 import type { Practice } from "@/data/stoic/types";
 
 interface Props {
@@ -46,6 +47,12 @@ const { practice } = Astro.props;
                     labelStart={step.widget.labelStart}
                     labelReset={step.widget.labelReset}
                     labelDone={step.widget.labelDone}
+                  />
+                ) : step.widget.type === "control" ? (
+                  <ControlSort
+                    placeholder={step.widget.placeholder}
+                    inControlLabel={step.widget.inControlLabel}
+                    notInControlLabel={step.widget.notInControlLabel}
                   />
                 ) : (
                   <TextEntry placeholder={step.widget.placeholder} rows={step.widget.rows} />

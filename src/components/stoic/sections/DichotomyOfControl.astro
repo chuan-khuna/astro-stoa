@@ -1,5 +1,6 @@
 ---
 import Centre from "@/components/Centre.astro";
+import ControlSort from "@/components/stoic/widgets/ControlSort.astro";
 import type { StoicContent } from "@/data/stoic/types";
 
 interface Props {
@@ -47,6 +48,19 @@ const { content } = Astro.props;
           ))}
         </ul>
       </div>
+    </div>
+
+    <!-- Interactive: sort your own concerns -->
+    <div class="border border-rule mt-10 p-7 max-w-3xl">
+      <h3 class="font-display italic text-xl text-ink mb-1">
+        {content.controlSort.heading}
+      </h3>
+      <p class="font-body text-sm text-muted leading-relaxed" set:html={content.controlSort.intro} />
+      <ControlSort
+        placeholder={content.controlSort.placeholder}
+        inControlLabel={content.controlSort.inControlLabel}
+        notInControlLabel={content.controlSort.notInControlLabel}
+      />
     </div>
 
     <!-- Practice note -->
