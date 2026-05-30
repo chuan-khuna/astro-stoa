@@ -1,6 +1,7 @@
 ---
 import FontLoader from '@/components/FontLoader.astro';
 import Footer from '@/components/Footer.astro';
+import Nav from '@/components/Nav.astro';
 import { site } from '@/data/site';
 import '@/styles/global.css';
 
@@ -32,39 +33,7 @@ const showScrollTop = /^\/(notes|quotes)\/[^/]+/.test(pathname);
   </head>
   <body class="bg-paper text-ink font-body min-h-dvh">
 
-    <!-- Masthead — FT-style: title / rule / sections / rule -->
-    <nav class="w-full border-t-2 border-accent/70" aria-label="Site navigation">
-      <!-- Masthead title -->
-      <div class="px-[clamp(1rem,5vw,3rem)] py-5 text-center">
-        <a
-          href="/"
-          class="inline-block font-display italic font-light text-[clamp(2.8rem,8vw,5.5rem)] tracking-[-0.025em] leading-none text-ink no-underline transition-colors duration-[160ms] hover:text-accent"
-          aria-label={site.nav.homeLabel}
-        >
-          {site.name}
-        </a>
-      </div>
-      <!-- Rule between title and sections -->
-      <div class="border-t border-ink" />
-      <!-- Section strip -->
-      <div class="px-[clamp(1rem,5vw,3rem)] flex items-center gap-8 border-b border-ink">
-        {site.nav.sections.map(({ label, href }) => {
-          const active = pathname.startsWith(href);
-          return (
-            <a
-              href={href}
-              class:list={[
-                'font-body text-sm tracking-[0.14em] uppercase transition-colors duration-[160ms] py-2.5',
-                active ? 'text-ink border-b-2 border-accent -mb-px font-semibold' : 'text-muted hover:text-ink',
-              ]}
-              aria-current={active ? 'page' : undefined}
-            >
-              {label}
-            </a>
-          );
-        })}
-      </div>
-    </nav>
+    <Nav />
 
     <slot />
 
