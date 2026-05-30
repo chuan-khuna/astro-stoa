@@ -13,5 +13,9 @@ export const site = {
 
   nav: {
     homeLabel: "Meditations — home",
+    sections: [
+      { label: "Quotes", href: "/quotes" },
+      { label: "Notes",  href: "/notes"  },
+    ],
   },
 } as const;
