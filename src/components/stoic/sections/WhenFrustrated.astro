@@ -1,0 +1,76 @@
+---
+import Centre from "@/components/Centre.astro";
+
+const reminders = [
+  {
+    label: "Check your expectations",
+    detail: "Frustration is the gap between what you expected and what happened. The event did not fail you — the expectation may have been unrealistic.",
+  },
+  {
+    label: "Locate the judgment",
+    detail: "Nothing is frustrating by nature. Your mind has judged it so. That judgment can be examined, and changed.",
+  },
+  {
+    label: "Return to what you can do",
+    detail: "When a path is blocked, a Stoic looks for the next action. Obstacle becomes redirection, not defeat.",
+  },
+  {
+    label: "Let imperfection stand",
+    detail: "Not everything will go smoothly. Expecting otherwise is the source of the friction, not the thing itself.",
+  },
+];
+---
+
+<section class="border-t border-rule py-16">
+  <Centre>
+
+    <div class="max-w-3xl mb-10">
+      <h2 class="font-display italic text-[clamp(1.8rem,4vw,2.8rem)] leading-tight text-ink mb-3">
+        When You Feel Frustrated
+      </h2>
+      <p class="font-body text-sm tracking-[0.12em] uppercase text-muted mb-8">
+        On irritation and unmet expectations — Marcus Aurelius, <em>Meditations</em>
+      </p>
+      <p class="font-body text-md leading-relaxed text-ink">
+        Frustration is almost always a collision between what you expected and what actually happened.
+        The Stoics noticed that we rarely get frustrated at things themselves — we get frustrated at
+        our picture of how things <em>should</em> have gone. That picture is entirely in your mind,
+        and it can be revised. The situation remains; your grip on a particular outcome does not have to.
+      </p>
+    </div>
+
+    <!-- Reminders grid -->
+    <div class="grid grid-cols-1 min-[48rem]:grid-cols-2 border-l border-t border-rule">
+      {reminders.map(({ label, detail }) => (
+        <div class="border-r border-b border-rule p-6">
+          <p class="font-display italic text-ink text-md leading-tight mb-2">{label}</p>
+          <p class="font-body text-sm text-muted leading-relaxed">{detail}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Practice note -->
+    <div class="max-w-3xl mt-10 space-y-4">
+      <h3 class="font-body text-sm tracking-[0.14em] uppercase text-muted">A practice for this moment</h3>
+      <p class="font-body text-md leading-relaxed text-ink">
+        Pause. Name what you expected to happen. Now name what actually happened. The distance between
+        those two things is the frustration — not the event itself. Ask: <em>Was that expectation mine
+        to hold?</em> Often it was not. Let the picture go, and look at what is actually in front of you.
+      </p>
+      <p class="font-body text-md leading-relaxed text-ink">
+        Marcus Aurelius returned to this again and again in his private notebooks. Even as emperor,
+        surrounded by things that refused to cooperate, he practiced redirecting his attention from what
+        was blocked to what remained open. The obstacle is not the end of the path — it is the path.
+      </p>
+      <div class="border-l-2 border-accent/50 pl-6 py-1 mt-8">
+        <blockquote class="font-display italic text-lg text-ink leading-snug mb-2">
+          "The impediment to action advances action. What stands in the way becomes the way."
+        </blockquote>
+        <cite class="font-body text-sm tracking-[0.1em] uppercase text-muted not-italic">
+          Marcus Aurelius, <em>Meditations</em> V.20
+        </cite>
+      </div>
+    </div>
+
+  </Centre>
+</section>

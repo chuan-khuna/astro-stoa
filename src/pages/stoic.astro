@@ -5,6 +5,8 @@ import TableOfContents from "@/components/stoic/sections/TableOfContents.astro";
 import WhatIsStoic from "@/components/stoic/sections/WhatIsStoic.astro";
 import DichotomyOfControl from "@/components/stoic/sections/DichotomyOfControl.astro";
 import StoicTriangle from "@/components/stoic/sections/StoicTriangle.astro";
+import WhenFrustrated from "@/components/stoic/sections/WhenFrustrated.astro";
+import WhenAngry from "@/components/stoic/sections/WhenAngry.astro";
 ---
 
 <ProseLayout
@@ -31,6 +33,8 @@ import StoicTriangle from "@/components/stoic/sections/StoicTriangle.astro";
     { label: "What is Stoicism?",           href: "#what-is-stoicism" },
     { label: "Focus on What You Control",   href: "#dichotomy-of-control" },
     { label: "The Stoic Triangle",          href: "#stoic-triangle" },
+    { label: "When You Feel Frustrated",    href: "#when-frustrated" },
+    { label: "When Anger Rises",            href: "#when-angry" },
   ]} />
 
   <div id="what-is-stoicism">
@@ -43,5 +47,13 @@ import StoicTriangle from "@/components/stoic/sections/StoicTriangle.astro";
 
   <div id="stoic-triangle">
     <StoicTriangle />
+  </div>
+
+  <div id="when-frustrated">
+    <WhenFrustrated />
+  </div>
+
+  <div id="when-angry">
+    <WhenAngry />
   </div>
 </ProseLayout>
