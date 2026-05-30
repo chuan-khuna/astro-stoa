@@ -7,7 +7,8 @@
 @theme {
   /* ── Typography ── */
   --font-display: var(--font-newsreader), ui-serif, Georgia, serif;
-  --font-body:    var(--font-ibm-plex-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-body:    var(--font-alegreya-sans), var(--font-ibm-plex-sans-thai-looped), ui-sans-serif, system-ui, sans-serif;
+  --font-mono:    var(--font-inconsolata), ui-monospace, monospace;
 
   /* ── Colour (OKLCH, anchor hue 75, warm oat parchment) ── */
   --color-paper:   oklch(95%  0.015 75);
