@@ -1,8 +1,8 @@
 // @ts-check
-import { defineConfig, fontProviders } from 'astro/config';
-import tailwindcss from '@tailwindcss/vite';
-import { fileURLToPath } from 'node:url';
-import mdx from '@astrojs/mdx';
+import { defineConfig, fontProviders } from "astro/config";
+import tailwindcss from "@tailwindcss/vite";
+import { fileURLToPath } from "node:url";
+import mdx from "@astrojs/mdx";
 
 export default defineConfig({
   integrations: [mdx()],
@@ -10,38 +10,38 @@ export default defineConfig({
     plugins: [tailwindcss()],
     resolve: {
       alias: {
-        '@': fileURLToPath(new URL('./src', import.meta.url)),
+        "@": fileURLToPath(new URL("./src", import.meta.url)),
       },
     },
   },
   fonts: [
     {
       provider: fontProviders.google(),
-      name: 'Spectral',
-      cssVariable: '--font-spectral',
+      name: "Spectral",
+      cssVariable: "--font-spectral",
       weights: [200, 300, 400],
-      styles: ['normal', 'italic'],
+      styles: ["normal", "italic"],
     },
     {
       provider: fontProviders.google(),
-      name: 'Alegreya Sans',
-      cssVariable: '--font-alegreya-sans',
+      name: "Alegreya Sans",
+      cssVariable: "--font-alegreya-sans",
       weights: [400, 500],
-      styles: ['normal'],
+      styles: ["normal"],
     },
     {
       provider: fontProviders.google(),
-      name: 'IBM Plex Sans Thai Looped',
-      cssVariable: '--font-ibm-plex-sans-thai-looped',
+      name: "IBM Plex Sans Thai Looped",
+      cssVariable: "--font-ibm-plex-sans-thai-looped",
       weights: [400, 500],
-      styles: ['normal'],
+      styles: ["normal"],
     },
     {
       provider: fontProviders.google(),
-      name: 'Inconsolata',
-      cssVariable: '--font-inconsolata',
+      name: "Inconsolata",
+      cssVariable: "--font-inconsolata",
       weights: [400, 500],
-      styles: ['normal'],
+      styles: ["normal"],
     },
   ],
 });
