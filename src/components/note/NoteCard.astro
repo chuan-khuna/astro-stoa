@@ -1,0 +1,31 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  entry: CollectionEntry<"notes">;
+}
+
+const { entry } = Astro.props;
+
+const slug = entry.id.replace(/\/index$/, "");
+const dateStr = entry.data.date.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<a
+  href={`/notes/${slug}`}
+  class="group flex flex-col gap-4 px-[clamp(1rem,5vw,3rem)] py-10 border-b border-rule min-[60rem]:[&:nth-child(even)]:border-l no-underline"
+>
+  <p class="font-display italic font-light text-[clamp(1rem,1.6vw,1.3rem)] leading-[1.5] text-ink group-hover:text-neutral transition-colors duration-200">
+    {entry.data.title}
+  </p>
+  <time
+    datetime={entry.data.date.toISOString()}
+    class="font-body text-[0.563rem] tracking-[0.12em] uppercase text-muted"
+  >
+    {dateStr}
+  </time>
+</a>

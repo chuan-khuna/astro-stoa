@@ -1,0 +1,50 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("notes", ({ data }) => !data.draft);
+  return entries.map((entry) => ({
+    params: { slug: entry.id.replace(/\/index$/, "") },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const dateStr = entry.data.date.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<Layout title={`${entry.data.title} — Meditations`}>
+  <main class="px-[clamp(1rem,5vw,3rem)] py-12 max-w-[72ch] mx-auto">
+    <a
+      href="/notes"
+      class="font-body text-[0.563rem] tracking-[0.12em] uppercase text-muted hover:text-ink transition-colors duration-200 mb-10 inline-block"
+    >
+      &larr; Notes
+    </a>
+
+    <article>
+      <header class="mb-10">
+        <h1 class="font-display italic font-light text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.3] text-ink mb-3">
+          {entry.data.title}
+        </h1>
+        <time
+          datetime={entry.data.date.toISOString()}
+          class="font-body text-[0.563rem] tracking-[0.12em] uppercase text-muted"
+        >
+          {dateStr}
+        </time>
+      </header>
+
+      <div class="prose prose-sm max-w-none font-body text-ink leading-[1.8]">
+        <Content />
+      </div>
+    </article>
+  </main>
+</Layout>

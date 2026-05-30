@@ -3,38 +3,93 @@ import { getCollection, render } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import QuoteCard from "@/components/quote/QuoteCard.astro";
 import QuoteModal from "@/components/quote/QuoteModal.astro";
+import NoteCard from "@/components/note/NoteCard.astro";
 
-const entries = await getCollection("quotes");
-const rendered = await Promise.all(
-  entries.map(async (entry) => {
+const allQuotes = await getCollection("quotes");
+const topQuotes = allQuotes.slice(0, 10);
+const renderedQuotes = await Promise.all(
+  topQuotes.map(async (entry) => {
     const { Content } = await render(entry);
     return { entry, Content };
   })
 );
+
+const allNotes = await getCollection("notes", ({ data }) => !data.draft);
+allNotes.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const topNotes = allNotes.slice(0, 10);
 ---
 
 <Layout title="Meditations">
   <!-- Pre-rendered MDX bodies (hidden, read by modal JS) -->
-  {rendered.map(({ entry, Content }) => (
+  {renderedQuotes.map(({ entry, Content }) => (
     <div id={`quote-body-${entry.id}`} hidden>
       <Content />
     </div>
   ))}
 
   <main>
-    <!-- Catalogue header -->
-    <div class="px-[clamp(1rem,5vw,3rem)] py-6 border-b border-rule">
-      <p
-        class="font-body text-[0.563rem] tracking-[0.12em] uppercase text-muted"
-      >
-        {entries.length} quotes &middot; curated by hand &middot; 2026
+    <!-- Quotes section -->
+    <div class="px-[clamp(1rem,5vw,3rem)] py-6 border-b border-rule flex items-center justify-between gap-4">
+      <p class="font-body text-[0.563rem] tracking-[0.12em] uppercase text-muted">
+        {allQuotes.length} quotes &middot; curated by hand &middot; 2026
       </p>
+      <a
+        href="/quotes"
+        class="font-body text-[0.563rem] tracking-[0.12em] uppercase text-muted hover:text-ink transition-colors duration-200 shrink-0"
+      >
+        View all &rarr;
+      </a>
     </div>
 
-    <!-- Quote grid -->
     <div class="grid grid-cols-1 min-[60rem]:grid-cols-2" role="list">
-      {rendered.map(({ entry }) => <QuoteCard entry={entry} />)}
+      {renderedQuotes.map(({ entry }) => <QuoteCard entry={entry} />)}
     </div>
+
+    {allQuotes.length > 10 && (
+      <div class="px-[clamp(1rem,5vw,3rem)] py-8 border-b border-rule">
+        <a
+          href="/quotes"
+          class="font-body text-[0.563rem] tracking-[0.12em] uppercase text-muted hover:text-ink transition-colors duration-200"
+        >
+          View all {allQuotes.length} quotes &rarr;
+        </a>
+      </div>
+    )}
+
+    <!-- Notes section -->
+    <div class="px-[clamp(1rem,5vw,3rem)] py-6 border-b border-rule flex items-center justify-between gap-4 mt-12">
+      <p class="font-body text-[0.563rem] tracking-[0.12em] uppercase text-muted">
+        {allNotes.length} notes &middot; recent writing &middot; 2026
+      </p>
+      <a
+        href="/notes"
+        class="font-body text-[0.563rem] tracking-[0.12em] uppercase text-muted hover:text-ink transition-colors duration-200 shrink-0"
+      >
+        View all &rarr;
+      </a>
+    </div>
+
+    {topNotes.length > 0 ? (
+      <div class="grid grid-cols-1 min-[60rem]:grid-cols-2" role="list">
+        {topNotes.map((entry) => <NoteCard entry={entry} />)}
+      </div>
+    ) : (
+      <div class="px-[clamp(1rem,5vw,3rem)] py-12 border-b border-rule">
+        <p class="font-display italic text-sm text-muted">No notes yet.</p>
+      </div>
+    )}
+
+    {allNotes.length > 10 && (
+      <div class="px-[clamp(1rem,5vw,3rem)] py-8 border-b border-rule">
+        <a
+          href="/notes"
+          class="font-body text-[0.563rem] tracking-[0.12em] uppercase text-muted hover:text-ink transition-colors duration-200"
+        >
+          View all {allNotes.length} notes &rarr;
+        </a>
+      </div>
+    )}
   </main>
+
   <QuoteModal />
 </Layout>
