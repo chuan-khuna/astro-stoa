@@ -1,20 +1,13 @@
 ---
-import { getCollection, render } from "astro:content";
+import { getCollection } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import { site } from "@/data/site";
 import QuoteCard from "@/components/quote/QuoteCard.astro";
-import QuoteModal from "@/components/quote/QuoteModal.astro";
 import NoteCard from "@/components/note/NoteCard.astro";
 import SectionTitle from "@/components/SectionTitle.astro";
 
 const allQuotes = await getCollection("quotes");
 const topQuotes = allQuotes.slice(0, 10);
-const renderedQuotes = await Promise.all(
-  topQuotes.map(async (entry) => {
-    const { Content } = await render(entry);
-    return { entry, Content };
-  }),
-);
 
 const allNotes = await getCollection("notes", ({ data }) => !data.draft);
 allNotes.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
@@ -22,21 +15,12 @@ const topNotes = allNotes.slice(0, 10);
 ---
 
 <Layout title={site.name}>
-  <!-- Pre-rendered MDX bodies (hidden, read by modal JS) -->
-  {
-    renderedQuotes.map(({ entry, Content }) => (
-      <div id={`quote-body-${entry.id}`} hidden>
-        <Content />
-      </div>
-    ))
-  }
-
   <main>
     <!-- Quotes section -->
     <SectionTitle title="Quotes" />
 
-    <div class="grid grid-cols-1 min-[60rem]:grid-cols-2 border-l border-t border-rule" role="list">
-      {renderedQuotes.map(({ entry }) => <QuoteCard entry={entry} />)}
+    <div class="mx-4 grid grid-cols-1 min-[60rem]:grid-cols-2 border-l border-t border-rule" role="list">
+      {topQuotes.map((entry) => <QuoteCard entry={entry} />)}
     </div>
 
     <div class="px-[clamp(1rem,5vw,3rem)] py-6">
@@ -53,7 +37,7 @@ const topNotes = allNotes.slice(0, 10);
 
     {
       topNotes.length > 0 ? (
-        <div class="grid grid-cols-1 min-[60rem]:grid-cols-2 border-l border-t border-rule" role="list">
+        <div class="mx-4 grid grid-cols-1 min-[60rem]:grid-cols-2 border-l border-t border-rule" role="list">
           {topNotes.map((entry) => (
             <NoteCard entry={entry} />
           ))}
@@ -79,5 +63,4 @@ const topNotes = allNotes.slice(0, 10);
     }
   </main>
 
-  <QuoteModal />
 </Layout>
