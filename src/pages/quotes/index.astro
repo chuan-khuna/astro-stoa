@@ -1,0 +1,35 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import QuoteCard from "@/components/quote/QuoteCard.astro";
+import QuoteModal from "@/components/quote/QuoteModal.astro";
+
+const entries = await getCollection("quotes");
+const rendered = await Promise.all(
+  entries.map(async (entry) => {
+    const { Content } = await render(entry);
+    return { entry, Content };
+  })
+);
+---
+
+<Layout title="Quotes — Meditations">
+  {rendered.map(({ entry, Content }) => (
+    <div id={`quote-body-${entry.id}`} hidden>
+      <Content />
+    </div>
+  ))}
+
+  <main>
+    <div class="px-[clamp(1rem,5vw,3rem)] py-6 border-b border-rule">
+      <p class="font-body text-[0.563rem] tracking-[0.12em] uppercase text-muted">
+        {entries.length} quotes &middot; curated by hand &middot; 2026
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 min-[60rem]:grid-cols-2" role="list">
+      {rendered.map(({ entry }) => <QuoteCard entry={entry} />)}
+    </div>
+  </main>
+  <QuoteModal />
+</Layout>
