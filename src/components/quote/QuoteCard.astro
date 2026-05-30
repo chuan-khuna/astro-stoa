@@ -9,7 +9,7 @@ const { entry } = Astro.props;
 ---
 
 <article
-  class="group flex flex-col gap-6 px-[clamp(1rem,5vw,3rem)] py-12 border-r border-b border-rule hover:bg-paper-2 cursor-pointer transition-colors duration-200"
+  class="group flex flex-col gap-6 px-[clamp(1rem,5vw,3rem)] py-12 border-r border-b border-rule hover:bg-accent/20 cursor-pointer transition-colors duration-200"
   role="listitem"
   tabindex="0"
   aria-haspopup="dialog"
@@ -21,7 +21,7 @@ const { entry } = Astro.props;
 >
   <blockquote>
     {entry.data.excerpt && (
-      <p class="font-display italic font-light text-[clamp(1.1rem,1.8vw,1.45rem)] leading-[1.45] text-ink [overflow-wrap:anywhere] min-w-0 group-hover:text-neutral transition-colors duration-200">
+      <p class="font-display italic font-light text-[clamp(1.1rem,1.8vw,1.45rem)] leading-[1.45] text-ink [overflow-wrap:anywhere] min-w-0 transition-colors duration-200">
         &ldquo;{entry.data.excerpt}&rdquo;
       </p>
     )}
