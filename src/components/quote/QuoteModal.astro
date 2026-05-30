@@ -1,0 +1,71 @@
+---
+// No props — modal is populated via data attributes on QuoteCard articles.
+---
+
+<dialog
+  id="quote-modal"
+  class="m-auto w-full max-w-2xl rounded-none border border-rule bg-paper p-[clamp(2rem,6vw,4rem)] shadow-none backdrop:bg-ink/40 open:flex open:flex-col open:gap-8"
+>
+  <blockquote id="modal-body">
+    <p
+      class="font-display italic font-light text-[clamp(1.25rem,2.5vw,2rem)] leading-[1.45] text-ink"
+    >
+    </p>
+  </blockquote>
+  <footer id="modal-footer" class="flex flex-col gap-1">
+    <cite
+      id="modal-author"
+      class="font-body not-italic text-[0.563rem] tracking-[0.12em] uppercase text-muted"
+    ></cite>
+    <span
+      id="modal-source"
+      class="font-display italic text-[0.563rem] text-neutral"
+    ></span>
+  </footer>
+  <button
+    id="modal-close"
+    class="absolute top-6 right-6 font-body text-[0.563rem] tracking-[0.12em] uppercase text-muted hover:text-ink transition-colors"
+    aria-label="Close"
+  >
+    Close
+  </button>
+</dialog>
+
+<style>
+  dialog {
+    position: relative;
+  }
+  dialog::backdrop {
+    background: rgba(0, 0, 0, 0.4);
+  }
+</style>
+
+<script>
+  const modal = document.getElementById("quote-modal") as HTMLDialogElement;
+  const modalBodyP = modal.querySelector("#modal-body p") as HTMLElement;
+  const modalAuthor = document.getElementById("modal-author") as HTMLElement;
+  const modalSource = document.getElementById("modal-source") as HTMLElement;
+  const modalClose = document.getElementById("modal-close") as HTMLButtonElement;
+
+  document.querySelectorAll("article[data-body]").forEach((card) => {
+    card.addEventListener("click", () => {
+      const body = card.getAttribute("data-body") ?? "";
+      const author = card.getAttribute("data-author") ?? "";
+      const source = card.getAttribute("data-source") ?? "";
+
+      modalBodyP.textContent = `"${body}"`;
+      modalAuthor.textContent = author;
+      modalAuthor.style.display = author ? "" : "none";
+      modalSource.textContent = source;
+      modalSource.style.display = source ? "" : "none";
+
+      modal.showModal();
+    });
+  });
+
+  modalClose.addEventListener("click", () => modal.close());
+
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) modal.close();
+  });
+</script>
