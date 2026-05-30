@@ -20,6 +20,7 @@
   --color-muted: oklch(42% 0.009 72);
   --color-ink: oklch(17% 0.012 70);
   --color-accent: oklch(50% 0.14 35);
+  --color-highlight: oklch(71.56% 0.0856 178.85);
   --color-focus: oklch(52% 0.18 35);
 
   /* ── Spacing (4 pt scale) ── */

@@ -44,6 +44,7 @@ export default {
         rule: 'var(--color-rule)',
         neutral: 'var(--color-neutral)',
         ink: 'var(--color-ink)',
+        highlight: 'var(--color-highlight)',
         focus: 'var(--color-focus)',
       },
       fontFamily: {
