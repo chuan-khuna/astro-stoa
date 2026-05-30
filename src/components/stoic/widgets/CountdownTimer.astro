@@ -1,57 +1,105 @@
 ---
 interface Props {
   seconds?: number;
+  variant?: "breathing" | "default";
   labelStart?: string;
   labelReset?: string;
   labelDone?: string;
+  labelAction?: string;
+  actionHref?: string;
 }
-const { seconds = 60, labelStart = "Start", labelReset = "Reset", labelDone = "Done" } = Astro.props;
+const {
+  seconds = 60,
+  variant = "default",
+  labelStart = "Start",
+  labelReset = "Reset",
+  labelDone = "Done",
+  labelAction,
+  actionHref,
+} = Astro.props;
 
 const mm = String(Math.floor(seconds / 60)).padStart(2, "0");
 const ss = String(seconds % 60).padStart(2, "0");
 ---
 
 <div
-  class="mt-3 flex items-center gap-4"
+  class="mt-3 flex flex-col gap-3"
   data-countdown
   data-seconds={seconds}
+  data-variant={variant}
   data-label-start={labelStart}
   data-label-reset={labelReset}
   data-label-done={labelDone}
 >
-  <p class="font-mono text-2xl text-ink tracking-widest leading-none" data-display>
+  <p
+    class="font-mono text-2xl text-ink tracking-widest leading-none"
+    data-display
+  >
     {mm}:{ss}
   </p>
-  <div class="flex items-center gap-2">
-    <div
-      data-breath-circle
-      class="rounded-full shrink-0"
-      style="width:0.5rem;height:0.5rem;background-color:transparent;transform:scale(1);transition:transform 0.5s ease,background-color 0.5s ease"
-    ></div>
-    <p
-      data-breath-label
-      class="font-body text-sm tracking-[0.12em] uppercase transition-colors duration-500"
-      style="color:transparent"
-    >&nbsp;</p>
+
+  <div class="flex flex-col gap-1.5">
+    {
+      variant === "breathing" && (
+        <p
+          data-breath-label
+          class="font-body text-xs tracking-[0.12em] uppercase transition-colors duration-500"
+          style="color:transparent"
+        >
+          &nbsp;
+        </p>
+      )
+    }
+    <div class="relative w-full h-px bg-rule">
+      <div
+        data-breath-bar
+        class="absolute inset-y-0 left-0 h-full"
+        style="width:0%;background-color:transparent;transition:width 0.5s linear,background-color 0.5s ease"
+      >
+      </div>
+    </div>
   </div>
-  <button
-    class="font-body text-xs tracking-[0.12em] uppercase border border-rule px-3 py-1.5 text-muted hover:text-ink hover:border-neutral transition-colors"
-    data-btn
-  >
-    {labelStart}
-  </button>
+
+  <div class="flex items-center gap-2">
+    <button
+      class="font-body text-xs tracking-[0.12em] uppercase border border-rule px-3 py-1.5 text-muted hover:text-ink hover:border-neutral transition-colors"
+      data-btn
+    >
+      {labelStart}
+    </button>
+    {
+      labelAction &&
+        (actionHref ? (
+          <a
+            href={actionHref}
+            class="font-body text-xs tracking-[0.12em] uppercase border border-rule px-3 py-1.5 text-muted hover:text-ink hover:border-neutral transition-colors"
+          >
+            {labelAction}
+          </a>
+        ) : (
+          <button
+            class="font-body text-xs tracking-[0.12em] uppercase border border-rule px-3 py-1.5 text-muted hover:text-ink hover:border-neutral transition-colors"
+            data-action-btn
+          >
+            {labelAction}
+          </button>
+        ))
+    }
+  </div>
 </div>
 
 <script>
   document.querySelectorAll<HTMLElement>("[data-countdown]").forEach((el) => {
     const total = Number(el.dataset.seconds);
+    const variant = el.dataset.variant ?? "default";
     const lblStart = el.dataset.labelStart ?? "Start";
     const lblReset = el.dataset.labelReset ?? "Reset";
-    const lblDone  = el.dataset.labelDone  ?? "Done";
+    const lblDone = el.dataset.labelDone ?? "Done";
+
     const display = el.querySelector<HTMLElement>("[data-display]")!;
-    const btn    = el.querySelector<HTMLButtonElement>("[data-btn]")!;
-    const circle = el.querySelector<HTMLElement>("[data-breath-circle]")!;
-    const label  = el.querySelector<HTMLElement>("[data-breath-label]")!;
+    const btn = el.querySelector<HTMLButtonElement>("[data-btn]")!;
+    const bar = el.querySelector<HTMLElement>("[data-breath-bar]")!;
+    const label = el.querySelector<HTMLElement>("[data-breath-label]");
 
     let remaining = total;
     let timerInterval: ReturnType<typeof setInterval> | null = null;
@@ -60,35 +108,52 @@ const ss = String(seconds % 60).padStart(2, "0");
     let phaseRemaining = 0;
 
     const PHASES = [
-      { name: "Inhale", duration: 4, scale: "1.45", color: "rgba(96,165,250,0.8)"  },
-      { name: "Hold",   duration: 7, scale: "1.45", color: "rgba(251,191,36,0.85)" },
-      { name: "Exhale", duration: 8, scale: "0.65", color: "rgba(52,211,153,0.75)" },
+      {
+        name: "Inhale",
+        duration: 4,
+        targetWidth: "100%",
+        color: "oklch(70% 0.14 230 / 0.8)",
+      },
+      {
+        name: "Hold",
+        duration: 7,
+        targetWidth: "100%",
+        color: "oklch(82% 0.16 80  / 0.85)",
+      },
+      {
+        name: "Exhale",
+        duration: 8,
+        targetWidth: "0%",
+        color: "oklch(75% 0.14 160 / 0.75)",
+      },
     ];
 
     const fmt = (s: number) =>
       `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`;
 
+    // --- breathing variant ---
     const applyPhase = (idx: number) => {
       const phase = PHASES[idx];
-      const transformDur = idx === 1
-        ? "0.4s"
-        : `${(phase.duration * 0.9).toFixed(1)}s`;
-      circle.style.transition =
-        `transform ${transformDur} ease-in-out, background-color 0.45s ease`;
-      circle.style.transform = `scale(${phase.scale})`;
-      circle.style.backgroundColor = phase.color;
-      label.style.color = phase.color;
-      label.textContent = phase.name;
+      const dur = idx === 1 ? "0.3s" : `${phase.duration}s`;
+      bar.style.transition = `width ${dur} linear, background-color 0.45s ease`;
+      bar.style.width = phase.targetWidth;
+      bar.style.backgroundColor = phase.color;
+      if (label) {
+        label.style.color = phase.color;
+        label.textContent = phase.name;
+      }
     };
 
     const stopBreathing = () => {
       clearInterval(breathInterval!);
       breathInterval = null;
-      circle.style.transition = "transform 0.55s ease, background-color 0.55s ease";
-      circle.style.transform = "scale(1)";
-      circle.style.backgroundColor = "transparent";
-      label.style.color = "transparent";
-      label.innerHTML = "&nbsp;";
+      bar.style.transition = "width 0.55s ease, background-color 0.55s ease";
+      bar.style.width = "0%";
+      bar.style.backgroundColor = "transparent";
+      if (label) {
+        label.style.color = "transparent";
+        label.innerHTML = "&nbsp;";
+      }
     };
 
     const startBreathing = () => {
@@ -105,10 +170,32 @@ const ss = String(seconds % 60).padStart(2, "0");
       }, 1000);
     };
 
+    // --- default variant ---
+    const startDefaultBar = () => {
+      bar.style.transition = `width ${total}s linear, background-color 0.45s ease`;
+      bar.style.backgroundColor = "oklch(60% 0 0 / 0.35)";
+      // force reflow so transition fires from 100%→0%
+      bar.style.width = "100%";
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => {
+          bar.style.transition = `width ${total}s linear`;
+          bar.style.width = "0%";
+        }),
+      );
+    };
+
+    const stopDefaultBar = () => {
+      bar.style.transition = "width 0.4s ease, background-color 0.4s ease";
+      bar.style.width = "0%";
+      bar.style.backgroundColor = "transparent";
+    };
+
+    // --- shared ---
     const reset = () => {
       clearInterval(timerInterval!);
       timerInterval = null;
-      stopBreathing();
+      if (variant === "breathing") stopBreathing();
+      else stopDefaultBar();
       remaining = total;
       display.textContent = fmt(remaining);
       display.classList.remove("text-highlight");
@@ -116,15 +203,20 @@ const ss = String(seconds % 60).padStart(2, "0");
     };
 
     btn.addEventListener("click", () => {
-      if (timerInterval) { reset(); return; }
-      startBreathing();
+      if (timerInterval) {
+        reset();
+        return;
+      }
+      if (variant === "breathing") startBreathing();
+      else startDefaultBar();
       timerInterval = setInterval(() => {
         remaining--;
         display.textContent = fmt(remaining);
         if (remaining <= 0) {
           clearInterval(timerInterval!);
           timerInterval = null;
-          stopBreathing();
+          if (variant === "breathing") stopBreathing();
+          else stopDefaultBar();
           display.textContent = lblDone;
           display.classList.add("text-highlight");
           btn.textContent = lblReset;
