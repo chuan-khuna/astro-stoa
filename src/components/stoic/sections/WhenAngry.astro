@@ -1,5 +1,7 @@
 ---
 import Centre from "@/components/Centre.astro";
+import CountdownTimer from "@/components/stoic/widgets/CountdownTimer.astro";
+import TextEntry from "@/components/stoic/widgets/TextEntry.astro";
 
 const insights = [
   {
@@ -33,8 +35,8 @@ const insights = [
       </p>
       <p class="font-body text-md leading-relaxed text-ink">
         Seneca devoted an entire treatise to anger — a sign of how seriously the Stoics took it.
-        His conclusion: anger is never useful, never righteous, and always costs you more than
-        whatever triggered it. It does not punish the person who wronged you; it punishes you first.
+        His conclusion: <span class="bg-highlight/20">anger is never useful, never righteous, and always costs you more than
+        whatever triggered it. It does not punish the person who wronged you; it punishes you first.</span>
         The Stoic goal is not to suppress anger but to dissolve it at its source — the judgment
         that harm was done and retaliation is owed.
       </p>
@@ -55,26 +57,31 @@ const insights = [
       <p class="font-mono text-xs text-muted tracking-wider mb-3">PRACTICE</p>
       <h3 class="font-display italic text-xl text-ink mb-0.5">A practice for this moment</h3>
       <p class="font-body text-sm tracking-[0.1em] uppercase text-muted mb-5">Step by step</p>
-      <ul class="border-l border-rule pl-5 mb-6 space-y-4">
+      <ul class="border-l border-rule pl-5 mb-6 space-y-6">
         <li>
           <p class="font-display italic text-ink text-base leading-tight">Do not act yet</p>
           <p class="font-body text-sm text-muted mt-0.5 leading-snug">Your only task right now is to do nothing irreversible. Wait.</p>
+          <CountdownTimer seconds={120} />
         </li>
         <li>
           <p class="font-display italic text-ink text-base leading-tight">Step away if you can</p>
           <p class="font-body text-sm text-muted mt-0.5 leading-snug">Physical distance helps the heat drop. Leave the room, take a walk.</p>
+          <CountdownTimer seconds={180} />
         </li>
         <li>
           <p class="font-display italic text-ink text-base leading-tight">Name what you believe happened</p>
           <p class="font-body text-sm text-muted mt-0.5 leading-snug">Say it plainly: what do you think was done to you, and by whom?</p>
+          <TextEntry placeholder="What do I believe happened?" />
         </li>
         <li>
           <p class="font-display italic text-ink text-base leading-tight">Question the belief</p>
           <p class="font-body text-sm text-muted mt-0.5 leading-snug">Is it true? Could there be another explanation? Does it matter as much as it feels?</p>
+          <TextEntry placeholder="Is it true? Is there another explanation?" />
         </li>
         <li>
           <p class="font-display italic text-ink text-base leading-tight">Choose your response</p>
           <p class="font-body text-sm text-muted mt-0.5 leading-snug">Now act — from reason, not reaction. A conversation, not a verdict.</p>
+          <TextEntry placeholder="How will I respond — from reason, not reaction?" rows={2} />
         </li>
       </ul>
       <blockquote class="font-display italic text-base text-ink leading-snug mb-1">

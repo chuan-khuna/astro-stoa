@@ -1,0 +1,13 @@
+---
+interface Props {
+  placeholder?: string;
+  rows?: number;
+}
+const { placeholder = "Write here…", rows = 3 } = Astro.props;
+---
+
+<textarea
+  class="mt-3 w-full font-body text-sm text-ink bg-paper-2 border border-rule px-3 py-2.5 leading-relaxed placeholder:text-muted/50 focus:outline-none focus:border-neutral resize-none transition-colors"
+  placeholder={placeholder}
+  rows={rows}
+></textarea>

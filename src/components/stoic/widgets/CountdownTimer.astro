@@ -1,0 +1,59 @@
+---
+interface Props {
+  seconds?: number;
+}
+const { seconds = 60 } = Astro.props;
+
+const mm = String(Math.floor(seconds / 60)).padStart(2, "0");
+const ss = String(seconds % 60).padStart(2, "0");
+---
+
+<div class="mt-3 flex items-center gap-4" data-countdown data-seconds={seconds}>
+  <p class="font-mono text-2xl text-ink tracking-widest leading-none" data-display>
+    {mm}:{ss}
+  </p>
+  <button
+    class="font-body text-xs tracking-[0.12em] uppercase border border-rule px-3 py-1.5 text-muted hover:text-ink hover:border-neutral transition-colors"
+    data-btn
+  >
+    Start
+  </button>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-countdown]").forEach((el) => {
+    const total = Number(el.dataset.seconds);
+    const display = el.querySelector<HTMLElement>("[data-display]")!;
+    const btn = el.querySelector<HTMLButtonElement>("[data-btn]")!;
+    let remaining = total;
+    let interval: ReturnType<typeof setInterval> | null = null;
+
+    const fmt = (s: number) =>
+      `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`;
+
+    const reset = () => {
+      clearInterval(interval!);
+      interval = null;
+      remaining = total;
+      display.textContent = fmt(remaining);
+      display.classList.remove("text-highlight");
+      btn.textContent = "Start";
+    };
+
+    btn.addEventListener("click", () => {
+      if (interval) { reset(); return; }
+      interval = setInterval(() => {
+        remaining--;
+        display.textContent = fmt(remaining);
+        if (remaining <= 0) {
+          clearInterval(interval!);
+          interval = null;
+          display.textContent = "Done";
+          display.classList.add("text-highlight");
+          btn.textContent = "Reset";
+        }
+      }, 1000);
+      btn.textContent = "Reset";
+    });
+  });
+</script>

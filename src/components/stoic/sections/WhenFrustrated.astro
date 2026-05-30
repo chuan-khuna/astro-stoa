@@ -1,5 +1,7 @@
 ---
 import Centre from "@/components/Centre.astro";
+import CountdownTimer from "@/components/stoic/widgets/CountdownTimer.astro";
+import TextEntry from "@/components/stoic/widgets/TextEntry.astro";
 
 const reminders = [
   {
@@ -33,9 +35,10 @@ const reminders = [
       </p>
       <p class="font-body text-md leading-relaxed text-ink">
         Frustration is almost always a collision between what you expected and what actually happened.
-        The Stoics noticed that we rarely get frustrated at things themselves — we get frustrated at
-        our picture of how things <em>should</em> have gone. That picture is entirely in your mind,
-        and it can be revised. The situation remains; your grip on a particular outcome does not have to.
+        The Stoics noticed that we rarely get frustrated at things themselves —
+        <span class="bg-highlight/20">we get frustrated at our picture of how things <em>should</em> have gone.</span>
+        That picture is entirely in your mind, and it can be revised.
+        The situation remains; your grip on a particular outcome does not have to.
       </p>
     </div>
 
@@ -54,26 +57,31 @@ const reminders = [
       <p class="font-mono text-xs text-muted tracking-wider mb-3">PRACTICE</p>
       <h3 class="font-display italic text-xl text-ink mb-0.5">A practice for this moment</h3>
       <p class="font-body text-sm tracking-[0.1em] uppercase text-muted mb-5">Step by step</p>
-      <ul class="border-l border-rule pl-5 mb-6 space-y-4">
+      <ul class="border-l border-rule pl-5 mb-6 space-y-6">
         <li>
           <p class="font-display italic text-ink text-base leading-tight">Pause</p>
           <p class="font-body text-sm text-muted mt-0.5 leading-snug">Stop what you are doing. Take one slow breath before anything else.</p>
+          <CountdownTimer seconds={60} />
         </li>
         <li>
           <p class="font-display italic text-ink text-base leading-tight">Name what you expected</p>
           <p class="font-body text-sm text-muted mt-0.5 leading-snug">Say it plainly — what did you think was going to happen?</p>
+          <TextEntry placeholder="What did I expect to happen?" />
         </li>
         <li>
           <p class="font-display italic text-ink text-base leading-tight">Name what actually happened</p>
           <p class="font-body text-sm text-muted mt-0.5 leading-snug">Describe the event without judgment. Just the facts.</p>
+          <TextEntry placeholder="What actually happened?" />
         </li>
         <li>
           <p class="font-display italic text-ink text-base leading-tight">Ask: was that expectation mine to hold?</p>
           <p class="font-body text-sm text-muted mt-0.5 leading-snug">Often the expectation was the problem, not the event. Release it if so.</p>
+          <TextEntry placeholder="Was it realistic? Was it within my control?" rows={2} />
         </li>
         <li>
           <p class="font-display italic text-ink text-base leading-tight">Find the next open action</p>
           <p class="font-body text-sm text-muted mt-0.5 leading-snug">What can you actually do from here? Do that, and only that.</p>
+          <TextEntry placeholder="What can I do right now?" rows={2} />
         </li>
       </ul>
       <blockquote class="font-display italic text-base text-ink leading-snug mb-1">
