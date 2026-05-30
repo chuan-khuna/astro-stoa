@@ -1,5 +1,5 @@
 export const site = {
-  name: "Meditations",
+  name: "Stoa",
   description: "A curated collection of quotes for reflection.",
   tagline: "An ongoing collection",
   established: "Est. 2026",
@@ -11,7 +11,7 @@ export const site = {
   },
 
   nav: {
-    homeLabel: "Meditations — home",
+    homeLabel: "Stoa — home",
     sections: [
       { label: "Quotes", href: "/quotes" },
       { label: "Notes",  href: "/notes"  },

@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
+import { site } from "@/data/site";
 
 export async function getStaticPaths() {
   const entries = await getCollection("quotes");
@@ -14,8 +15,8 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 
 const pageTitle = entry.data.excerpt
-  ? `"${entry.data.excerpt.slice(0, 60)}${entry.data.excerpt.length > 60 ? "…" : ""}" — Meditations`
-  : "Quote — Meditations";
+  ? `"${entry.data.excerpt.slice(0, 60)}${entry.data.excerpt.length > 60 ? "…" : ""}" — ${site.name}`
+  : `Quote — ${site.name}`;
 ---
 
 <Layout title={pageTitle}>

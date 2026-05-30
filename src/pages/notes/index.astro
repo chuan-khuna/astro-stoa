@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
+import { site } from "@/data/site";
 import NoteCard from "@/components/note/NoteCard.astro";
 import SectionTitle from "@/components/SectionTitle.astro";
 
@@ -8,7 +9,7 @@ const entries = await getCollection("notes", ({ data }) => !data.draft);
 entries.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
-<Layout title="Notes — Meditations">
+<Layout title={`Notes — ${site.name}`}>
   <main>
     <SectionTitle title="Notes" />
 

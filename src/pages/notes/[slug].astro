@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
+import { site } from "@/data/site";
 
 export async function getStaticPaths() {
   const entries = await getCollection("notes", ({ data }) => !data.draft);
@@ -14,8 +15,8 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 
 const pageTitle = entry.data.title
-  ? `"${entry.data.title.slice(0, 60)}${entry.data.title.length > 60 ? "…" : ""}" — Meditations`
-  : "Note — Meditations";
+  ? `"${entry.data.title.slice(0, 60)}${entry.data.title.length > 60 ? "…" : ""}" — ${site.name}`
+  : `Note — ${site.name}`;
 ---
 
 <Layout title={pageTitle}>

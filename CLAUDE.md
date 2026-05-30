@@ -2,7 +2,7 @@
 
 ## Project
 
-Meditations is a curated quotes site — a place to browse and discover meaningful quotes. It is designed for readers who want to encounter well-chosen words without noise.
+Stoa is a curated Stoic quotes site — a place to browse and discover meaningful quotes from Stoic philosophy. It is designed for readers who want to encounter well-chosen words without noise.
 
 The site uses a content collection for quotes as its core data model, with a potential blog section in the future. The design direction favors typographic clarity and calm reading over visual complexity.
 

@@ -10,7 +10,7 @@ Personal reader — the person who built this and returns to it regularly. Conte
 
 ## Product Purpose
 
-Meditations is a curated quotes site — a place to encounter well-chosen words without noise. It exists as a personal record, not a directory or aggregator. Success means a reader can open it, read something, and feel the design has gotten out of the way.
+Stoa is a curated Stoic quotes site — a place to encounter well-chosen words without noise. It exists as a personal record, not a directory or aggregator. Success means a reader can open it, read something, and feel the design has gotten out of the way.
 
 ## Brand Personality
 
