@@ -33,8 +33,8 @@ const showScrollTop = /^\/(notes|quotes)\/[^/]+/.test(pathname);
   <body class="bg-paper text-ink font-body min-h-dvh">
 
     <!-- N6 Newspaper masthead — knobs: issue-below, size=2xl, rule=double -->
-    <nav class="w-full px-[clamp(1rem,5vw,3rem)] pt-6 text-center" aria-label="Site navigation">
-      <div class="flex items-center justify-center gap-3 font-body text-[0.563rem] tracking-[0.14em] uppercase text-muted py-3 border-t border-rule">
+    <nav class="w-full px-[clamp(1rem,5vw,3rem)] pt-6 text-center border-t border-ink" aria-label="Site navigation">
+      <div class="flex items-center justify-center gap-3 font-body text-[0.563rem] tracking-[0.14em] uppercase text-muted py-3">
         <span>{site.tagline}</span>
         <span aria-hidden="true">&middot;</span>
         <span>{site.established}</span>
@@ -46,17 +46,16 @@ const showScrollTop = /^\/(notes|quotes)\/[^/]+/.test(pathname);
       >
         {site.name}
       </a>
-      <div class="h-[4px] border-t border-b border-ink mt-2" aria-hidden="true"></div>
-      <!-- FT-style section strip — left-aligned below the double rule -->
-      <div class="flex items-center gap-6 pt-2.5 pb-0.5 text-left">
+      <!-- FT-style section strip — single rule, active item has accent underline -->
+      <div class="flex items-center gap-6 pt-0.5 pb-0 text-left border-b border-ink">
         {site.nav.sections.map(({ label, href }) => {
           const active = pathname.startsWith(href);
           return (
             <a
               href={href}
               class:list={[
-                'font-body text-xs tracking-[0.12em] uppercase transition-colors duration-[160ms] py-1',
-                active ? 'text-ink border-b border-ink' : 'text-muted hover:text-ink',
+                'font-body text-xs tracking-[0.12em] uppercase transition-colors duration-[160ms] py-2',
+                active ? 'text-ink border-b-2 border-accent -mb-px' : 'text-muted hover:text-ink',
               ]}
               aria-current={active ? 'page' : undefined}
             >

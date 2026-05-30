@@ -29,44 +29,32 @@ const topNotes = allNotes.slice(0, 10);
 
   <main>
     <!-- Quotes section -->
-    <div class="px-[clamp(1rem,5vw,3rem)] py-6 border-b border-rule flex items-center justify-between gap-4">
-      <p class="font-body text-[0.563rem] tracking-[0.12em] uppercase text-muted">
-        {allQuotes.length} quotes &middot; curated by hand &middot; 2026
+    <div class="px-[clamp(1rem,5vw,3rem)] pt-8 pb-5">
+      <div class="border-t border-dotted border-rule"></div>
+      <p class="text-center font-body text-[0.563rem] tracking-[0.14em] uppercase text-muted pt-3">
+        Quotes
       </p>
-      <a
-        href="/quotes"
-        class="font-body text-[0.563rem] tracking-[0.12em] uppercase text-muted hover:text-ink transition-colors duration-200 shrink-0"
-      >
-        View all &rarr;
-      </a>
     </div>
 
     <div class="grid grid-cols-1 min-[60rem]:grid-cols-2" role="list">
       {renderedQuotes.map(({ entry }) => <QuoteCard entry={entry} />)}
     </div>
 
-    {allQuotes.length > 10 && (
-      <div class="px-[clamp(1rem,5vw,3rem)] py-8 border-b border-rule">
-        <a
-          href="/quotes"
-          class="font-body text-[0.563rem] tracking-[0.12em] uppercase text-muted hover:text-ink transition-colors duration-200"
-        >
-          View all {allQuotes.length} quotes &rarr;
-        </a>
-      </div>
-    )}
+    <div class="px-[clamp(1rem,5vw,3rem)] py-6">
+      <a
+        href="/quotes"
+        class="font-body text-[0.563rem] tracking-[0.12em] uppercase text-muted hover:text-ink transition-colors duration-200"
+      >
+        All {allQuotes.length} quotes &rarr;
+      </a>
+    </div>
 
     <!-- Notes section -->
-    <div class="px-[clamp(1rem,5vw,3rem)] py-6 border-b border-rule flex items-center justify-between gap-4 mt-12">
-      <p class="font-body text-[0.563rem] tracking-[0.12em] uppercase text-muted">
-        {allNotes.length} notes &middot; recent writing &middot; 2026
+    <div class="px-[clamp(1rem,5vw,3rem)] pt-10 pb-5">
+      <div class="border-t border-dotted border-rule"></div>
+      <p class="text-center font-body text-[0.563rem] tracking-[0.14em] uppercase text-muted pt-3">
+        Notes
       </p>
-      <a
-        href="/notes"
-        class="font-body text-[0.563rem] tracking-[0.12em] uppercase text-muted hover:text-ink transition-colors duration-200 shrink-0"
-      >
-        View all &rarr;
-      </a>
     </div>
 
     {topNotes.length > 0 ? (
@@ -74,18 +62,18 @@ const topNotes = allNotes.slice(0, 10);
         {topNotes.map((entry) => <NoteCard entry={entry} />)}
       </div>
     ) : (
-      <div class="px-[clamp(1rem,5vw,3rem)] py-12 border-b border-rule">
+      <div class="px-[clamp(1rem,5vw,3rem)] py-12">
         <p class="font-display italic text-sm text-muted">No notes yet.</p>
       </div>
     )}
 
-    {allNotes.length > 10 && (
-      <div class="px-[clamp(1rem,5vw,3rem)] py-8 border-b border-rule">
+    {allNotes.length > 0 && (
+      <div class="px-[clamp(1rem,5vw,3rem)] py-6">
         <a
           href="/notes"
           class="font-body text-[0.563rem] tracking-[0.12em] uppercase text-muted hover:text-ink transition-colors duration-200"
         >
-          View all {allNotes.length} notes &rarr;
+          All {allNotes.length} notes &rarr;
         </a>
       </div>
     )}
