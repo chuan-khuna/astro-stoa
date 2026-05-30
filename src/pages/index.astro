@@ -11,7 +11,9 @@ const entries = await getCollection("quotes");
   <main>
     <!-- Catalogue header -->
     <div class="px-[clamp(1rem,5vw,3rem)] py-6 border-b border-rule">
-      <p class="font-body text-[0.563rem] tracking-[0.12em] uppercase text-muted">
+      <p
+        class="font-body text-[0.563rem] tracking-[0.12em] uppercase text-muted"
+      >
         {entries.length} quotes &middot; curated by hand &middot; 2026
       </p>
     </div>
@@ -21,6 +23,5 @@ const entries = await getCollection("quotes");
       {entries.map((entry) => <QuoteCard entry={entry} />)}
     </div>
   </main>
-
   <QuoteModal />
 </Layout>
