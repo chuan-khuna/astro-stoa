@@ -32,30 +32,30 @@ const showScrollTop = /^\/(notes|quotes)\/[^/]+/.test(pathname);
   </head>
   <body class="bg-paper text-ink font-body min-h-dvh">
 
-    <!-- N6 Newspaper masthead — knobs: issue-below, size=2xl, rule=double -->
-    <nav class="w-full px-[clamp(1rem,5vw,3rem)] pt-6 text-center border-t border-ink" aria-label="Site navigation">
-      <div class="flex items-center justify-center gap-3 font-body text-[0.563rem] tracking-[0.14em] uppercase text-muted py-3">
-        <span>{site.tagline}</span>
-        <span aria-hidden="true">&middot;</span>
-        <span>{site.established}</span>
+    <!-- Masthead — FT-style: title / rule / sections / rule -->
+    <nav class="w-full border-t-2 border-accent/70" aria-label="Site navigation">
+      <!-- Masthead title -->
+      <div class="px-[clamp(1rem,5vw,3rem)] py-5 text-center">
+        <a
+          href="/"
+          class="inline-block font-display italic font-light text-[clamp(2.8rem,8vw,5.5rem)] tracking-[-0.025em] leading-none text-ink no-underline transition-colors duration-[160ms] hover:text-accent"
+          aria-label={site.nav.homeLabel}
+        >
+          {site.name}
+        </a>
       </div>
-      <a
-        href="/"
-        class="inline-block font-display italic font-light text-[clamp(2.8rem,7vw,5rem)] tracking-[-0.025em] leading-none text-ink no-underline py-3 pb-4 transition-colors duration-[160ms] hover:text-accent"
-        aria-label={site.nav.homeLabel}
-      >
-        {site.name}
-      </a>
-      <!-- FT-style section strip — single rule, active item has accent underline -->
-      <div class="flex items-center gap-6 pt-0.5 pb-0 text-left border-b border-ink">
+      <!-- Rule between title and sections -->
+      <div class="border-t border-ink" />
+      <!-- Section strip -->
+      <div class="px-[clamp(1rem,5vw,3rem)] flex items-center gap-8 border-b border-ink">
         {site.nav.sections.map(({ label, href }) => {
           const active = pathname.startsWith(href);
           return (
             <a
               href={href}
               class:list={[
-                'font-body text-xs tracking-[0.12em] uppercase transition-colors duration-[160ms] py-2',
-                active ? 'text-ink border-b-2 border-accent -mb-px' : 'text-muted hover:text-ink',
+                'font-body text-sm tracking-[0.14em] uppercase transition-colors duration-[160ms] py-2.5',
+                active ? 'text-ink border-b-2 border-accent -mb-px font-semibold' : 'text-muted hover:text-ink',
               ]}
               aria-current={active ? 'page' : undefined}
             >
