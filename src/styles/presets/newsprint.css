@@ -8,7 +8,7 @@
   /* ── Typography ── */
   --font-display: var(--font-spectral), ui-serif, Georgia, serif;
   --font-body:
-    var(--font-alegreya-sans), var(--font-ibm-plex-sans-thai-looped),
+    "Alegreya Sans", "IBM Plex Sans Thai Looped",
     ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-inconsolata), ui-monospace, monospace;
 
