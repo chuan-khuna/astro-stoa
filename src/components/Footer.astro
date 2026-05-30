@@ -1,11 +1,12 @@
 ---
+import { site } from "@/data/site";
 ---
 
 <footer class="px-[clamp(1rem,5vw,3rem)] pt-12 pb-20" aria-label="Colophon">
   <div class="h-px bg-rule mb-6" role="separator"></div>
   <p class="font-display italic text-sm text-muted max-w-[72ch] leading-[1.75]">
-    Meditations &middot; A personal record of words that settled.
-    Typeset in Newsreader &amp; IBM Plex Sans.
-    Compiled without noise. MMXXVI.
+    {site.name} &middot; {site.footer.tagline}
+    {site.footer.typesetNote}
+    {site.footer.closingNote} {site.year}.
   </p>
 </footer>

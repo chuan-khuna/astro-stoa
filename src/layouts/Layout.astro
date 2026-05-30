@@ -1,6 +1,7 @@
 ---
 import FontLoader from '@/components/FontLoader.astro';
 import Footer from '@/components/Footer.astro';
+import { site } from '@/data/site';
 import '@/styles/global.css';
 
 interface Props {
@@ -9,8 +10,8 @@ interface Props {
 }
 
 const {
-  title = 'Meditations',
-  description = 'A curated collection of quotes for reflection.',
+  title = site.name,
+  description = site.description,
 } = Astro.props;
 ---
 
@@ -31,16 +32,16 @@ const {
     <!-- N6 Newspaper masthead — knobs: issue-below, size=2xl, rule=double -->
     <nav class="w-full px-[clamp(1rem,5vw,3rem)] pt-6 text-center" aria-label="Site navigation">
       <div class="flex items-center justify-center gap-3 font-body text-[0.563rem] tracking-[0.14em] uppercase text-muted py-3 border-t border-rule">
-        <span>An ongoing collection</span>
+        <span>{site.tagline}</span>
         <span aria-hidden="true">&middot;</span>
-        <span>Est. 2026</span>
+        <span>{site.established}</span>
       </div>
       <a
         href="/"
         class="inline-block font-display italic font-light text-[clamp(2.8rem,7vw,5rem)] tracking-[-0.025em] leading-none text-ink no-underline py-3 pb-4 transition-colors duration-[160ms] hover:text-accent"
-        aria-label="Meditations — home"
+        aria-label={site.nav.homeLabel}
       >
-        Meditations
+        {site.name}
       </a>
       <div class="h-[4px] border-t border-b border-ink mt-2" aria-hidden="true"></div>
     </nav>
