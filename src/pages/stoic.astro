@@ -5,7 +5,6 @@ import TableOfContents from "@/components/stoic/sections/TableOfContents.astro";
 import WhatIsStoic from "@/components/stoic/sections/WhatIsStoic.astro";
 import DichotomyOfControl from "@/components/stoic/sections/DichotomyOfControl.astro";
 import StoicTriangle from "@/components/stoic/sections/StoicTriangle.astro";
-import LittleBookSummary from "@/components/stoic/sections/LittleBookSummary.astro";
 ---
 
 <ProseLayout
@@ -32,7 +31,6 @@ import LittleBookSummary from "@/components/stoic/sections/LittleBookSummary.ast
     { label: "What is Stoicism?",           href: "#what-is-stoicism" },
     { label: "Focus on What You Control",   href: "#dichotomy-of-control" },
     { label: "The Stoic Triangle",          href: "#stoic-triangle" },
-    { label: "The Little Book of Stoicism", href: "#little-book" },
   ]} />
 
   <div id="what-is-stoicism">
@@ -45,9 +43,5 @@ import LittleBookSummary from "@/components/stoic/sections/LittleBookSummary.ast
 
   <div id="stoic-triangle">
     <StoicTriangle />
-  </div>
-
-  <div id="little-book">
-    <LittleBookSummary />
   </div>
 </ProseLayout>
