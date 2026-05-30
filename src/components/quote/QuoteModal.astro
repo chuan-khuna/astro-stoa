@@ -3,42 +3,111 @@
 
 <dialog
   id="quote-modal"
-  class="fixed inset-0 m-auto w-full max-w-2xl max-h-[90dvh] overflow-y-auto bg-page border border-rule p-[clamp(1.5rem,5vw,3.5rem)] backdrop:bg-ink/40 open:flex flex-col gap-8"
+  class="fixed inset-0 m-auto w-full max-w-2xl max-h-[90dvh] overflow-y-auto bg-paper p-[clamp(2rem,6vw,4rem)] open:flex flex-col gap-8"
 >
-  <header class="flex items-start justify-between gap-4">
-    <div id="modal-meta" class="flex flex-col gap-1">
-      <cite id="modal-author" class="block font-body not-italic text-[0.563rem] tracking-[0.12em] uppercase text-muted"></cite>
-      <span id="modal-source" class="block font-display italic text-[0.563rem] text-neutral"></span>
-    </div>
-    <button
-      id="modal-close"
-      aria-label="Close"
-      class="shrink-0 text-muted hover:text-ink transition-colors duration-150 mt-0.5"
-    >
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-        <path d="M2 2l12 12M14 2L2 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>
-    </button>
-  </header>
+  <button
+    id="modal-close"
+    aria-label="Close"
+    class="absolute top-6 right-6 text-neutral hover:text-ink transition-colors duration-150"
+  >
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+      <path d="M2 2l14 14M16 2L2 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+    </svg>
+  </button>
 
+  <!-- Excerpt as title -->
   <blockquote>
-    <p id="modal-body" class="font-display italic font-light text-[clamp(1.1rem,1.8vw,1.45rem)] leading-[1.6] text-ink [overflow-wrap:anywhere] min-w-0"></p>
+    <span aria-hidden="true" class="block font-display italic leading-none text-[5rem] text-accent/25 -mb-4 -ml-1 select-none">&ldquo;</span>
+    <p
+      id="modal-excerpt"
+      class="font-display italic font-light text-[clamp(1.5rem,3.2vw,2.5rem)] leading-[1.45] text-ink [overflow-wrap:anywhere] min-w-0 [text-wrap:pretty]"
+    ></p>
   </blockquote>
+
+  <!-- Attribution -->
+  <div class="flex flex-col gap-1">
+    <cite id="modal-author" class="block font-body not-italic text-[0.563rem] tracking-[0.14em] uppercase text-muted"></cite>
+    <span id="modal-source" class="block font-display italic text-[0.75rem] text-neutral"></span>
+  </div>
+
+  <!-- Full body -->
+  <div id="modal-body-wrapper" class="border-t border-rule pt-6">
+    <p
+      id="modal-body"
+      class="font-body text-[0.9rem] leading-[1.8] text-neutral [overflow-wrap:anywhere] min-w-0 [text-wrap:pretty] max-w-[65ch]"
+    ></p>
+  </div>
 </dialog>
+
+<style>
+  dialog {
+    transition:
+      opacity 280ms cubic-bezier(0.16, 1, 0.3, 1),
+      translate 280ms cubic-bezier(0.16, 1, 0.3, 1),
+      overlay 280ms allow-discrete,
+      display 280ms allow-discrete;
+  }
+
+  dialog[open] {
+    opacity: 1;
+    translate: 0 0;
+  }
+
+  @starting-style {
+    dialog[open] {
+      opacity: 0;
+      translate: 0 1.75rem;
+    }
+  }
+
+  dialog::backdrop {
+    background: var(--color-ink);
+    opacity: 0;
+    transition:
+      opacity 280ms cubic-bezier(0.16, 1, 0.3, 1),
+      overlay 280ms allow-discrete,
+      display 280ms allow-discrete;
+  }
+
+  dialog[open]::backdrop {
+    opacity: 0.6;
+  }
+
+  @starting-style {
+    dialog[open]::backdrop {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    dialog,
+    dialog::backdrop {
+      transition: none;
+    }
+  }
+</style>
 
 <script>
   const modal = document.getElementById("quote-modal") as HTMLDialogElement;
-  const modalBody = document.getElementById("modal-body")!;
+  const modalExcerpt = document.getElementById("modal-excerpt")!;
   const modalAuthor = document.getElementById("modal-author")!;
   const modalSource = document.getElementById("modal-source")!;
+  const modalBody = document.getElementById("modal-body")!;
+  const modalBodyWrapper = document.getElementById("modal-body-wrapper")!;
   const closeBtn = document.getElementById("modal-close")!;
 
   function openModal(card: HTMLElement) {
-    const body = card.dataset.body?.trim();
-    const excerpt = card.dataset.excerpt?.trim();
-    modalBody.textContent = `“${body || excerpt || ""}”`;
+    const excerpt = card.dataset.excerpt?.trim() ?? "";
+    const body = card.dataset.body?.trim() ?? "";
+
+    modalExcerpt.textContent = excerpt;
     modalAuthor.textContent = card.dataset.author ?? "";
     modalSource.textContent = card.dataset.source ?? "";
+
+    const hasBody = body && body !== excerpt;
+    modalBody.textContent = body;
+    modalBodyWrapper.style.display = hasBody ? "" : "none";
+
     modal.showModal();
   }
 
