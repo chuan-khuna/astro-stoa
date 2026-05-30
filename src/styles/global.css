@@ -16,3 +16,31 @@ body {
   outline: 2px solid var(--color-focus);
   outline-offset: 3px;
 }
+
+/* Scrollbar */
+html {
+  scrollbar-color: var(--color-rule) var(--color-paper);
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-paper);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-rule);
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-neutral);
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
