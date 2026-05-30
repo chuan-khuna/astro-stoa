@@ -28,12 +28,12 @@ const { entry } = Astro.props;
   </blockquote>
   <footer class="flex flex-col gap-1">
     {entry.data.author && (
-      <cite class="block font-body not-italic text-[0.563rem] tracking-[0.12em] uppercase text-muted">
+      <cite class="block font-body not-italic text-sm tracking-[0.12em] uppercase text-muted">
         {entry.data.author}
       </cite>
     )}
     {entry.data.source && (
-      <span class="block font-display italic text-[0.563rem] text-neutral">
+      <span class="block font-display italic text-sm text-neutral">
         {entry.data.source}
       </span>
     )}
