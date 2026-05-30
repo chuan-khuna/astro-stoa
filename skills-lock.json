@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "skills": {
+    "git-commit": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "computedHash": "2607fc60629b82b257136dd2a7a373f0a4466c0b49df7746d845d59313c99b21"
+    },
+    "hallmark": {
+      "source": "nutlope/hallmark",
+      "sourceType": "github",
+      "computedHash": "099306f12b9980eb6196a441af8290412d2cb8884b09c675672e3ffbb268b3c7"
+    },
+    "handoff": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "computedHash": "1a78d774f8a59db5daa6e65e20a6596872fa8cde769f9a6e3a09b678dd5ae8cc"
+    },
+    "impeccable": {
+      "source": "pbakaus/impeccable",
+      "sourceType": "github",
+      "computedHash": "5e8c66eeffba8dc0c5e0941afbf4aecd6359184f8b0ea08cfc60a33f2e328e49"
+    },
+    "scrutinize": {
+      "source": "thananon/9arm-skills",
+      "sourceType": "github",
+      "computedHash": "d82a0b76617a00069f972cd0efd57c591e18b56f7aa0652aec63f6cb37cfd735"
+    }
+  }
+}
