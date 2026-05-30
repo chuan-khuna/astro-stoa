@@ -11,7 +11,8 @@ const { entry } = Astro.props;
 <article
   class="group flex flex-col gap-6 px-[clamp(1rem,5vw,3rem)] py-12 border-b border-rule min-[60rem]:[&:nth-child(even)]:border-l cursor-pointer"
   role="listitem"
-  data-body={entry.data.excerpt ?? entry.body?.trim()}
+  data-excerpt={entry.data.excerpt ?? ""}
+  data-body={entry.body?.trim() ?? ""}
   data-author={entry.data.author ?? ""}
   data-source={entry.data.source ?? ""}
 >

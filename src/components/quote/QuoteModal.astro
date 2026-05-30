@@ -4,15 +4,13 @@
 
 <dialog
   id="quote-modal"
-  class="m-auto w-full max-w-2xl rounded-none border border-rule bg-paper p-[clamp(2rem,6vw,4rem)] shadow-none backdrop:bg-ink/40 open:flex open:flex-col open:gap-8"
+  class="m-auto w-full max-w-2xl rounded-none border border-rule bg-paper p-[clamp(2rem,6vw,4rem)] shadow-none backdrop:bg-ink/40 open:flex open:flex-col open:gap-6"
 >
-  <blockquote id="modal-body">
-    <p
-      class="font-display italic font-light text-[clamp(1.25rem,2.5vw,2rem)] leading-[1.45] text-ink"
-    >
-    </p>
+  <blockquote id="modal-excerpt">
+    <p class="font-display italic font-light text-[clamp(1.25rem,2.5vw,2rem)] leading-[1.45] text-ink"></p>
   </blockquote>
-  <footer id="modal-footer" class="flex flex-col gap-1">
+
+  <footer id="modal-attribution" class="flex flex-col gap-1">
     <cite
       id="modal-author"
       class="font-body not-italic text-[0.563rem] tracking-[0.12em] uppercase text-muted"
@@ -22,6 +20,14 @@
       class="font-display italic text-[0.563rem] text-neutral"
     ></span>
   </footer>
+
+  <div id="modal-rule" class="h-px bg-rule"></div>
+
+  <p
+    id="modal-body"
+    class="font-body text-[0.875rem] leading-[1.75] text-neutral"
+  ></p>
+
   <button
     id="modal-close"
     class="absolute top-6 right-6 font-body text-[0.563rem] tracking-[0.12em] uppercase text-muted hover:text-ink transition-colors"
@@ -42,22 +48,30 @@
 
 <script>
   const modal = document.getElementById("quote-modal") as HTMLDialogElement;
-  const modalBodyP = modal.querySelector("#modal-body p") as HTMLElement;
+  const modalExcerptP = modal.querySelector("#modal-excerpt p") as HTMLElement;
   const modalAuthor = document.getElementById("modal-author") as HTMLElement;
   const modalSource = document.getElementById("modal-source") as HTMLElement;
+  const modalRule = document.getElementById("modal-rule") as HTMLElement;
+  const modalBody = document.getElementById("modal-body") as HTMLElement;
   const modalClose = document.getElementById("modal-close") as HTMLButtonElement;
 
-  document.querySelectorAll("article[data-body]").forEach((card) => {
+  document.querySelectorAll("article[data-excerpt]").forEach((card) => {
     card.addEventListener("click", () => {
+      const excerpt = card.getAttribute("data-excerpt") ?? "";
       const body = card.getAttribute("data-body") ?? "";
       const author = card.getAttribute("data-author") ?? "";
       const source = card.getAttribute("data-source") ?? "";
 
-      modalBodyP.textContent = `"${body}"`;
+      modalExcerptP.textContent = excerpt ? `“${excerpt}”` : "";
       modalAuthor.textContent = author;
       modalAuthor.style.display = author ? "" : "none";
       modalSource.textContent = source;
       modalSource.style.display = source ? "" : "none";
+
+      const hasBody = body && body !== excerpt;
+      modalRule.style.display = hasBody ? "" : "none";
+      modalBody.textContent = body;
+      modalBody.style.display = hasBody ? "" : "none";
 
       modal.showModal();
     });
