@@ -20,3 +20,4 @@ in a content collection or updating site config.
 | What you need | Reference file |
 | ------------- | ------------------------------------------------ |
 | Quote entries | [`references/quotes.md`](./references/quotes.md) |
+| Note entries  | [`references/notes.md`](./references/notes.md)   |
