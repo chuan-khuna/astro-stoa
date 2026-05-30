@@ -9,80 +9,120 @@ const inOurControl = [
 ];
 
 const notInOurControl = [
-  { term: "Body & health", detail: "Illness, injury, age — all subject to fortune." },
+  {
+    term: "Body & health",
+    detail: "Illness, injury, age — all subject to fortune.",
+  },
   { term: "Reputation", detail: "Others' opinions are theirs, not yours." },
   { term: "Wealth & property", detail: "Can be given or taken at any moment." },
-  { term: "Outcomes", detail: "Results depend on countless factors beyond us." },
+  {
+    term: "Outcomes",
+    detail: "Results depend on countless factors beyond us.",
+  },
 ];
 ---
 
 <section class="border-t border-rule py-16">
   <Centre>
-
     <div class="max-w-3xl mb-10">
-      <h2 class="font-display italic text-[clamp(1.8rem,4vw,2.8rem)] leading-tight text-ink mb-3">
+      <h2
+        class="font-display italic text-[clamp(1.8rem,4vw,2.8rem)] leading-tight text-ink mb-3"
+      >
         Focus on What You Control
       </h2>
       <p class="font-body text-sm tracking-[0.12em] uppercase text-muted mb-8">
         The Dichotomy of Control — Epictetus, <em>Enchiridion</em> §1
       </p>
       <p class="font-body text-md leading-relaxed text-ink">
-        Epictetus opens the <em>Enchiridion</em> with the single most clarifying idea in Stoic thought:
-        <span class="bg-highlight/20">some things are up to us, some things are not.</span> Unhappiness arises almost entirely from
-        confusing the two. The practice is simple to state and difficult to live: identify which
-        category a thing belongs to, then respond accordingly.
+        Epictetus opens the <em>Enchiridion</em> with the single most clarifying idea
+        in Stoic thought:
+        <span class="bg-highlight/20"
+          >some things are up to us, some things are not.</span
+        > Unhappiness arises almost entirely from confusing the two. The practice
+        is simple to state and difficult to live: identify which category a thing
+        belongs to, then respond accordingly.
       </p>
     </div>
 
     <!-- Two-column control table -->
-    <div class="grid grid-cols-1 min-[48rem]:grid-cols-2 border-l border-t border-rule">
+    <div
+      class="grid grid-cols-1 min-[48rem]:grid-cols-2 border-l border-t border-rule"
+    >
       <div class="border-r border-b border-rule p-6">
-        <p class="font-body text-sm tracking-[0.14em] uppercase text-muted mb-5">In our control</p>
+        <p
+          class="font-body text-sm tracking-[0.14em] uppercase text-muted mb-5"
+        >
+          In our control
+        </p>
         <ul class="space-y-4">
-          {inOurControl.map(({ term, detail }) => (
-            <li>
-              <p class="font-display italic text-ink text-md leading-tight">{term}</p>
-              <p class="font-body text-sm text-muted mt-0.5 leading-snug">{detail}</p>
-            </li>
-          ))}
+          {
+            inOurControl.map(({ term, detail }) => (
+              <li>
+                <p class="font-display italic text-ink text-md leading-tight">
+                  {term}
+                </p>
+                <p class="font-body text-sm text-muted mt-0.5 leading-snug">
+                  {detail}
+                </p>
+              </li>
+            ))
+          }
         </ul>
       </div>
       <div class="border-r border-b border-rule p-6">
-        <p class="font-body text-sm tracking-[0.14em] uppercase text-muted mb-5">Not in our control</p>
+        <p
+          class="font-body text-sm tracking-[0.14em] uppercase text-muted mb-5"
+        >
+          Not in our control
+        </p>
         <ul class="space-y-4">
-          {notInOurControl.map(({ term, detail }) => (
-            <li>
-              <p class="font-display italic text-ink text-md leading-tight">{term}</p>
-              <p class="font-body text-sm text-muted mt-0.5 leading-snug">{detail}</p>
-            </li>
-          ))}
+          {
+            notInOurControl.map(({ term, detail }) => (
+              <li>
+                <p class="font-display italic text-ink text-md leading-tight">
+                  {term}
+                </p>
+                <p class="font-body text-sm text-muted mt-0.5 leading-snug">
+                  {detail}
+                </p>
+              </li>
+            ))
+          }
         </ul>
       </div>
     </div>
 
     <!-- Practice note -->
     <div class="max-w-3xl mt-10 space-y-4">
-      <h3 class="font-body text-sm tracking-[0.14em] uppercase text-muted">How to apply it</h3>
+      <h3 class="font-body text-sm tracking-[0.14em] uppercase text-muted">
+        How to apply it
+      </h3>
       <p class="font-body text-md leading-relaxed text-ink">
-        When something disturbs you, pause and ask: <em>Is this up to me?</em> If yes, act. If no,
-        release your grip on the outcome. Aim for the shot, accept the landing. Prepare thoroughly
-        for the interview, let go of the hiring decision. Give the speech with care, relinquish
-        the audience's reaction.
+        When something disturbs you, pause and ask: <em>Is this up to me?</em> If
+        yes, act. If no, release your grip on the outcome. Aim for the shot, accept
+        the landing. Prepare thoroughly for the interview, let go of the hiring decision.
+        Give the speech with care, relinquish the audience's reaction.
       </p>
       <p class="font-body text-md leading-relaxed text-ink">
-        <span class="bg-highlight/20">This is not passivity — it is precision.</span> You pour full energy into what you can actually
-        move, and you stop wasting energy on what you cannot. The result is not indifference
-        to the world but a kind of liberated engagement with it.
+        <span class="bg-highlight/20"
+          >This is not passivity — it is precision.</span
+        > You pour full energy into what you can actually move, and you stop wasting
+        energy on what you cannot. The result is not indifference to the world but
+        a kind of liberated engagement with it.
       </p>
       <div class="border-l-2 border-accent/50 pl-6 py-1 mt-8">
-        <blockquote class="font-display italic text-lg text-ink leading-snug mb-2">
-          "Make the best use of what is in your power, and take the rest as it happens."
+        <blockquote
+          class="font-display italic text-lg text-ink leading-snug mb-2"
+        >
+          "Make the best use of what is in your power, and take the rest as it
+          happens."
         </blockquote>
-        <cite class="font-body text-sm tracking-[0.1em] uppercase text-muted not-italic">
+        <cite
+          class="font-body text-sm tracking-[0.1em] uppercase text-muted not-italic"
+        >
           Epictetus, <em>Enchiridion</em>
         </cite>
       </div>
     </div>
-
   </Centre>
 </section>

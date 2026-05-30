@@ -56,40 +56,194 @@ const insights = [
     <div class="border-l border-t border-r border-b border-rule mt-10 p-7">
       <p class="font-mono text-xs text-muted tracking-wider mb-3">PRACTICE</p>
       <h3 class="font-display italic text-xl text-ink mb-0.5">A practice for this moment</h3>
-      <p class="font-body text-sm tracking-[0.1em] uppercase text-muted mb-5">Step by step</p>
-      <ul class="border-l border-rule pl-5 mb-6 space-y-6">
-        <li>
-          <p class="font-display italic text-ink text-base leading-tight">Do not act yet</p>
-          <p class="font-body text-sm text-muted mt-0.5 leading-snug">Your only task right now is to do nothing irreversible. Wait.</p>
-          <CountdownTimer seconds={120} />
-        </li>
-        <li>
-          <p class="font-display italic text-ink text-base leading-tight">Step away if you can</p>
-          <p class="font-body text-sm text-muted mt-0.5 leading-snug">Physical distance helps the heat drop. Leave the room, take a walk.</p>
-          <CountdownTimer seconds={180} />
-        </li>
-        <li>
-          <p class="font-display italic text-ink text-base leading-tight">Name what you believe happened</p>
-          <p class="font-body text-sm text-muted mt-0.5 leading-snug">Say it plainly: what do you think was done to you, and by whom?</p>
-          <TextEntry placeholder="What do I believe happened?" />
-        </li>
-        <li>
-          <p class="font-display italic text-ink text-base leading-tight">Question the belief</p>
-          <p class="font-body text-sm text-muted mt-0.5 leading-snug">Is it true? Could there be another explanation? Does it matter as much as it feels?</p>
-          <TextEntry placeholder="Is it true? Is there another explanation?" />
-        </li>
-        <li>
-          <p class="font-display italic text-ink text-base leading-tight">Choose your response</p>
-          <p class="font-body text-sm text-muted mt-0.5 leading-snug">Now act — from reason, not reaction. A conversation, not a verdict.</p>
-          <TextEntry placeholder="How will I respond — from reason, not reaction?" rows={2} />
-        </li>
-      </ul>
-      <blockquote class="font-display italic text-base text-ink leading-snug mb-1">
-        "The greatest remedy for anger is delay."
-      </blockquote>
-      <cite class="font-body text-xs tracking-[0.1em] uppercase text-muted not-italic">
-        Seneca, <em>De Ira</em> II.29
-      </cite>
+      <p class="font-body text-sm tracking-[0.1em] uppercase text-muted mb-8">Step by step</p>
+
+      <div class="space-y-0">
+
+        <!-- Step 1 -->
+        <div class="flex gap-5">
+          <div class="flex flex-col items-center shrink-0">
+            <div class="w-4 h-4 rounded-full bg-ink mt-1 shrink-0"></div>
+            <div class="flex-1 w-px bg-rule mt-2"></div>
+          </div>
+          <div class="flex-1 pb-8">
+            <div class="grid grid-cols-1 min-[48rem]:grid-cols-[3fr_2fr] gap-6 items-start">
+              <div>
+                <p class="font-display italic text-ink text-base leading-tight mb-3">Do not act yet</p>
+                <p class="font-body text-sm text-ink leading-relaxed mb-3">
+                  Seneca's first and most urgent instruction: do nothing. Not because the anger is
+                  wrong, but because action taken at peak anger almost always makes the situation
+                  worse — and harder to repair. Your only goal right now is to avoid doing anything
+                  that cannot be undone.
+                </p>
+                <ul class="space-y-1.5">
+                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
+                    <span class="shrink-0 text-muted/40">—</span>
+                    <span>Do not send the message. Do not make the call.</span>
+                  </li>
+                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
+                    <span class="shrink-0 text-muted/40">—</span>
+                    <span>Do not walk into the room ready to argue.</span>
+                  </li>
+                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
+                    <span class="shrink-0 text-muted/40">—</span>
+                    <span>Let the urge to act pass before you do anything.</span>
+                  </li>
+                </ul>
+              </div>
+              <div><CountdownTimer seconds={120} /></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="flex gap-5">
+          <div class="flex flex-col items-center shrink-0">
+            <div class="w-4 h-4 rounded-full bg-ink mt-1 shrink-0"></div>
+            <div class="flex-1 w-px bg-rule mt-2"></div>
+          </div>
+          <div class="flex-1 pb-8">
+            <div class="grid grid-cols-1 min-[48rem]:grid-cols-[3fr_2fr] gap-6 items-start">
+              <div>
+                <p class="font-display italic text-ink text-base leading-tight mb-3">Step away if you can</p>
+                <p class="font-body text-sm text-ink leading-relaxed mb-3">
+                  Physical proximity to the source of anger keeps the nervous system activated. Even
+                  a brief change of environment — another room, outside, a short walk — breaks the
+                  sensory loop and lets the body begin to cool. You are not avoiding the problem;
+                  you are creating conditions where you can address it well.
+                </p>
+                <ul class="space-y-1.5">
+                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
+                    <span class="shrink-0 text-muted/40">—</span>
+                    <span>Walk slowly, not urgently. Speed feeds the agitation.</span>
+                  </li>
+                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
+                    <span class="shrink-0 text-muted/40">—</span>
+                    <span>Avoid replaying the scene in your head as you walk.</span>
+                  </li>
+                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
+                    <span class="shrink-0 text-muted/40">—</span>
+                    <span>Notice what you see and hear around you instead.</span>
+                  </li>
+                </ul>
+              </div>
+              <div><CountdownTimer seconds={180} /></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="flex gap-5">
+          <div class="flex flex-col items-center shrink-0">
+            <div class="w-4 h-4 rounded-full bg-ink mt-1 shrink-0"></div>
+            <div class="flex-1 w-px bg-rule mt-2"></div>
+          </div>
+          <div class="flex-1 pb-8">
+            <div class="grid grid-cols-1 min-[48rem]:grid-cols-[3fr_2fr] gap-6 items-start">
+              <div>
+                <p class="font-display italic text-ink text-base leading-tight mb-3">Name what you believe happened</p>
+                <p class="font-body text-sm text-ink leading-relaxed mb-3">
+                  Anger is always based on a story — a belief about what was done, by whom, and with
+                  what intention. That story may be accurate or it may not. Write it out without
+                  self-censorship. You are not looking for fairness yet; you are making the belief
+                  visible so it can be examined.
+                </p>
+                <ul class="space-y-1.5">
+                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
+                    <span class="shrink-0 text-muted/40">—</span>
+                    <span>Who did what? What do you believe their intention was?</span>
+                  </li>
+                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
+                    <span class="shrink-0 text-muted/40">—</span>
+                    <span>What does this mean about you, them, or the relationship?</span>
+                  </li>
+                </ul>
+              </div>
+              <div><TextEntry placeholder="What do I believe happened, and why?" /></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="flex gap-5">
+          <div class="flex flex-col items-center shrink-0">
+            <div class="w-4 h-4 rounded-full bg-ink mt-1 shrink-0"></div>
+            <div class="flex-1 w-px bg-rule mt-2"></div>
+          </div>
+          <div class="flex-1 pb-8">
+            <div class="grid grid-cols-1 min-[48rem]:grid-cols-[3fr_2fr] gap-6 items-start">
+              <div>
+                <p class="font-display italic text-ink text-base leading-tight mb-3">Question the belief</p>
+                <p class="font-body text-sm text-ink leading-relaxed mb-3">
+                  The Stoics held that anger begins in a judgment: that a wrong was done and
+                  punishment is owed. Both parts are worth examining. The wrong may be real but
+                  smaller than it feels. The desire to punish may be doing more harm than the
+                  original act.
+                </p>
+                <ul class="space-y-1.5">
+                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
+                    <span class="shrink-0 text-muted/40">—</span>
+                    <span>Is this the only possible interpretation of what happened?</span>
+                  </li>
+                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
+                    <span class="shrink-0 text-muted/40">—</span>
+                    <span>What would a neutral observer think?</span>
+                  </li>
+                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
+                    <span class="shrink-0 text-muted/40">—</span>
+                    <span>What changes if I am partially or entirely wrong?</span>
+                  </li>
+                </ul>
+              </div>
+              <div><TextEntry placeholder="Is it true? Is there another explanation?" /></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 5 (last — no connector line) -->
+        <div class="flex gap-5">
+          <div class="shrink-0 pt-1">
+            <div class="w-4 h-4 rounded-full border-2 border-ink bg-paper"></div>
+          </div>
+          <div class="flex-1">
+            <div class="grid grid-cols-1 min-[48rem]:grid-cols-[3fr_2fr] gap-6 items-start">
+              <div>
+                <p class="font-display italic text-ink text-base leading-tight mb-3">Choose your response</p>
+                <p class="font-body text-sm text-ink leading-relaxed mb-3">
+                  This is where the Stoic practice becomes active. You have examined the anger, found
+                  what is real, and now you choose what to do with it. A response chosen from reason
+                  serves the situation. A reaction driven by anger usually serves only the feeling.
+                </p>
+                <ul class="space-y-1.5">
+                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
+                    <span class="shrink-0 text-muted/40">—</span>
+                    <span>What outcome do I actually want from this?</span>
+                  </li>
+                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
+                    <span class="shrink-0 text-muted/40">—</span>
+                    <span>What response is most likely to produce it?</span>
+                  </li>
+                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
+                    <span class="shrink-0 text-muted/40">—</span>
+                    <span>What would I say if I wanted to repair rather than win?</span>
+                  </li>
+                </ul>
+              </div>
+              <div><TextEntry placeholder="How will I respond — from reason, not reaction?" rows={2} /></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="border-t border-rule mt-6 pt-6">
+        <blockquote class="font-display italic text-base text-ink leading-snug mb-1">
+          "The greatest remedy for anger is delay."
+        </blockquote>
+        <cite class="font-body text-xs tracking-[0.1em] uppercase text-muted not-italic">
+          Seneca, <em>De Ira</em> II.29
+        </cite>
+      </div>
     </div>
 
   </Centre>
