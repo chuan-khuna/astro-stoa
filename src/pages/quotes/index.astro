@@ -25,7 +25,7 @@ const rendered = await Promise.all(
   <main>
     <SectionTitle title="Quotes" />
 
-    <div class="grid grid-cols-1 min-[60rem]:grid-cols-2" role="list">
+    <div class="grid grid-cols-1 min-[60rem]:grid-cols-2 border-l border-t border-rule" role="list">
       {rendered.map(({ entry }) => <QuoteCard entry={entry} />)}
     </div>
   </main>

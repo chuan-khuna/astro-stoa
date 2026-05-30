@@ -13,7 +13,7 @@ entries.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
   <main>
     <SectionTitle title="Notes" />
 
-    <div class="grid grid-cols-1 min-[60rem]:grid-cols-2" role="list">
+    <div class="grid grid-cols-1 min-[60rem]:grid-cols-2 border-l border-t border-rule" role="list">
       {entries.map((entry) => <NoteCard entry={entry} />)}
     </div>
   </main>

@@ -35,7 +35,7 @@ const topNotes = allNotes.slice(0, 10);
     <!-- Quotes section -->
     <SectionTitle title="Quotes" />
 
-    <div class="grid grid-cols-1 min-[60rem]:grid-cols-2" role="list">
+    <div class="grid grid-cols-1 min-[60rem]:grid-cols-2 border-l border-t border-rule" role="list">
       {renderedQuotes.map(({ entry }) => <QuoteCard entry={entry} />)}
     </div>
 
@@ -53,7 +53,7 @@ const topNotes = allNotes.slice(0, 10);
 
     {
       topNotes.length > 0 ? (
-        <div class="grid grid-cols-1 min-[60rem]:grid-cols-2" role="list">
+        <div class="grid grid-cols-1 min-[60rem]:grid-cols-2 border-l border-t border-rule" role="list">
           {topNotes.map((entry) => (
             <NoteCard entry={entry} />
           ))}
