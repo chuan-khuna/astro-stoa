@@ -2,6 +2,7 @@
 import FontLoader from '@/components/FontLoader.astro';
 import Footer from '@/components/Footer.astro';
 import Nav from '@/components/Nav.astro';
+import ScrollToTop from '@/components/ScrollToTop.astro';
 import { site } from '@/data/site';
 import '@/styles/global.css';
 
@@ -38,29 +39,7 @@ const {
       <Footer />
     </div>
 
-    <!-- Scroll-to-top -->
-    <button
-      id="scroll-top"
-      aria-label="Scroll to top"
-      class="fixed bottom-6 right-6 w-9 h-9 flex items-center justify-center border border-ink text-ink opacity-0 pointer-events-none transition-opacity duration-300 hover:bg-ink hover:text-paper focus-visible:opacity-100"
-    >
-      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-        <path d="M6 10V2M2 6l4-4 4 4" stroke="currentColor" stroke-width="1.25" stroke-linecap="square"/>
-      </svg>
-    </button>
-
-    <script>
-      const btn = document.getElementById('scroll-top');
-      if (btn) {
-        const show = () => {
-          const visible = window.scrollY > 400;
-          btn.style.opacity = visible ? '1' : '0';
-          btn.style.pointerEvents = visible ? 'auto' : 'none';
-        };
-        window.addEventListener('scroll', show, { passive: true });
-        btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-      }
-    </script>
+    <ScrollToTop />
 
   </body>
 </html>
