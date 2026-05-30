@@ -7,7 +7,6 @@ export const site = {
 
   footer: {
     tagline: "A personal record of words that settled.",
-    typesetNote: "Typeset in Newsreader & IBM Plex Sans.",
     closingNote: "Compiled without noise.",
   },
 

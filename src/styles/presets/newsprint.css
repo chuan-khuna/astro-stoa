@@ -6,7 +6,7 @@
 
 @theme {
   /* ── Typography ── */
-  --font-display: var(--font-newsreader), ui-serif, Georgia, serif;
+  --font-display: var(--font-spectral), ui-serif, Georgia, serif;
   --font-body:    var(--font-alegreya-sans), var(--font-ibm-plex-sans-thai-looped), ui-sans-serif, system-ui, sans-serif;
   --font-mono:    var(--font-inconsolata), ui-monospace, monospace;
 

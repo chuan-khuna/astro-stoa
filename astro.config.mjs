@@ -17,9 +17,9 @@ export default defineConfig({
   fonts: [
     {
       provider: fontProviders.google(),
-      name: 'Newsreader',
-      cssVariable: '--font-newsreader',
-      weights: [300, 400, 700],
+      name: 'Spectral',
+      cssVariable: '--font-spectral',
+      weights: [200, 300, 400],
       styles: ['normal', 'italic'],
     },
     {
