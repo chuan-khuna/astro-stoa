@@ -35,7 +35,9 @@ const showScrollTop = /^\/(notes|quotes)\/[^/]+/.test(pathname);
 
     <Nav />
 
-    <slot />
+    <div class="max-w-[90rem] mx-auto w-full border-x border-accent/25">
+      <slot />
+    </div>
 
     <!-- Ft4 Dense typographic colophon — knobs: serif, single-block -->
     <Footer />
