@@ -1,23 +1,60 @@
+---
+import FontLoader from '@/components/FontLoader.astro';
+import '@/styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Meditations',
+  description = 'A curated collection of quotes for reflection.',
+} = Astro.props;
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <FontLoader />
+  </head>
+  <body class="bg-paper text-ink font-body min-h-dvh">
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+    <!-- N6 Newspaper masthead — knobs: issue-below, size=2xl, rule=double -->
+    <nav class="w-full px-[clamp(1rem,5vw,3rem)] pt-6 text-center" aria-label="Site navigation">
+      <div class="flex items-center justify-center gap-3 font-body text-[0.563rem] tracking-[0.14em] uppercase text-muted py-3 border-t border-rule">
+        <span>An ongoing collection</span>
+        <span aria-hidden="true">&middot;</span>
+        <span>Est. 2026</span>
+      </div>
+      <a
+        href="/"
+        class="inline-block font-display italic font-light text-[clamp(2.8rem,7vw,5rem)] tracking-[-0.025em] leading-none text-ink no-underline py-3 pb-4 transition-colors duration-[160ms] hover:text-accent"
+        aria-label="Meditations — home"
+      >
+        Meditations
+      </a>
+      <div class="h-[4px] border-t border-b border-ink mt-2" aria-hidden="true"></div>
+    </nav>
+
+    <slot />
+
+    <!-- Ft4 Dense typographic colophon — knobs: serif, single-block -->
+    <footer class="px-[clamp(1rem,5vw,3rem)] pt-12 pb-20" aria-label="Colophon">
+      <div class="h-px bg-rule mb-6" role="separator"></div>
+      <p class="font-display italic text-sm text-muted max-w-[72ch] leading-[1.75]">
+        Meditations &middot; A personal record of words that settled.
+        Typeset in Newsreader &amp; IBM Plex Sans.
+        Compiled without noise. MMXXVI.
+      </p>
+    </footer>
+
+  </body>
+</html>

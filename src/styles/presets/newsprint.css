@@ -1,0 +1,57 @@
+/* Hallmark · genre: editorial · macrostructure: Catalogue · theme: Newsprint
+ * nav: N6 Newspaper masthead · knobs: issue-below, size=2xl, rule=double
+ * footer: Ft4 Dense typographic · knobs: serif, single-block
+ * anchor hue: 75 (warm oat) · paper-band: light · display-style: roman-serif · accent-hue: warm
+ * tone: minimal-editorial · no border-radius · brief: Meditations personal quotes journal */
+
+@theme {
+  /* ── Typography ── */
+  --font-display: var(--font-newsreader), ui-serif, Georgia, serif;
+  --font-body:    var(--font-ibm-plex-sans), ui-sans-serif, system-ui, sans-serif;
+
+  /* ── Colour (OKLCH, anchor hue 75, warm oat parchment) ── */
+  --color-paper:   oklch(95%  0.015 75);
+  --color-paper-2: oklch(91%  0.018 75);
+  --color-rule:    oklch(82%  0.012 75);
+  --color-neutral: oklch(58%  0.010 75);
+  --color-muted:   oklch(42%  0.009 72);
+  --color-ink:     oklch(17%  0.012 70);
+  --color-accent:  oklch(50%  0.14  35);
+  --color-focus:   oklch(52%  0.18  35);
+
+  /* ── Spacing (4 pt scale) ── */
+  --space-2xs: 0.25rem;
+  --space-xs:  0.5rem;
+  --space-sm:  0.75rem;
+  --space-md:  1rem;
+  --space-lg:  1.5rem;
+  --space-xl:  2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4.5rem;
+  --space-4xl: 6rem;
+
+  /* ── Type scale (perfect fourth × 1.333) ── */
+  --text-xs:      0.563rem;
+  --text-sm:      0.75rem;
+  --text-base:    1rem;
+  --text-md:      1.125rem;
+  --text-lg:      1.333rem;
+  --text-xl:      1.777rem;
+  --text-2xl:     2.369rem;
+  --text-3xl:     3.157rem;
+  --text-4xl:     4.209rem;
+  --text-display: clamp(3rem, 6vw, 5.6rem);
+
+  /* ── Border radius — none per brief ── */
+  --radius:    0rem;
+  --radius-sm: 0rem;
+  --radius-md: 0rem;
+
+  /* ── Motion ── */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:     cubic-bezier(0.7, 0, 1, 1);
+  --ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
+  --dur-fast:    80ms;
+  --dur-base:    160ms;
+  --dur-slow:    320ms;
+}

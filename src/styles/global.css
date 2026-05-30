@@ -1,0 +1,18 @@
+@import "tailwindcss";
+@import "./presets/newsprint.css";
+
+html,
+body {
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer base {
+  * { border-radius: 0; }
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+}
