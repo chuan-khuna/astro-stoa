@@ -1,95 +1,121 @@
 ---
-import Layout from '@/layouts/Layout.astro';
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
 
-const quotes = [
-  {
-    text: "The unexamined life is not worth living.",
-    author: "Socrates",
-    source: "Plato, Apology",
-  },
-  {
-    text: "We suffer more in imagination than in reality.",
-    author: "Seneca",
-    source: "Letters to Lucilius",
-  },
-  {
-    text: "Begin at once to live, and count each separate day as a separate life.",
-    author: "Seneca",
-    source: "Letters to Lucilius",
-  },
-  {
-    text: "He who has a why to live can bear almost any how.",
-    author: "Friedrich Nietzsche",
-    source: "Twilight of the Idols",
-  },
-  {
-    text: "The present moment always will have been.",
-    author: "Marcus Aurelius",
-    source: "Meditations, IV.3",
-  },
-  {
-    text: "Between stimulus and response there is a space. In that space is our power to choose our response.",
-    author: "Viktor Frankl",
-    source: "Man's Search for Meaning",
-  },
-  {
-    text: "The quieter you become, the more you can hear.",
-    author: "Ram Dass",
-    source: "",
-  },
-  {
-    text: "You are not a drop in the ocean. You are the entire ocean in a drop.",
-    author: "Rumi",
-    source: "",
-  },
-  {
-    text: "Wherever you are, be all there.",
-    author: "Jim Elliot",
-    source: "",
-  },
-  {
-    text: "What you resist persists.",
-    author: "Carl Gustav Jung",
-    source: "",
-  },
-];
+const entries = await getCollection("quotes");
 ---
 
 <Layout title="Meditations">
   <main>
-
     <!-- Catalogue header -->
     <div class="px-[clamp(1rem,5vw,3rem)] py-6 border-b border-rule">
-      <p class="font-body text-[0.563rem] tracking-[0.12em] uppercase text-muted">
-        {quotes.length} quotes &middot; curated by hand &middot; 2026
+      <p
+        class="font-body text-[0.563rem] tracking-[0.12em] uppercase text-muted"
+      >
+        {entries.length} quotes &middot; curated by hand &middot; 2026
       </p>
     </div>
 
     <!-- Quote grid (Catalogue macrostructure) -->
     <div class="grid grid-cols-1 min-[60rem]:grid-cols-2" role="list">
-      {quotes.map((quote) => (
-        <article
-          class="flex flex-col gap-6 px-[clamp(1rem,5vw,3rem)] py-12 border-b border-rule min-[60rem]:[&:nth-child(even)]:border-l"
-          role="listitem"
-        >
-          <blockquote>
-            <p class="font-display italic font-light text-[clamp(1.1rem,1.8vw,1.45rem)] leading-[1.45] text-ink [overflow-wrap:anywhere] min-w-0">
-              &ldquo;{quote.text}&rdquo;
-            </p>
-          </blockquote>
-          <footer class="flex flex-col gap-1">
-            <cite class="block font-body not-italic text-[0.563rem] tracking-[0.12em] uppercase text-muted">
-              {quote.author}
-            </cite>
-            {quote.source && (
-              <span class="block font-display italic text-[0.563rem] text-neutral">
-                {quote.source}
-              </span>
-            )}
-          </footer>
-        </article>
-      ))}
+      {
+        entries.map((entry) => (
+          <article
+            class="group flex flex-col gap-6 px-[clamp(1rem,5vw,3rem)] py-12 border-b border-rule min-[60rem]:[&:nth-child(even)]:border-l cursor-pointer"
+            role="listitem"
+            data-body={entry.body?.trim()}
+            data-author={entry.data.author ?? ""}
+            data-source={entry.data.source ?? ""}
+          >
+            <blockquote>
+              <p class="font-display italic font-light text-[clamp(1.1rem,1.8vw,1.45rem)] leading-[1.45] text-ink [overflow-wrap:anywhere] min-w-0 group-hover:text-neutral transition-colors duration-200">
+                &ldquo;{entry.data.excerpt ?? entry.body}&rdquo;
+              </p>
+            </blockquote>
+            <footer class="flex flex-col gap-1">
+              {entry.data.author && (
+                <cite class="block font-body not-italic text-[0.563rem] tracking-[0.12em] uppercase text-muted">
+                  {entry.data.author}
+                </cite>
+              )}
+              {entry.data.source && (
+                <span class="block font-display italic text-[0.563rem] text-neutral">
+                  {entry.data.source}
+                </span>
+              )}
+            </footer>
+          </article>
+        ))
+      }
     </div>
-
   </main>
+
+  <!-- Quote modal -->
+  <dialog
+    id="quote-modal"
+    class="m-auto w-full max-w-2xl rounded-none border border-rule bg-paper p-[clamp(2rem,6vw,4rem)] shadow-none backdrop:bg-ink/40 open:flex open:flex-col open:gap-8"
+  >
+    <blockquote id="modal-body">
+      <p
+        class="font-display italic font-light text-[clamp(1.25rem,2.5vw,2rem)] leading-[1.45] text-ink"
+      >
+      </p>
+    </blockquote>
+    <footer id="modal-footer" class="flex flex-col gap-1">
+      <cite
+        id="modal-author"
+        class="font-body not-italic text-[0.563rem] tracking-[0.12em] uppercase text-muted"
+      ></cite>
+      <span
+        id="modal-source"
+        class="font-display italic text-[0.563rem] text-neutral"
+      ></span>
+    </footer>
+    <button
+      id="modal-close"
+      class="absolute top-6 right-6 font-body text-[0.563rem] tracking-[0.12em] uppercase text-muted hover:text-ink transition-colors"
+      aria-label="Close"
+    >
+      Close
+    </button>
+  </dialog>
 </Layout>
+
+<style>
+  dialog {
+    position: relative;
+  }
+  dialog::backdrop {
+    background: rgba(0, 0, 0, 0.4);
+  }
+</style>
+
+<script>
+  const modal = document.getElementById("quote-modal") as HTMLDialogElement;
+  const modalBodyP = modal.querySelector("#modal-body p") as HTMLElement;
+  const modalAuthor = document.getElementById("modal-author") as HTMLElement;
+  const modalSource = document.getElementById("modal-source") as HTMLElement;
+  const modalClose = document.getElementById("modal-close") as HTMLButtonElement;
+
+  document.querySelectorAll("article[data-body]").forEach((card) => {
+    card.addEventListener("click", () => {
+      const body = card.getAttribute("data-body") ?? "";
+      const author = card.getAttribute("data-author") ?? "";
+      const source = card.getAttribute("data-source") ?? "";
+
+      modalBodyP.textContent = `“${body}”`;
+      modalAuthor.textContent = author;
+      modalAuthor.style.display = author ? "" : "none";
+      modalSource.textContent = source;
+      modalSource.style.display = source ? "" : "none";
+
+      modal.showModal();
+    });
+  });
+
+  modalClose.addEventListener("click", () => modal.close());
+
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) modal.close();
+  });
+</script>

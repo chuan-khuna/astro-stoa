@@ -2,8 +2,10 @@
 import { defineConfig, fontProviders } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import { fileURLToPath } from 'node:url';
+import mdx from '@astrojs/mdx';
 
 export default defineConfig({
+  integrations: [mdx()],
   vite: {
     plugins: [tailwindcss()],
     resolve: {
