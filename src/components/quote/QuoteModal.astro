@@ -53,11 +53,11 @@
 
   <!-- Full body -->
   <div id="modal-body-wrapper" class="border-t border-rule pt-6">
-    <p
+    <div
       id="modal-body"
-      class="font-body text-[0.9rem] leading-[1.8] text-neutral [overflow-wrap:anywhere] min-w-0 [text-wrap:pretty] max-w-[65ch]"
+      class="prose prose-sm max-w-[65ch]"
     >
-    </p>
+    </div>
   </div>
 </dialog>
 
@@ -117,6 +117,17 @@
       backdrop-filter: none;
     }
   }
+
+  /* Tune prose to site tokens */
+  #modal-body {
+    --tw-prose-body: var(--color-neutral);
+    --tw-prose-headings: var(--color-ink);
+    --tw-prose-hr: var(--color-rule);
+    --tw-prose-bullets: var(--color-neutral);
+    --tw-prose-counters: var(--color-neutral);
+    --tw-prose-links: var(--color-ink);
+    font-family: var(--font-body);
+  }
 </style>
 
 <script>
@@ -129,15 +140,17 @@
   const closeBtn = document.getElementById("modal-close")!;
 
   function openModal(card: HTMLElement) {
-    const excerpt = card.dataset.excerpt?.trim() ?? "";
-    const body = card.dataset.body?.trim() ?? "";
-
-    modalExcerpt.textContent = excerpt;
+    modalExcerpt.textContent = card.dataset.excerpt?.trim() ?? "";
     modalAuthor.textContent = card.dataset.author ?? "";
     modalSource.textContent = card.dataset.source ?? "";
 
-    const hasBody = body && body !== excerpt;
-    modalBody.textContent = body;
+    const hasBody = card.dataset.hasBody === "true";
+    if (hasBody) {
+      const bodyEl = document.getElementById(`quote-body-${card.dataset.bodyId}`);
+      modalBody.innerHTML = bodyEl ? bodyEl.innerHTML : "";
+    } else {
+      modalBody.innerHTML = "";
+    }
     modalBodyWrapper.style.display = hasBody ? "" : "none";
 
     modal.showModal();

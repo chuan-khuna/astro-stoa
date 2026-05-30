@@ -14,7 +14,8 @@ const { entry } = Astro.props;
   tabindex="0"
   aria-haspopup="dialog"
   data-excerpt={entry.data.excerpt ?? ""}
-  data-body={entry.body?.trim() ?? ""}
+  data-body-id={entry.id}
+  data-has-body={entry.body?.trim() ? "true" : "false"}
   data-author={entry.data.author ?? ""}
   data-source={entry.data.source ?? ""}
 >

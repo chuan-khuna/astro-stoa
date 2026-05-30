@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./presets/newsprint.css";
+@plugin "@tailwindcss/typography";
 
 html,
 body {
