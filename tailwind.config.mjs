@@ -48,8 +48,8 @@ export default {
         focus: "var(--color-focus)",
       },
       fontFamily: {
-        display: "var(--font-spectral)",
-        body: "var(--font-alegreya-sans), var(--font-ibm-plex-sans-thai-looped), sans-serif",
+        display: "var(--font-spectral), var(--font-bai-jamjuree)",
+        body: "var(--font-alegreya-sans), var(--font-noto-sans-thai-looped), sans-serif",
         mono: "var(--font-inconsolata)",
       },
       borderRadius: {

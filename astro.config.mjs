@@ -36,13 +36,21 @@ export default defineConfig({
     },
     {
       provider: fontProviders.google(),
-      name: "IBM Plex Sans Thai Looped",
-      cssVariable: "--font-ibm-plex-sans-thai-looped",
+      name: "Noto Sans Thai Looped",
+      cssVariable: "--font-noto-sans-thai-looped",
       weights: [400, 500],
       styles: ["normal"],
       // Astro defaults `subsets` to ["latin"], which has no Thai glyphs —
       // without "thai" the woff2 ships empty for Thai text and the browser
       // silently falls back to a system font.
+      subsets: ["thai", "latin"],
+    },
+    {
+      provider: fontProviders.google(),
+      name: "Bai Jamjuree",
+      cssVariable: "--font-bai-jamjuree",
+      weights: [300, 400],
+      styles: ["normal", "italic"],
       subsets: ["thai", "latin"],
     },
     {
