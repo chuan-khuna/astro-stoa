@@ -1,0 +1,49 @@
+---
+interface Section {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  sections: Section[];
+}
+
+const { sections } = Astro.props;
+---
+
+<nav class="sticky top-0 z-10 border-b border-rule bg-paper" aria-label="Table of contents">
+
+  <!-- Mobile: collapsed summary row, tap to expand -->
+  <details class="md:hidden group">
+    <summary class="px-[clamp(1rem,5vw,3rem)] py-4 flex items-center justify-between cursor-pointer list-none select-none">
+      <span class="font-body text-sm tracking-[0.1em] uppercase text-muted">Contents</span>
+      <svg
+        width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"
+        class="text-muted transition-transform duration-[160ms] group-open:rotate-180"
+      >
+        <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.25" stroke-linecap="square"/>
+      </svg>
+    </summary>
+    <ol class="px-[clamp(1rem,5vw,3rem)] pb-4 flex flex-col gap-3 border-t border-rule pt-4">
+      {sections.map(({ label, href }) => (
+        <li>
+          <a href={href} class="font-body text-sm tracking-[0.1em] uppercase text-muted hover:text-ink transition-colors duration-[160ms]">
+            {label}
+          </a>
+        </li>
+      ))}
+    </ol>
+  </details>
+
+  <!-- Desktop: single flex row -->
+  <ol class="hidden md:flex flex-wrap items-center gap-x-8 gap-y-2 px-[clamp(1rem,5vw,3rem)] py-4">
+    {sections.map(({ label, href }) => (
+      <li>
+        <a href={href} class="font-body text-sm tracking-[0.1em] uppercase text-muted hover:text-ink transition-colors duration-[160ms]">
+          {label}
+        </a>
+      </li>
+    ))}
+  </ol>
+
+</nav>

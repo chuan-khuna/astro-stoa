@@ -1,0 +1,95 @@
+---
+const principles = [
+  {
+    number: "01",
+    title: "Live according to Nature",
+    body: "Use reason — your most human faculty — to navigate every situation. Emotions are not enemies; irrational judgements are.",
+  },
+  {
+    number: "02",
+    title: "The Dichotomy of Control",
+    body: "Distinguish what is up to you (judgements, desires, actions) from what is not (body, reputation, outcomes). Invest only in the former.",
+  },
+  {
+    number: "03",
+    title: "Virtue as the only good",
+    body: "Courage, justice, wisdom, and self-discipline are the only things that are good without qualification. Everything else is preferred or dispreferred — not good or bad in itself.",
+  },
+  {
+    number: "04",
+    title: "Negative Visualisation",
+    body: "Contemplate loss before it arrives. Imagine the worst case not to despair but to appreciate what you have and remove the sting from future misfortune.",
+  },
+  {
+    number: "05",
+    title: "The View from Above",
+    body: "Zoom out. Picture your worries against the scale of time, the city, the planet. Most friction dissolves. What remains is worth your attention.",
+  },
+  {
+    number: "06",
+    title: "Act with a Reserve Clause",
+    body: "Pursue goals wholeheartedly — <em>fate permitting</em>. Attach the phrase to every intention. It keeps you committed without making outcomes your master.",
+  },
+  {
+    number: "07",
+    title: "Practice, not theory",
+    body: "Stoicism is not a set of ideas to admire; it is a set of habits to build. Morning reflection, evening review, and deliberate exposure to discomfort are the drills.",
+  },
+];
+---
+
+<section class="px-[clamp(1rem,5vw,3rem)] py-16 border-t border-rule">
+  <div class="max-w-3xl mb-12">
+    <h2 class="font-display italic text-[clamp(1.8rem,4vw,2.8rem)] leading-tight text-ink mb-3">
+      The Little Book of Stoicism
+    </h2>
+    <p class="font-body text-sm tracking-[0.12em] uppercase text-muted mb-6">
+      Jonas Salzgeber — Summary
+    </p>
+    <p class="font-body text-md leading-relaxed text-ink">
+      Salzgeber's book distils ancient Stoicism into practical habits for modern life. It is
+      organised in two halves: first, the core philosophy — what the Stoics believed and why;
+      second, 55 bite-sized practices you can apply immediately. The argument throughout is that
+      Stoicism is not a consolation philosophy for hard times but an active training programme
+      for every day.
+    </p>
+  </div>
+
+  <!-- Principles grid -->
+  <div class="grid grid-cols-1 min-[48rem]:grid-cols-2 border-l border-t border-rule max-w-4xl">
+    {principles.map(({ number, title, body }) => (
+      <div class="border-r border-b border-rule p-6 group hover:bg-paper-2 transition-colors duration-[160ms]">
+        <p class="font-mono text-xs text-muted mb-3 tracking-wider">{number}</p>
+        <h3 class="font-display italic text-ink text-lg leading-snug mb-2">{title}</h3>
+        <p class="font-body text-sm text-muted leading-relaxed" set:html={body} />
+      </div>
+    ))}
+  </div>
+
+  <!-- Takeaway -->
+  <div class="max-w-3xl mt-12">
+    <h3 class="font-body text-sm tracking-[0.14em] uppercase text-muted mb-4">
+      The central message
+    </h3>
+    <p class="font-body text-md leading-relaxed text-ink mb-5">
+      Salzgeber frames Stoic happiness as <em>eudaimonia</em> — flourishing, not pleasure.
+      You flourish by living virtuously, not by accumulating good circumstances. The Stoics
+      called this the <em>summum bonum</em>: the highest good, and the only one entirely within
+      your reach.
+    </p>
+    <p class="font-body text-md leading-relaxed text-ink">
+      The practical upshot: stop outsourcing your wellbeing to luck. Train your inner faculty —
+      the one that judges, chooses, and responds — and external storms become, at worst, weather.
+    </p>
+
+    <div class="border-l-2 border-accent/50 pl-6 py-1 mt-8">
+      <blockquote class="font-display italic text-lg text-ink leading-snug mb-2">
+        "He is a wise man who does not grieve for the things which he has not,
+        but rejoices for those which he has."
+      </blockquote>
+      <cite class="font-body text-sm tracking-[0.1em] uppercase text-muted not-italic">
+        Epictetus — quoted in Salzgeber
+      </cite>
+    </div>
+  </div>
+</section>
