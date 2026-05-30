@@ -38,19 +38,8 @@ const ss = String(seconds % 60).padStart(2, "0");
     {mm}:{ss}
   </p>
 
-  <div class="flex flex-col gap-1.5">
-    {
-      variant === "breathing" && (
-        <p
-          data-breath-label
-          class="font-body text-xs tracking-[0.12em] uppercase transition-colors duration-500"
-          style="color:transparent"
-        >
-          &nbsp;
-        </p>
-      )
-    }
-    <div class="relative w-full h-px bg-rule">
+  <div class="flex flex-col gap-1">
+    <div class="relative w-full h-0.5 bg-rule">
       <div
         data-breath-bar
         class="absolute inset-y-0 left-0 h-full"
@@ -58,33 +47,45 @@ const ss = String(seconds % 60).padStart(2, "0");
       >
       </div>
     </div>
-  </div>
-
-  <div class="flex items-center gap-2">
-    <button
-      class="font-body text-xs tracking-[0.12em] uppercase border border-rule px-3 py-1.5 text-muted hover:text-ink hover:border-neutral transition-colors"
-      data-btn
-    >
-      {labelStart}
-    </button>
-    {
-      labelAction &&
-        (actionHref ? (
-          <a
-            href={actionHref}
-            class="font-body text-xs tracking-[0.12em] uppercase border border-rule px-3 py-1.5 text-muted hover:text-ink hover:border-neutral transition-colors"
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <button
+          class="font-body text-xs tracking-[0.12em] uppercase border border-rule px-3 py-1.5 text-muted hover:text-ink hover:border-neutral transition-colors"
+          data-btn
+        >
+          {labelStart}
+        </button>
+        {
+          labelAction &&
+            (actionHref ? (
+              <a
+                href={actionHref}
+                class="font-body text-xs tracking-[0.12em] uppercase border border-rule px-3 py-1.5 text-muted hover:text-ink hover:border-neutral transition-colors"
+              >
+                {labelAction}
+              </a>
+            ) : (
+              <button
+                class="font-body text-xs tracking-[0.12em] uppercase border border-rule px-3 py-1.5 text-muted hover:text-ink hover:border-neutral transition-colors"
+                data-action-btn
+              >
+                {labelAction}
+              </button>
+            ))
+        }
+      </div>
+      {
+        variant === "breathing" && (
+          <p
+            data-breath-label
+            class="font-body text-xs tracking-[0.12em] uppercase transition-colors duration-500"
+            style="color:transparent"
           >
-            {labelAction}
-          </a>
-        ) : (
-          <button
-            class="font-body text-xs tracking-[0.12em] uppercase border border-rule px-3 py-1.5 text-muted hover:text-ink hover:border-neutral transition-colors"
-            data-action-btn
-          >
-            {labelAction}
-          </button>
-        ))
-    }
+            &nbsp;
+          </p>
+        )
+      }
+    </div>
   </div>
 </div>
 
