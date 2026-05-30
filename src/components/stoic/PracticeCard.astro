@@ -1,0 +1,66 @@
+---
+import CountdownTimer from "@/components/stoic/widgets/CountdownTimer.astro";
+import TextEntry from "@/components/stoic/widgets/TextEntry.astro";
+import type { Practice } from "@/data/stoic/types";
+
+interface Props {
+  practice: Practice;
+}
+
+const { practice } = Astro.props;
+---
+
+<div class="border-l border-t border-r border-b border-rule mt-10 p-7">
+  <p class="font-mono text-xs text-muted tracking-wider mb-3">{practice.eyebrow}</p>
+  <h3 class="font-display italic text-xl text-ink mb-0.5">{practice.heading}</h3>
+  <p class="font-body text-sm tracking-[0.1em] uppercase text-muted mb-8">{practice.subheading}</p>
+
+  <div class="space-y-0">
+    {practice.steps.map((step, i) => {
+      const isLast = i === practice.steps.length - 1;
+      return (
+        <div class="flex gap-5">
+          <div class:list={[{ "flex flex-col items-center shrink-0": !isLast, "shrink-0 pt-1": isLast }]}>
+            <div class:list={["w-2.5 h-2.5 rounded-full bg-accent shrink-0", { "mt-1.5": !isLast }]}></div>
+            {!isLast && <div class="flex-1 w-px bg-rule mt-2"></div>}
+          </div>
+          <div class:list={["flex-1", { "pb-8": !isLast }]}>
+            <div class="grid grid-cols-1 min-[48rem]:grid-cols-[3fr_2fr] gap-[1.875rem] items-start">
+              <div>
+                <p class="font-display italic text-ink text-base leading-tight mb-3">{step.heading}</p>
+                <p class="font-body text-sm text-ink leading-relaxed mb-3">{step.body}</p>
+                <ul class="space-y-1.5">
+                  {step.bullets.map((bullet) => (
+                    <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
+                      <span class="shrink-0 text-muted/40">—</span>
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                {step.widget.type === "timer" ? (
+                  <CountdownTimer
+                    seconds={step.widget.seconds}
+                    labelStart={step.widget.labelStart}
+                    labelReset={step.widget.labelReset}
+                    labelDone={step.widget.labelDone}
+                  />
+                ) : (
+                  <TextEntry placeholder={step.widget.placeholder} rows={step.widget.rows} />
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    })}
+  </div>
+
+  <div class="border-t border-rule mt-6 pt-6">
+    <blockquote class="font-display italic text-base text-ink leading-snug mb-1">
+      "{practice.quote.text}"
+    </blockquote>
+    <cite class="font-body text-xs tracking-[0.1em] uppercase text-muted not-italic" set:html={practice.quote.author} />
+  </div>
+</div>

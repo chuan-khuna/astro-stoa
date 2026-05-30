@@ -1,52 +1,13 @@
 ---
 import Centre from "@/components/Centre.astro";
+import type { StoicContent } from "@/data/stoic/types";
 
-const pillars = [
-  {
-    number: "01",
-    label: "Live with Arete",
-    sub: "Excellence / Virtue",
-    description:
-      "Express the best version of yourself in every moment. Arete is the Greek word for excellence — it means acting from virtue rather than appetite or habit. The Stoics identified four cardinal virtues as the cornerstones of a well-lived life.",
-    virtues: [
-      { name: "Wisdom", detail: "Knowing how to live well and make good judgements in any situation." },
-      { name: "Courage", detail: "Taking right action despite fear, discomfort, or opposition." },
-      { name: "Justice", detail: "Acting fairly and with genuine care toward others." },
-      { name: "Temperance", detail: "Mastering your desires; living with self-discipline and moderation." },
-    ],
-    note: null,
-    quote: {
-      text: "Waste no more time arguing what a good man should be. Be one.",
-      author: "Marcus Aurelius, Meditations X.16",
-    },
-  },
-  {
-    number: "02",
-    label: "Focus on What You Control",
-    sub: "Selective Focus",
-    description:
-      "Accept external circumstances as they come, and direct your energy only toward your own actions. You cannot control weather, traffic, or other people's opinions. You can control your thoughts, judgements, and responses. Letting go of what lies outside your power frees you from needless frustration.",
-    virtues: [],
-    note: "This pillar maps directly to the Dichotomy of Control — the most foundational practice in Stoic philosophy. See the section above for a full breakdown.",
-    quote: {
-      text: "Make the best use of what is in your power, and take the rest as it happens.",
-      author: "Epictetus, Enchiridion §15",
-    },
-  },
-  {
-    number: "03",
-    label: "Take Responsibility",
-    sub: "For your mental state",
-    description:
-      "Recognise that you choose how you react to external events. Events themselves are neutral — a broken glass doesn't upset you; it is your judgement of it as bad or clumsy that causes the pain. When you own your inner state, no external event can permanently take away your peace of mind.",
-    virtues: [],
-    note: "This is not about self-blame. It is about self-authorship: claiming the power you already have over your own response.",
-    quote: {
-      text: "Men are disturbed not by the things which happen, but by the opinions about the things.",
-      author: "Epictetus, Enchiridion §5",
-    },
-  },
-];
+interface Props {
+  content: StoicContent["stoicTriangle"];
+}
+
+const { content } = Astro.props;
+const { svgLabels: svg, pillars } = content;
 ---
 
 <section class="border-t border-rule py-16">
@@ -54,16 +15,10 @@ const pillars = [
 
     <div class="max-w-3xl mb-6">
       <h2 class="font-display italic text-[clamp(1.8rem,4vw,2.8rem)] leading-tight text-ink mb-3">
-        The Stoic Happiness Triangle
+        {content.heading}
       </h2>
-      <p class="font-body text-sm tracking-[0.12em] uppercase text-muted mb-6">
-        Jonas Salzgeber — <em>The Little Book of Stoicism</em>
-      </p>
-      <p class="font-body text-md leading-relaxed text-ink">
-        Salzgeber distils the entire practice of Stoicism into a single diagram: a triangle
-        whose three sides support one goal at the centre — <em>Eudaimonia</em>, a flourishing life.
-        Each side is a principle you can act on today.
-      </p>
+      <p class="font-body text-sm tracking-[0.12em] uppercase text-muted mb-6" set:html={content.source} />
+      <p class="font-body text-md leading-relaxed text-ink" set:html={content.intro} />
     </div>
 
     <!-- Triangle diagram -->
@@ -74,7 +29,6 @@ const pillars = [
         xmlns="http://www.w3.org/2000/svg"
         class="w-full max-w-md"
       >
-        <!-- Triangle — inset from all edges to leave room for labels -->
         <polygon
           points="210,48 374,294 46,294"
           stroke="var(--color-accent)"
@@ -85,20 +39,16 @@ const pillars = [
           stroke-linejoin="miter"
         />
 
-        <!-- Top vertex label -->
-        <text x="210" y="28" text-anchor="middle" font-family="var(--font-spectral)" font-style="italic" font-size="13" fill="var(--color-ink)">Live with Arete</text>
+        <text x="210" y="28" text-anchor="middle" font-family="var(--font-spectral)" font-style="italic" font-size="13" fill="var(--color-ink)">{svg.topVertex}</text>
 
-        <!-- Bottom-right vertex label -->
-        <text x="400" y="318" text-anchor="end" font-family="var(--font-spectral)" font-style="italic" font-size="13" fill="var(--color-ink)">Focus on What</text>
-        <text x="400" y="338" text-anchor="end" font-family="var(--font-spectral)" font-style="italic" font-size="13" fill="var(--color-ink)">You Control</text>
+        <text x="400" y="318" text-anchor="end" font-family="var(--font-spectral)" font-style="italic" font-size="13" fill="var(--color-ink)">{svg.bottomRightLine1}</text>
+        <text x="400" y="338" text-anchor="end" font-family="var(--font-spectral)" font-style="italic" font-size="13" fill="var(--color-ink)">{svg.bottomRightLine2}</text>
 
-        <!-- Bottom-left vertex label -->
-        <text x="20" y="318" text-anchor="start" font-family="var(--font-spectral)" font-style="italic" font-size="13" fill="var(--color-ink)">Take</text>
-        <text x="20" y="338" text-anchor="start" font-family="var(--font-spectral)" font-style="italic" font-size="13" fill="var(--color-ink)">Responsibility</text>
+        <text x="20" y="318" text-anchor="start" font-family="var(--font-spectral)" font-style="italic" font-size="13" fill="var(--color-ink)">{svg.bottomLeftLine1}</text>
+        <text x="20" y="338" text-anchor="start" font-family="var(--font-spectral)" font-style="italic" font-size="13" fill="var(--color-ink)">{svg.bottomLeftLine2}</text>
 
-        <!-- Centre label -->
-        <text x="210" y="188" text-anchor="middle" font-family="var(--font-alegreya-sans)" font-size="9" letter-spacing="0.14em" fill="var(--color-muted)" dominant-baseline="middle">EUDAIMONIA</text>
-        <text x="210" y="206" text-anchor="middle" font-family="var(--font-spectral)" font-style="italic" font-size="11" fill="var(--color-muted)" dominant-baseline="middle">a flourishing life</text>
+        <text x="210" y="188" text-anchor="middle" font-family="var(--font-alegreya-sans)" font-size="9" letter-spacing="0.14em" fill="var(--color-muted)" dominant-baseline="middle">{svg.centre}</text>
+        <text x="210" y="206" text-anchor="middle" font-family="var(--font-spectral)" font-style="italic" font-size="11" fill="var(--color-muted)" dominant-baseline="middle">{svg.centreItalic}</text>
       </svg>
     </div>
 
@@ -110,9 +60,9 @@ const pillars = [
           <h3 class="font-display italic text-xl text-ink mb-0.5">{label}</h3>
           <p class="font-body text-sm tracking-[0.1em] uppercase text-muted mb-5">{sub}</p>
           <p class="font-body text-md leading-relaxed text-ink mb-5">{description}</p>
-          {virtues.length > 0 && (
+          {(virtues ?? []).length > 0 && (
             <ul class="border-l border-rule pl-5 mb-6 space-y-3">
-              {virtues.map(({ name, detail }) => (
+              {(virtues ?? []).map(({ name, detail }) => (
                 <li>
                   <p class="font-display italic text-ink text-base leading-tight">{name}</p>
                   <p class="font-body text-sm text-muted mt-0.5 leading-snug">{detail}</p>
@@ -135,18 +85,10 @@ const pillars = [
 
     <!-- Closing note -->
     <div class="max-w-3xl mt-12 space-y-4">
-      <h3 class="font-body text-sm tracking-[0.14em] uppercase text-muted">Why a triangle?</h3>
-      <p class="font-body text-md leading-relaxed text-ink">
-        Salzgeber chose the triangle deliberately: each side reinforces the others. You cannot
-        live with Arete while blaming your moods on circumstances. You cannot focus only on
-        what you control without taking responsibility for your inner state. And responsibility
-        without virtue collapses into passive resignation. Together the three sides hold the
-        centre — Eudaimonia — stable.
-      </p>
-      <p class="font-body text-md leading-relaxed text-ink">
-        The triangle is not a checklist. It is a single, integrated practice: act with excellence,
-        release what you cannot move, and own what happens inside you.
-      </p>
+      <h3 class="font-body text-sm tracking-[0.14em] uppercase text-muted">{content.whyTriangleHeading}</h3>
+      {content.whyTriangleParagraphs.map((p) => (
+        <p class="font-body text-md leading-relaxed text-ink">{p}</p>
+      ))}
     </div>
 
   </Centre>

@@ -1,0 +1,64 @@
+---
+import Centre from "@/components/Centre.astro";
+import TableOfContents from "@/components/stoic/sections/TableOfContents.astro";
+import WhatIsStoic from "@/components/stoic/sections/WhatIsStoic.astro";
+import DichotomyOfControl from "@/components/stoic/sections/DichotomyOfControl.astro";
+import StoicTriangle from "@/components/stoic/sections/StoicTriangle.astro";
+import WhenFrustrated from "@/components/stoic/sections/WhenFrustrated.astro";
+import WhenAngry from "@/components/stoic/sections/WhenAngry.astro";
+import type { StoicContent } from "@/data/stoic/types";
+
+interface Props {
+  content: StoicContent;
+}
+
+const { content } = Astro.props;
+---
+
+<!-- Page header -->
+<div class="border-b border-rule">
+  <Centre class="pt-12 pb-4">
+    <div class="flex items-start justify-between gap-6">
+      <div>
+        <p class="font-body text-sm tracking-[0.14em] uppercase text-muted mb-2">
+          {content.header.eyebrow}
+        </p>
+        <h1 class="font-display italic text-[clamp(2.4rem,6vw,4.2rem)] leading-none text-ink">
+          {content.header.title}
+        </h1>
+        <p class="font-body text-md text-muted mt-3 max-w-xl leading-relaxed">
+          {content.header.description}
+        </p>
+      </div>
+      <a
+        href={content.langSwitch.href}
+        class="shrink-0 mt-1 font-body text-xs tracking-[0.12em] uppercase border border-rule px-3 py-1.5 text-muted hover:text-ink hover:border-neutral transition-colors whitespace-nowrap"
+      >
+        {content.langSwitch.label}
+      </a>
+    </div>
+  </Centre>
+</div>
+
+<!-- Table of contents -->
+<TableOfContents sections={content.toc} />
+
+<div id="what-is-stoicism">
+  <WhatIsStoic content={content.whatIsStoic} />
+</div>
+
+<div id="dichotomy-of-control">
+  <DichotomyOfControl content={content.dichotomy} />
+</div>
+
+<div id="stoic-triangle">
+  <StoicTriangle content={content.stoicTriangle} />
+</div>
+
+<div id="when-frustrated">
+  <WhenFrustrated content={content.whenFrustrated} />
+</div>
+
+<div id="when-angry">
+  <WhenAngry content={content.whenAngry} />
+</div>

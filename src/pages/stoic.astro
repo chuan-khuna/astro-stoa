@@ -1,59 +1,9 @@
 ---
 import ProseLayout from "@/layouts/ProseLayout.astro";
-import Centre from "@/components/Centre.astro";
-import TableOfContents from "@/components/stoic/sections/TableOfContents.astro";
-import WhatIsStoic from "@/components/stoic/sections/WhatIsStoic.astro";
-import DichotomyOfControl from "@/components/stoic/sections/DichotomyOfControl.astro";
-import StoicTriangle from "@/components/stoic/sections/StoicTriangle.astro";
-import WhenFrustrated from "@/components/stoic/sections/WhenFrustrated.astro";
-import WhenAngry from "@/components/stoic/sections/WhenAngry.astro";
+import StoicPage from "@/components/stoic/StoicPage.astro";
+import { en } from "@/data/stoic/en";
 ---
 
-<ProseLayout
-  title="Stoicism — Stoa"
-  description="An introduction to Stoic philosophy: what it is, the dichotomy of control, the Stoic triangle, and key ideas from The Little Book of Stoicism."
-  narrow={false}
->
-  <!-- Page header -->
-  <div class="border-b border-rule">
-    <Centre class="pt-12 pb-4">
-      <p class="font-body text-sm tracking-[0.14em] uppercase text-muted mb-2">Philosophy</p>
-      <h1 class="font-display italic text-[clamp(2.4rem,6vw,4.2rem)] leading-none text-ink">
-        Stoicism
-      </h1>
-      <p class="font-body text-md text-muted mt-3 max-w-xl leading-relaxed">
-        A guide to the ancient philosophy of living well — its foundations,
-        its central practice, and how to apply it today.
-      </p>
-    </Centre>
-  </div>
-
-  <!-- Table of contents -->
-  <TableOfContents sections={[
-    { label: "What is Stoicism?",           href: "#what-is-stoicism" },
-    { label: "Focus on What You Control",   href: "#dichotomy-of-control" },
-    { label: "The Stoic Triangle",          href: "#stoic-triangle" },
-    { label: "When You Feel Frustrated",    href: "#when-frustrated" },
-    { label: "When Anger Rises",            href: "#when-angry" },
-  ]} />
-
-  <div id="what-is-stoicism">
-    <WhatIsStoic />
-  </div>
-
-  <div id="dichotomy-of-control">
-    <DichotomyOfControl />
-  </div>
-
-  <div id="stoic-triangle">
-    <StoicTriangle />
-  </div>
-
-  <div id="when-frustrated">
-    <WhenFrustrated />
-  </div>
-
-  <div id="when-angry">
-    <WhenAngry />
-  </div>
+<ProseLayout title={en.meta.title} description={en.meta.description} narrow={false}>
+  <StoicPage content={en} />
 </ProseLayout>

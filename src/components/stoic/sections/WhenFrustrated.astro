@@ -1,26 +1,13 @@
 ---
 import Centre from "@/components/Centre.astro";
-import CountdownTimer from "@/components/stoic/widgets/CountdownTimer.astro";
-import TextEntry from "@/components/stoic/widgets/TextEntry.astro";
+import PracticeCard from "@/components/stoic/PracticeCard.astro";
+import type { StoicContent } from "@/data/stoic/types";
 
-const reminders = [
-  {
-    label: "Check your expectations",
-    detail: "Frustration is the gap between what you expected and what happened. The event did not fail you — the expectation may have been unrealistic.",
-  },
-  {
-    label: "Locate the judgment",
-    detail: "Nothing is frustrating by nature. Your mind has judged it so. That judgment can be examined, and changed.",
-  },
-  {
-    label: "Return to what you can do",
-    detail: "When a path is blocked, a Stoic looks for the next action. Obstacle becomes redirection, not defeat.",
-  },
-  {
-    label: "Let imperfection stand",
-    detail: "Not everything will go smoothly. Expecting otherwise is the source of the friction, not the thing itself.",
-  },
-];
+interface Props {
+  content: StoicContent["whenFrustrated"];
+}
+
+const { content } = Astro.props;
 ---
 
 <section class="border-t border-rule py-16">
@@ -28,23 +15,15 @@ const reminders = [
 
     <div class="max-w-3xl mb-10">
       <h2 class="font-display italic text-[clamp(1.8rem,4vw,2.8rem)] leading-tight text-ink mb-3">
-        When You Feel Frustrated
+        {content.heading}
       </h2>
-      <p class="font-body text-sm tracking-[0.12em] uppercase text-muted mb-8">
-        On irritation and unmet expectations — Marcus Aurelius, <em>Meditations</em>
-      </p>
-      <p class="font-body text-md leading-relaxed text-ink">
-        Frustration is almost always a collision between what you expected and what actually happened.
-        The Stoics noticed that we rarely get frustrated at things themselves —
-        <span class="bg-highlight/20">we get frustrated at our picture of how things <em>should</em> have gone.</span>
-        That picture is entirely in your mind, and it can be revised.
-        The situation remains; your grip on a particular outcome does not have to.
-      </p>
+      <p class="font-body text-sm tracking-[0.12em] uppercase text-muted mb-8" set:html={content.source} />
+      <p class="font-body text-md leading-relaxed text-ink" set:html={content.intro} />
     </div>
 
     <!-- Reminders grid -->
     <div class="grid grid-cols-1 min-[48rem]:grid-cols-2 border-l border-t border-rule">
-      {reminders.map(({ label, detail }) => (
+      {content.reminders.map(({ label, detail }) => (
         <div class="border-r border-b border-rule p-6">
           <p class="font-display italic text-ink text-md leading-tight mb-2">{label}</p>
           <p class="font-body text-sm text-muted leading-relaxed">{detail}</p>
@@ -52,192 +31,7 @@ const reminders = [
       ))}
     </div>
 
-    <!-- Practice card -->
-    <div class="border-l border-t border-r border-b border-rule mt-10 p-7">
-      <p class="font-mono text-xs text-muted tracking-wider mb-3">PRACTICE</p>
-      <h3 class="font-display italic text-xl text-ink mb-0.5">A practice for this moment</h3>
-      <p class="font-body text-sm tracking-[0.1em] uppercase text-muted mb-8">Step by step</p>
-
-      <div class="space-y-0">
-
-        <!-- Step 1 -->
-        <div class="flex gap-5">
-          <div class="flex flex-col items-center shrink-0">
-            <div class="w-2.5 h-2.5 rounded-full bg-accent mt-1.5 shrink-0"></div>
-            <div class="flex-1 w-px bg-rule mt-2"></div>
-          </div>
-          <div class="flex-1 pb-8">
-            <div class="grid grid-cols-1 min-[48rem]:grid-cols-[3fr_2fr] gap-[1.875rem] items-start">
-              <div>
-                <p class="font-display italic text-ink text-base leading-tight mb-3">Pause</p>
-                <p class="font-body text-sm text-ink leading-relaxed mb-3">
-                  The moment frustration rises, your brain shifts into a reactive mode — thoughts
-                  accelerate, the body tenses, and you become more likely to say something you will
-                  regret. The only way to interrupt this is to physically stop. Not slow down, but
-                  stop completely.
-                </p>
-                <ul class="space-y-1.5">
-                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
-                    <span class="shrink-0 text-muted/40">—</span>
-                    <span>Stop moving. Put down what you are holding.</span>
-                  </li>
-                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
-                    <span class="shrink-0 text-muted/40">—</span>
-                    <span>Take one slow breath from the belly, not the chest.</span>
-                  </li>
-                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
-                    <span class="shrink-0 text-muted/40">—</span>
-                    <span>Feel your feet on the floor. Notice the weight of your body.</span>
-                  </li>
-                </ul>
-              </div>
-              <div><CountdownTimer seconds={60} /></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Step 2 -->
-        <div class="flex gap-5">
-          <div class="flex flex-col items-center shrink-0">
-            <div class="w-2.5 h-2.5 rounded-full bg-accent mt-1.5 shrink-0"></div>
-            <div class="flex-1 w-px bg-rule mt-2"></div>
-          </div>
-          <div class="flex-1 pb-8">
-            <div class="grid grid-cols-1 min-[48rem]:grid-cols-[3fr_2fr] gap-[1.875rem] items-start">
-              <div>
-                <p class="font-display italic text-ink text-base leading-tight mb-3">Name what you expected</p>
-                <p class="font-body text-sm text-ink leading-relaxed mb-3">
-                  Frustration rarely makes its cause explicit — you feel it without having articulated
-                  the expectation that was violated. Naming it forces a confrontation: was this
-                  expectation reasonable in the first place? Was it yours to hold?
-                </p>
-                <ul class="space-y-1.5">
-                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
-                    <span class="shrink-0 text-muted/40">—</span>
-                    <span>Be specific — not "things to go well" but exactly what you pictured.</span>
-                  </li>
-                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
-                    <span class="shrink-0 text-muted/40">—</span>
-                    <span>Whose behaviour were you counting on? What outcome did you assume?</span>
-                  </li>
-                </ul>
-              </div>
-              <div><TextEntry placeholder="What did I expect to happen?" /></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Step 3 -->
-        <div class="flex gap-5">
-          <div class="flex flex-col items-center shrink-0">
-            <div class="w-2.5 h-2.5 rounded-full bg-accent mt-1.5 shrink-0"></div>
-            <div class="flex-1 w-px bg-rule mt-2"></div>
-          </div>
-          <div class="flex-1 pb-8">
-            <div class="grid grid-cols-1 min-[48rem]:grid-cols-[3fr_2fr] gap-[1.875rem] items-start">
-              <div>
-                <p class="font-display italic text-ink text-base leading-tight mb-3">Name what actually happened</p>
-                <p class="font-body text-sm text-ink leading-relaxed mb-3">
-                  Strip the event down to facts — no interpretation, no blame, no story. Just what
-                  occurred. This is harder than it sounds; the mind immediately wraps events in
-                  meaning. Try to describe it as a camera would record it.
-                </p>
-                <ul class="space-y-1.5">
-                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
-                    <span class="shrink-0 text-muted/40">—</span>
-                    <span>Use plain language. Leave out words like "unfair", "as usual", "always".</span>
-                  </li>
-                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
-                    <span class="shrink-0 text-muted/40">—</span>
-                    <span>Just: what happened, when, and who was involved.</span>
-                  </li>
-                </ul>
-              </div>
-              <div><TextEntry placeholder="What actually happened — just the facts?" /></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Step 4 -->
-        <div class="flex gap-5">
-          <div class="flex flex-col items-center shrink-0">
-            <div class="w-2.5 h-2.5 rounded-full bg-accent mt-1.5 shrink-0"></div>
-            <div class="flex-1 w-px bg-rule mt-2"></div>
-          </div>
-          <div class="flex-1 pb-8">
-            <div class="grid grid-cols-1 min-[48rem]:grid-cols-[3fr_2fr] gap-[1.875rem] items-start">
-              <div>
-                <p class="font-display italic text-ink text-base leading-tight mb-3">Ask: was that expectation mine to hold?</p>
-                <p class="font-body text-sm text-ink leading-relaxed mb-3">
-                  Many expectations are borrowed — from social norms, from how things "should" work,
-                  from past patterns. Some were never realistic. Others were placed on things entirely
-                  outside your control. This question cuts to the root.
-                </p>
-                <ul class="space-y-1.5">
-                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
-                    <span class="shrink-0 text-muted/40">—</span>
-                    <span>Was this outcome within someone else's control, not yours?</span>
-                  </li>
-                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
-                    <span class="shrink-0 text-muted/40">—</span>
-                    <span>Were you counting on a person to act against their nature?</span>
-                  </li>
-                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
-                    <span class="shrink-0 text-muted/40">—</span>
-                    <span>Did you expect certainty in a situation that was never certain?</span>
-                  </li>
-                </ul>
-              </div>
-              <div><TextEntry placeholder="Was this expectation realistic? Was it within my control?" rows={3} /></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Step 5 (last — no connector line) -->
-        <div class="flex gap-5">
-          <div class="shrink-0 pt-1">
-            <div class="w-2.5 h-2.5 rounded-full bg-accent"></div>
-          </div>
-          <div class="flex-1">
-            <div class="grid grid-cols-1 min-[48rem]:grid-cols-[3fr_2fr] gap-[1.875rem] items-start">
-              <div>
-                <p class="font-display italic text-ink text-base leading-tight mb-3">Find the next open action</p>
-                <p class="font-body text-sm text-ink leading-relaxed mb-3">
-                  Once you have released the expectation, attention can move to what is actually
-                  available. There is almost always something — even if it is only to sit with the
-                  discomfort, or to accept that this is how it is for now.
-                </p>
-                <ul class="space-y-1.5">
-                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
-                    <span class="shrink-0 text-muted/40">—</span>
-                    <span>What is one thing I can do in the next ten minutes?</span>
-                  </li>
-                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
-                    <span class="shrink-0 text-muted/40">—</span>
-                    <span>If nothing — what can I let go of right now?</span>
-                  </li>
-                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
-                    <span class="shrink-0 text-muted/40">—</span>
-                    <span>What would I advise a close friend to do in this situation?</span>
-                  </li>
-                </ul>
-              </div>
-              <div><TextEntry placeholder="What can I actually do from here?" rows={2} /></div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="border-t border-rule mt-6 pt-6">
-        <blockquote class="font-display italic text-base text-ink leading-snug mb-1">
-          "The impediment to action advances action. What stands in the way becomes the way."
-        </blockquote>
-        <cite class="font-body text-xs tracking-[0.1em] uppercase text-muted not-italic">
-          Marcus Aurelius, <em>Meditations</em> V.20
-        </cite>
-      </div>
-    </div>
+    <PracticeCard practice={content.practice} />
 
   </Centre>
 </section>

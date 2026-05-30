@@ -1,26 +1,13 @@
 ---
 import Centre from "@/components/Centre.astro";
-import CountdownTimer from "@/components/stoic/widgets/CountdownTimer.astro";
-import TextEntry from "@/components/stoic/widgets/TextEntry.astro";
+import PracticeCard from "@/components/stoic/PracticeCard.astro";
+import type { StoicContent } from "@/data/stoic/types";
 
-const insights = [
-  {
-    label: "Anger is a judgment",
-    detail: "It begins with the belief that a wrong was done and retaliation is deserved. Both beliefs can be questioned before you act on them.",
-  },
-  {
-    label: "You are not your anger",
-    detail: "The feeling arose in you — it is not you. There is a gap between the impulse and the response. That gap is where your character lives.",
-  },
-  {
-    label: "Delay is the cure",
-    detail: "Seneca's single most repeated advice: wait. Even a brief pause breaks the momentum. Anger fed immediately grows; anger paused almost always shrinks.",
-  },
-  {
-    label: "Consider the other person",
-    detail: "They acted from their own fears, history, or misunderstanding. So do you. Understanding does not excuse — but it frees you from needing to punish.",
-  },
-];
+interface Props {
+  content: StoicContent["whenAngry"];
+}
+
+const { content } = Astro.props;
 ---
 
 <section class="border-t border-rule py-16">
@@ -28,23 +15,15 @@ const insights = [
 
     <div class="max-w-3xl mb-10">
       <h2 class="font-display italic text-[clamp(1.8rem,4vw,2.8rem)] leading-tight text-ink mb-3">
-        When Anger Rises
+        {content.heading}
       </h2>
-      <p class="font-body text-sm tracking-[0.12em] uppercase text-muted mb-8">
-        On anger and its antidotes — Seneca, <em>De Ira</em> (On Anger)
-      </p>
-      <p class="font-body text-md leading-relaxed text-ink">
-        Seneca devoted an entire treatise to anger — a sign of how seriously the Stoics took it.
-        His conclusion: <span class="bg-highlight/20">anger is never useful, never righteous, and always costs you more than
-        whatever triggered it. It does not punish the person who wronged you; it punishes you first.</span>
-        The Stoic goal is not to suppress anger but to dissolve it at its source — the judgment
-        that harm was done and retaliation is owed.
-      </p>
+      <p class="font-body text-sm tracking-[0.12em] uppercase text-muted mb-8" set:html={content.source} />
+      <p class="font-body text-md leading-relaxed text-ink" set:html={content.intro} />
     </div>
 
     <!-- Insights grid -->
     <div class="grid grid-cols-1 min-[48rem]:grid-cols-2 border-l border-t border-rule">
-      {insights.map(({ label, detail }) => (
+      {content.insights.map(({ label, detail }) => (
         <div class="border-r border-b border-rule p-6">
           <p class="font-display italic text-ink text-md leading-tight mb-2">{label}</p>
           <p class="font-body text-sm text-muted leading-relaxed">{detail}</p>
@@ -52,199 +31,7 @@ const insights = [
       ))}
     </div>
 
-    <!-- Practice card -->
-    <div class="border-l border-t border-r border-b border-rule mt-10 p-7">
-      <p class="font-mono text-xs text-muted tracking-wider mb-3">PRACTICE</p>
-      <h3 class="font-display italic text-xl text-ink mb-0.5">A practice for this moment</h3>
-      <p class="font-body text-sm tracking-[0.1em] uppercase text-muted mb-8">Step by step</p>
-
-      <div class="space-y-0">
-
-        <!-- Step 1 -->
-        <div class="flex gap-5">
-          <div class="flex flex-col items-center shrink-0">
-            <div class="w-2.5 h-2.5 rounded-full bg-accent mt-1.5 shrink-0"></div>
-            <div class="flex-1 w-px bg-rule mt-2"></div>
-          </div>
-          <div class="flex-1 pb-8">
-            <div class="grid grid-cols-1 min-[48rem]:grid-cols-[3fr_2fr] gap-[1.875rem] items-start">
-              <div>
-                <p class="font-display italic text-ink text-base leading-tight mb-3">Do not act yet</p>
-                <p class="font-body text-sm text-ink leading-relaxed mb-3">
-                  Seneca's first and most urgent instruction: do nothing. Not because the anger is
-                  wrong, but because action taken at peak anger almost always makes the situation
-                  worse — and harder to repair. Your only goal right now is to avoid doing anything
-                  that cannot be undone.
-                </p>
-                <ul class="space-y-1.5">
-                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
-                    <span class="shrink-0 text-muted/40">—</span>
-                    <span>Do not send the message. Do not make the call.</span>
-                  </li>
-                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
-                    <span class="shrink-0 text-muted/40">—</span>
-                    <span>Do not walk into the room ready to argue.</span>
-                  </li>
-                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
-                    <span class="shrink-0 text-muted/40">—</span>
-                    <span>Let the urge to act pass before you do anything.</span>
-                  </li>
-                </ul>
-              </div>
-              <div><CountdownTimer seconds={120} /></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Step 2 -->
-        <div class="flex gap-5">
-          <div class="flex flex-col items-center shrink-0">
-            <div class="w-2.5 h-2.5 rounded-full bg-accent mt-1.5 shrink-0"></div>
-            <div class="flex-1 w-px bg-rule mt-2"></div>
-          </div>
-          <div class="flex-1 pb-8">
-            <div class="grid grid-cols-1 min-[48rem]:grid-cols-[3fr_2fr] gap-[1.875rem] items-start">
-              <div>
-                <p class="font-display italic text-ink text-base leading-tight mb-3">Step away if you can</p>
-                <p class="font-body text-sm text-ink leading-relaxed mb-3">
-                  Physical proximity to the source of anger keeps the nervous system activated. Even
-                  a brief change of environment — another room, outside, a short walk — breaks the
-                  sensory loop and lets the body begin to cool. You are not avoiding the problem;
-                  you are creating conditions where you can address it well.
-                </p>
-                <ul class="space-y-1.5">
-                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
-                    <span class="shrink-0 text-muted/40">—</span>
-                    <span>Walk slowly, not urgently. Speed feeds the agitation.</span>
-                  </li>
-                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
-                    <span class="shrink-0 text-muted/40">—</span>
-                    <span>Avoid replaying the scene in your head as you walk.</span>
-                  </li>
-                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
-                    <span class="shrink-0 text-muted/40">—</span>
-                    <span>Notice what you see and hear around you instead.</span>
-                  </li>
-                </ul>
-              </div>
-              <div><CountdownTimer seconds={180} /></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Step 3 -->
-        <div class="flex gap-5">
-          <div class="flex flex-col items-center shrink-0">
-            <div class="w-2.5 h-2.5 rounded-full bg-accent mt-1.5 shrink-0"></div>
-            <div class="flex-1 w-px bg-rule mt-2"></div>
-          </div>
-          <div class="flex-1 pb-8">
-            <div class="grid grid-cols-1 min-[48rem]:grid-cols-[3fr_2fr] gap-[1.875rem] items-start">
-              <div>
-                <p class="font-display italic text-ink text-base leading-tight mb-3">Name what you believe happened</p>
-                <p class="font-body text-sm text-ink leading-relaxed mb-3">
-                  Anger is always based on a story — a belief about what was done, by whom, and with
-                  what intention. That story may be accurate or it may not. Write it out without
-                  self-censorship. You are not looking for fairness yet; you are making the belief
-                  visible so it can be examined.
-                </p>
-                <ul class="space-y-1.5">
-                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
-                    <span class="shrink-0 text-muted/40">—</span>
-                    <span>Who did what? What do you believe their intention was?</span>
-                  </li>
-                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
-                    <span class="shrink-0 text-muted/40">—</span>
-                    <span>What does this mean about you, them, or the relationship?</span>
-                  </li>
-                </ul>
-              </div>
-              <div><TextEntry placeholder="What do I believe happened, and why?" /></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Step 4 -->
-        <div class="flex gap-5">
-          <div class="flex flex-col items-center shrink-0">
-            <div class="w-2.5 h-2.5 rounded-full bg-accent mt-1.5 shrink-0"></div>
-            <div class="flex-1 w-px bg-rule mt-2"></div>
-          </div>
-          <div class="flex-1 pb-8">
-            <div class="grid grid-cols-1 min-[48rem]:grid-cols-[3fr_2fr] gap-[1.875rem] items-start">
-              <div>
-                <p class="font-display italic text-ink text-base leading-tight mb-3">Question the belief</p>
-                <p class="font-body text-sm text-ink leading-relaxed mb-3">
-                  The Stoics held that anger begins in a judgment: that a wrong was done and
-                  punishment is owed. Both parts are worth examining. The wrong may be real but
-                  smaller than it feels. The desire to punish may be doing more harm than the
-                  original act.
-                </p>
-                <ul class="space-y-1.5">
-                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
-                    <span class="shrink-0 text-muted/40">—</span>
-                    <span>Is this the only possible interpretation of what happened?</span>
-                  </li>
-                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
-                    <span class="shrink-0 text-muted/40">—</span>
-                    <span>What would a neutral observer think?</span>
-                  </li>
-                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
-                    <span class="shrink-0 text-muted/40">—</span>
-                    <span>What changes if I am partially or entirely wrong?</span>
-                  </li>
-                </ul>
-              </div>
-              <div><TextEntry placeholder="Is it true? Is there another explanation?" /></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Step 5 (last — no connector line) -->
-        <div class="flex gap-5">
-          <div class="shrink-0 pt-1">
-            <div class="w-2.5 h-2.5 rounded-full bg-accent"></div>
-          </div>
-          <div class="flex-1">
-            <div class="grid grid-cols-1 min-[48rem]:grid-cols-[3fr_2fr] gap-[1.875rem] items-start">
-              <div>
-                <p class="font-display italic text-ink text-base leading-tight mb-3">Choose your response</p>
-                <p class="font-body text-sm text-ink leading-relaxed mb-3">
-                  This is where the Stoic practice becomes active. You have examined the anger, found
-                  what is real, and now you choose what to do with it. A response chosen from reason
-                  serves the situation. A reaction driven by anger usually serves only the feeling.
-                </p>
-                <ul class="space-y-1.5">
-                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
-                    <span class="shrink-0 text-muted/40">—</span>
-                    <span>What outcome do I actually want from this?</span>
-                  </li>
-                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
-                    <span class="shrink-0 text-muted/40">—</span>
-                    <span>What response is most likely to produce it?</span>
-                  </li>
-                  <li class="font-body text-sm text-muted flex gap-2.5 leading-snug">
-                    <span class="shrink-0 text-muted/40">—</span>
-                    <span>What would I say if I wanted to repair rather than win?</span>
-                  </li>
-                </ul>
-              </div>
-              <div><TextEntry placeholder="How will I respond — from reason, not reaction?" rows={2} /></div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="border-t border-rule mt-6 pt-6">
-        <blockquote class="font-display italic text-base text-ink leading-snug mb-1">
-          "The greatest remedy for anger is delay."
-        </blockquote>
-        <cite class="font-body text-xs tracking-[0.1em] uppercase text-muted not-italic">
-          Seneca, <em>De Ira</em> II.29
-        </cite>
-      </div>
-    </div>
+    <PracticeCard practice={content.practice} />
 
   </Centre>
 </section>
