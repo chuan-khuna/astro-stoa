@@ -3,8 +3,10 @@ import { defineConfig, fontProviders } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import { fileURLToPath } from "node:url";
 import mdx from "@astrojs/mdx";
+import cloudflare from "@astrojs/cloudflare";
 
 export default defineConfig({
+  adapter: cloudflare({ imageService: 'compile', prerenderEnvironment: 'node' }),
   integrations: [mdx()],
   vite: {
     plugins: [tailwindcss()],
