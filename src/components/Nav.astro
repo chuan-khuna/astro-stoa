@@ -5,7 +5,7 @@ const { pathname } = Astro.url;
 ---
 
 <nav class="w-full border-t-2 border-accent/70" aria-label="Site navigation">
-  <div class="px-[clamp(1rem,5vw,3rem)] py-5 text-center max-w-[90rem] mx-auto border-x border-accent/25">
+  <div class="px-[clamp(1rem,5vw,3rem)] py-5 text-center">
     <a
       href="/"
       class="inline-block font-display italic font-light text-[clamp(2.8rem,8vw,5.5rem)] tracking-[-0.025em] leading-none text-ink no-underline transition-colors duration-[160ms] hover:text-accent"
@@ -15,7 +15,7 @@ const { pathname } = Astro.url;
     </a>
   </div>
   <div class="border-t border-accent/25" />
-  <div class="px-[clamp(1rem,5vw,3rem)] flex items-center gap-8 border-b border-accent/25 max-w-[90rem] mx-auto border-x border-accent/25">
+  <div class="px-[clamp(1rem,5vw,3rem)] flex items-center gap-8 border-b border-accent/25">
     {site.nav.sections.map(({ label, href }) => {
       const active = pathname.startsWith(href);
       return (

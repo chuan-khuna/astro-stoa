@@ -1,5 +1,6 @@
 ---
 import ProseLayout from "@/layouts/ProseLayout.astro";
+import Centre from "@/components/Centre.astro";
 import TableOfContents from "@/components/stoic/sections/TableOfContents.astro";
 import WhatIsStoic from "@/components/stoic/sections/WhatIsStoic.astro";
 import DichotomyOfControl from "@/components/stoic/sections/DichotomyOfControl.astro";
@@ -14,16 +15,16 @@ import LittleBookSummary from "@/components/stoic/sections/LittleBookSummary.ast
 >
   <!-- Page header -->
   <div class="border-b border-rule">
-    <div class="px-[clamp(1rem,5vw,3rem)] pt-12 pb-4 max-w-5xl mx-auto">
-    <p class="font-body text-sm tracking-[0.14em] uppercase text-muted mb-2">Philosophy</p>
-    <h1 class="font-display italic text-[clamp(2.4rem,6vw,4.2rem)] leading-none text-ink">
-      Stoicism
-    </h1>
-    <p class="font-body text-md text-muted mt-3 max-w-xl leading-relaxed">
-      A guide to the ancient philosophy of living well — its foundations,
-      its central practice, and how to apply it today.
-    </p>
-    </div>
+    <Centre class="pt-12 pb-4">
+      <p class="font-body text-sm tracking-[0.14em] uppercase text-muted mb-2">Philosophy</p>
+      <h1 class="font-display italic text-[clamp(2.4rem,6vw,4.2rem)] leading-none text-ink">
+        Stoicism
+      </h1>
+      <p class="font-body text-md text-muted mt-3 max-w-xl leading-relaxed">
+        A guide to the ancient philosophy of living well — its foundations,
+        its central practice, and how to apply it today.
+      </p>
+    </Centre>
   </div>
 
   <!-- Table of contents -->

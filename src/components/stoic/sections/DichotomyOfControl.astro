@@ -1,4 +1,6 @@
 ---
+import Centre from "@/components/Centre.astro";
+
 const inOurControl = [
   { term: "Judgements", detail: "How we evaluate what happens to us." },
   { term: "Desires", detail: "What we choose to want or pursue." },
@@ -15,7 +17,7 @@ const notInOurControl = [
 ---
 
 <section class="border-t border-rule py-16">
-  <div class="px-[clamp(1rem,5vw,3rem)] max-w-5xl mx-auto">
+  <Centre>
 
     <div class="max-w-3xl mb-10">
       <h2 class="font-display italic text-[clamp(1.8rem,4vw,2.8rem)] leading-tight text-ink mb-3">
@@ -82,5 +84,5 @@ const notInOurControl = [
       </div>
     </div>
 
-  </div>
+  </Centre>
 </section>

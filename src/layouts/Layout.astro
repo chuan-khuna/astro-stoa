@@ -33,14 +33,12 @@ const showScrollTop = /^\/(notes|quotes)\/[^/]+/.test(pathname);
   </head>
   <body class="bg-paper text-ink font-body min-h-dvh">
 
-    <Nav />
-
     <div class="max-w-[90rem] mx-auto w-full border-x border-accent/25">
+      <Nav />
       <slot />
+      <!-- Ft4 Dense typographic colophon — knobs: serif, single-block -->
+      <Footer />
     </div>
-
-    <!-- Ft4 Dense typographic colophon — knobs: serif, single-block -->
-    <Footer />
 
     <!-- Scroll-to-top (detail pages only) -->
     {showScrollTop && (
