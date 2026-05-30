@@ -12,7 +12,7 @@ const entries = await getCollection("quotes");
   <main>
     <SectionTitle title="Quotes" />
 
-    <div class="mx-4 grid grid-cols-1 min-[60rem]:grid-cols-2 border-l border-t border-rule" role="list">
+    <div class="mx-4 grid grid-cols-1 min-[60rem]:grid-cols-2 border-l border-t border-rule [&>*:last-child:nth-child(odd)]:col-span-full" role="list">
       {entries.map((entry) => <QuoteCard entry={entry} />)}
     </div>
   </main>
