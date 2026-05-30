@@ -38,58 +38,59 @@ const principles = [
 ];
 ---
 
-<section class="px-[clamp(1rem,5vw,3rem)] py-16 border-t border-rule">
-  <div class="max-w-3xl mb-12">
-    <h2 class="font-display italic text-[clamp(1.8rem,4vw,2.8rem)] leading-tight text-ink mb-3">
-      The Little Book of Stoicism
-    </h2>
-    <p class="font-body text-sm tracking-[0.12em] uppercase text-muted mb-6">
-      Jonas Salzgeber — Summary
-    </p>
-    <p class="font-body text-md leading-relaxed text-ink">
-      Salzgeber's book distils ancient Stoicism into practical habits for modern life. It is
-      organised in two halves: first, the core philosophy — what the Stoics believed and why;
-      second, 55 bite-sized practices you can apply immediately. The argument throughout is that
-      Stoicism is not a consolation philosophy for hard times but an active training programme
-      for every day.
-    </p>
-  </div>
+<section class="border-t border-rule py-16">
+  <div class="px-[clamp(1rem,5vw,3rem)] max-w-5xl mx-auto">
 
-  <!-- Principles grid -->
-  <div class="grid grid-cols-1 min-[48rem]:grid-cols-2 border-l border-t border-rule max-w-4xl">
-    {principles.map(({ number, title, body }) => (
-      <div class="border-r border-b border-rule p-6 group hover:bg-paper-2 transition-colors duration-[160ms]">
-        <p class="font-mono text-xs text-muted mb-3 tracking-wider">{number}</p>
-        <h3 class="font-display italic text-ink text-lg leading-snug mb-2">{title}</h3>
-        <p class="font-body text-sm text-muted leading-relaxed" set:html={body} />
-      </div>
-    ))}
-  </div>
-
-  <!-- Takeaway -->
-  <div class="max-w-3xl mt-12">
-    <h3 class="font-body text-sm tracking-[0.14em] uppercase text-muted mb-4">
-      The central message
-    </h3>
-    <p class="font-body text-md leading-relaxed text-ink mb-5">
-      Salzgeber frames Stoic happiness as <em>eudaimonia</em> — flourishing, not pleasure.
-      You flourish by living virtuously, not by accumulating good circumstances. The Stoics
-      called this the <em>summum bonum</em>: the highest good, and the only one entirely within
-      your reach.
-    </p>
-    <p class="font-body text-md leading-relaxed text-ink">
-      The practical upshot: stop outsourcing your wellbeing to luck. Train your inner faculty —
-      the one that judges, chooses, and responds — and external storms become, at worst, weather.
-    </p>
-
-    <div class="border-l-2 border-accent/50 pl-6 py-1 mt-8">
-      <blockquote class="font-display italic text-lg text-ink leading-snug mb-2">
-        "He is a wise man who does not grieve for the things which he has not,
-        but rejoices for those which he has."
-      </blockquote>
-      <cite class="font-body text-sm tracking-[0.1em] uppercase text-muted not-italic">
-        Epictetus — quoted in Salzgeber
-      </cite>
+    <div class="max-w-3xl mb-12">
+      <h2 class="font-display italic text-[clamp(1.8rem,4vw,2.8rem)] leading-tight text-ink mb-3">
+        The Little Book of Stoicism
+      </h2>
+      <p class="font-body text-sm tracking-[0.12em] uppercase text-muted mb-6">
+        Jonas Salzgeber — Summary
+      </p>
+      <p class="font-body text-md leading-relaxed text-ink">
+        Salzgeber's book distils ancient Stoicism into practical habits for modern life. It is
+        organised in two halves: first, the core philosophy — what the Stoics believed and why;
+        second, 55 bite-sized practices you can apply immediately. The argument throughout is that
+        Stoicism is not a consolation philosophy for hard times but an active training programme
+        for every day.
+      </p>
     </div>
+
+    <!-- Principles grid -->
+    <div class="grid grid-cols-1 min-[48rem]:grid-cols-2 border-l border-t border-rule">
+      {principles.map(({ number, title, body }) => (
+        <div class="border-r border-b border-rule p-6 hover:bg-paper-2 transition-colors duration-[160ms]">
+          <p class="font-mono text-xs text-muted mb-3 tracking-wider">{number}</p>
+          <h3 class="font-display italic text-ink text-lg leading-snug mb-2">{title}</h3>
+          <p class="font-body text-sm text-muted leading-relaxed" set:html={body} />
+        </div>
+      ))}
+    </div>
+
+    <!-- Takeaway -->
+    <div class="max-w-3xl mt-12 space-y-4">
+      <h3 class="font-body text-sm tracking-[0.14em] uppercase text-muted">The central message</h3>
+      <p class="font-body text-md leading-relaxed text-ink">
+        Salzgeber frames Stoic happiness as <em>eudaimonia</em> — flourishing, not pleasure.
+        You flourish by living virtuously, not by accumulating good circumstances. The Stoics
+        called this the <em>summum bonum</em>: the highest good, and the only one entirely within
+        your reach.
+      </p>
+      <p class="font-body text-md leading-relaxed text-ink">
+        The practical upshot: stop outsourcing your wellbeing to luck. Train your inner faculty —
+        the one that judges, chooses, and responds — and external storms become, at worst, weather.
+      </p>
+      <div class="border-l-2 border-accent/50 pl-6 py-1 mt-8">
+        <blockquote class="font-display italic text-lg text-ink leading-snug mb-2">
+          "He is a wise man who does not grieve for the things which he has not,
+          but rejoices for those which he has."
+        </blockquote>
+        <cite class="font-body text-sm tracking-[0.1em] uppercase text-muted not-italic">
+          Epictetus — quoted in Salzgeber
+        </cite>
+      </div>
+    </div>
+
   </div>
 </section>

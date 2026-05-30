@@ -1,0 +1,13 @@
+---
+interface Props {
+  /** Tailwind max-width class. Defaults to max-w-5xl. */
+  maxWidth?: string;
+  class?: string;
+}
+
+const { maxWidth = "max-w-5xl", class: cls } = Astro.props;
+---
+
+<div class:list={["px-[clamp(1rem,5vw,3rem)] mx-auto w-full", maxWidth, cls]}>
+  <slot />
+</div>

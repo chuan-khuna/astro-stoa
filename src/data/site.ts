@@ -9,16 +9,18 @@ export const site = {
   },
 
   footerNav: [
-    { label: "Home",   href: "/"       },
+    { label: "Home", href: "/" },
     { label: "Quotes", href: "/quotes" },
-    { label: "Notes",  href: "/notes"  },
+    { label: "Notes", href: "/notes" },
+    { label: "Stoicism", href: "/stoic" },
   ],
 
   nav: {
     homeLabel: "Stoa — home",
     sections: [
       { label: "Quotes", href: "/quotes" },
-      { label: "Notes",  href: "/notes"  },
+      { label: "Notes", href: "/notes" },
+      { label: "Stoicism", href: "/stoic" },
     ],
   },
 } as const;

@@ -1,45 +1,52 @@
 ---
-import Layout from "@/layouts/Layout.astro";
+import ProseLayout from "@/layouts/ProseLayout.astro";
 import TableOfContents from "@/components/stoic/sections/TableOfContents.astro";
 import WhatIsStoic from "@/components/stoic/sections/WhatIsStoic.astro";
 import DichotomyOfControl from "@/components/stoic/sections/DichotomyOfControl.astro";
+import StoicTriangle from "@/components/stoic/sections/StoicTriangle.astro";
 import LittleBookSummary from "@/components/stoic/sections/LittleBookSummary.astro";
 ---
 
-<Layout
+<ProseLayout
   title="Stoicism — Stoa"
-  description="An introduction to Stoic philosophy: what it is, the dichotomy of control, and key ideas from The Little Book of Stoicism."
+  description="An introduction to Stoic philosophy: what it is, the dichotomy of control, the Stoic triangle, and key ideas from The Little Book of Stoicism."
+  narrow={false}
 >
-  <main>
-    <!-- Page header -->
-    <div class="px-[clamp(1rem,5vw,3rem)] pt-12 pb-4 border-b border-rule">
-      <p class="font-body text-sm tracking-[0.14em] uppercase text-muted mb-2">Philosophy</p>
-      <h1 class="font-display italic text-[clamp(2.4rem,6vw,4.2rem)] leading-none text-ink">
-        Stoicism
-      </h1>
-      <p class="font-body text-md text-muted mt-3 max-w-xl leading-relaxed">
-        A guide to the ancient philosophy of living well — its foundations,
-        its central practice, and how to apply it today.
-      </p>
+  <!-- Page header -->
+  <div class="border-b border-rule">
+    <div class="px-[clamp(1rem,5vw,3rem)] pt-12 pb-4 max-w-5xl mx-auto">
+    <p class="font-body text-sm tracking-[0.14em] uppercase text-muted mb-2">Philosophy</p>
+    <h1 class="font-display italic text-[clamp(2.4rem,6vw,4.2rem)] leading-none text-ink">
+      Stoicism
+    </h1>
+    <p class="font-body text-md text-muted mt-3 max-w-xl leading-relaxed">
+      A guide to the ancient philosophy of living well — its foundations,
+      its central practice, and how to apply it today.
+    </p>
     </div>
+  </div>
 
-    <!-- Table of contents -->
-    <TableOfContents sections={[
-      { label: "What is Stoicism?",         href: "#what-is-stoicism" },
-      { label: "Focus on What You Control", href: "#dichotomy-of-control" },
-      { label: "The Little Book of Stoicism", href: "#little-book" },
-    ]} />
+  <!-- Table of contents -->
+  <TableOfContents sections={[
+    { label: "What is Stoicism?",           href: "#what-is-stoicism" },
+    { label: "Focus on What You Control",   href: "#dichotomy-of-control" },
+    { label: "The Stoic Triangle",          href: "#stoic-triangle" },
+    { label: "The Little Book of Stoicism", href: "#little-book" },
+  ]} />
 
-    <div id="what-is-stoicism">
-      <WhatIsStoic />
-    </div>
+  <div id="what-is-stoicism">
+    <WhatIsStoic />
+  </div>
 
-    <div id="dichotomy-of-control">
-      <DichotomyOfControl />
-    </div>
+  <div id="dichotomy-of-control">
+    <DichotomyOfControl />
+  </div>
 
-    <div id="little-book">
-      <LittleBookSummary />
-    </div>
-  </main>
-</Layout>
+  <div id="stoic-triangle">
+    <StoicTriangle />
+  </div>
+
+  <div id="little-book">
+    <LittleBookSummary />
+  </div>
+</ProseLayout>

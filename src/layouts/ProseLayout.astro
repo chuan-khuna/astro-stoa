@@ -1,0 +1,37 @@
+---
+import Layout from "@/layouts/Layout.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  back?: { href: string; label: string };
+  /** true (default): max-w-2xl centered prose column with padding. false: full-width, no padding. */
+  narrow?: boolean;
+}
+
+const { title, description, back, narrow = true } = Astro.props;
+---
+
+<Layout title={title} description={description}>
+  {narrow ? (
+    <main class="px-[clamp(1rem,5vw,3rem)] py-12 max-w-2xl mx-auto">
+      {back && (
+        <div class="flex items-center justify-between mb-8">
+          <a
+            href={back.href}
+            class="font-body text-[0.563rem] tracking-[0.12em] uppercase text-muted hover:text-ink transition-colors duration-150 no-underline"
+          >
+            &larr; {back.label}
+          </a>
+        </div>
+      )}
+      <article class="flex flex-col gap-8">
+        <slot />
+      </article>
+    </main>
+  ) : (
+    <main>
+      <slot />
+    </main>
+  )}
+</Layout>

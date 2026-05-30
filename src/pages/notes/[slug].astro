@@ -1,6 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
-import Layout from "@/layouts/Layout.astro";
+import ProseLayout from "@/layouts/ProseLayout.astro";
 import { site } from "@/data/site";
 
 export async function getStaticPaths() {
@@ -19,62 +19,50 @@ const pageTitle = entry.data.title
   : `Note — ${site.name}`;
 ---
 
-<Layout title={pageTitle}>
-  <main class="px-[clamp(1rem,5vw,3rem)] py-12 max-w-2xl mx-auto">
+<ProseLayout title={pageTitle} back={{ href: "/notes", label: "All notes" }}>
 
-    <div class="flex items-center justify-between mb-8">
-      <a
-        href="/notes"
-        class="font-body text-[0.563rem] tracking-[0.12em] uppercase text-muted hover:text-ink transition-colors duration-150 no-underline"
+  <blockquote>
+    <p class="font-display italic font-light text-[clamp(1.5rem,3.2vw,2.5rem)] leading-[1.45] text-ink [overflow-wrap:anywhere] min-w-0 [text-wrap:pretty]">
+      {entry.data.title}
+    </p>
+  </blockquote>
+
+  <div class="flex flex-col gap-1.5">
+    <time
+      datetime={entry.data.date.toISOString()}
+      class="block font-body not-italic text-[0.7rem] tracking-[0.14em] uppercase text-muted"
+    >
+      {entry.data.date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+    </time>
+    {entry.data.tags && entry.data.tags.length > 0 && (
+      <ul class="flex flex-wrap gap-2 mt-2" aria-label="Tags">
+        {entry.data.tags.map((tag) => (
+          <li class="font-body text-[0.5rem] tracking-[0.1em] uppercase text-muted border border-rule px-2 py-0.5">
+            {tag}
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+
+  {entry.body?.trim() && (
+    <div class="border-t border-rule pt-6">
+      <div
+        class="prose max-w-[65ch]"
+        style="
+          --tw-prose-body: var(--color-neutral);
+          --tw-prose-headings: var(--color-ink);
+          --tw-prose-hr: var(--color-rule);
+          --tw-prose-bullets: var(--color-neutral);
+          --tw-prose-counters: var(--color-neutral);
+          --tw-prose-links: var(--color-ink);
+          font-family: var(--font-body);
+          line-height: 1.9;
+        "
       >
-        &larr; All notes
-      </a>
-    </div>
-
-    <article class="flex flex-col gap-8">
-      <blockquote>
-        <p class="font-display italic font-light text-[clamp(1.5rem,3.2vw,2.5rem)] leading-[1.45] text-ink [overflow-wrap:anywhere] min-w-0 [text-wrap:pretty]">
-          {entry.data.title}
-        </p>
-      </blockquote>
-
-      <div class="flex flex-col gap-1.5">
-        <time
-          datetime={entry.data.date.toISOString()}
-          class="block font-body not-italic text-[0.7rem] tracking-[0.14em] uppercase text-muted"
-        >
-          {entry.data.date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
-        </time>
-        {entry.data.tags && entry.data.tags.length > 0 && (
-          <ul class="flex flex-wrap gap-2 mt-2" aria-label="Tags">
-            {entry.data.tags.map((tag) => (
-              <li class="font-body text-[0.5rem] tracking-[0.1em] uppercase text-muted border border-rule px-2 py-0.5">
-                {tag}
-              </li>
-            ))}
-          </ul>
-        )}
+        <Content />
       </div>
+    </div>
+  )}
 
-      {entry.body?.trim() && (
-        <div class="border-t border-rule pt-6">
-          <div
-            class="prose max-w-[65ch]"
-            style="
-              --tw-prose-body: var(--color-neutral);
-              --tw-prose-headings: var(--color-ink);
-              --tw-prose-hr: var(--color-rule);
-              --tw-prose-bullets: var(--color-neutral);
-              --tw-prose-counters: var(--color-neutral);
-              --tw-prose-links: var(--color-ink);
-              font-family: var(--font-body);
-              line-height: 1.9;
-            "
-          >
-            <Content />
-          </div>
-        </div>
-      )}
-    </article>
-  </main>
-</Layout>
+</ProseLayout>
