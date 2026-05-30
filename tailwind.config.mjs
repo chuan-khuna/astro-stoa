@@ -49,7 +49,7 @@ export default {
       },
       fontFamily: {
         display: "var(--font-spectral)",
-        body: '"Alegreya Sans", "IBM Plex Sans Thai Looped", sans-serif',
+        body: "var(--font-alegreya-sans), var(--font-ibm-plex-sans-thai-looped), sans-serif",
         mono: "var(--font-inconsolata)",
       },
       borderRadius: {

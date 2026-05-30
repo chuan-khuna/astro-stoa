@@ -6,7 +6,10 @@ import mdx from "@astrojs/mdx";
 import cloudflare from "@astrojs/cloudflare";
 
 export default defineConfig({
-  adapter: cloudflare({ imageService: 'compile', prerenderEnvironment: 'node' }),
+  adapter: cloudflare({
+    imageService: "compile",
+    prerenderEnvironment: "node",
+  }),
   integrations: [mdx()],
   vite: {
     plugins: [tailwindcss()],
@@ -37,6 +40,10 @@ export default defineConfig({
       cssVariable: "--font-ibm-plex-sans-thai-looped",
       weights: [400, 500],
       styles: ["normal"],
+      // Astro defaults `subsets` to ["latin"], which has no Thai glyphs —
+      // without "thai" the woff2 ships empty for Thai text and the browser
+      // silently falls back to a system font.
+      subsets: ["thai", "latin"],
     },
     {
       provider: fontProviders.google(),
