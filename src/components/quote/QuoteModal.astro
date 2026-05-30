@@ -4,59 +4,65 @@
 
 <dialog
   id="quote-modal"
-  class="fixed inset-0 m-auto w-full max-w-2xl max-h-[90dvh] overflow-y-auto bg-paper p-[clamp(2rem,6vw,4rem)] open:flex flex-col gap-8"
+  class="fixed inset-0 m-auto w-full max-w-2xl max-h-[90dvh] bg-paper open:flex flex-col"
 >
-  <button
-    id="modal-close"
-    aria-label="Close"
-    class="absolute top-6 right-6 text-neutral hover:text-ink transition-colors duration-150"
-  >
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 18 18"
-      fill="none"
-      aria-hidden="true"
+  <!-- Close button — outside the scroll area so it never scrolls away -->
+  <div class="shrink-0 flex justify-end px-6 pt-6 pb-2">
+    <button
+      id="modal-close"
+      aria-label="Close"
+      class="text-neutral hover:text-ink transition-colors duration-150"
     >
-      <path
-        d="M2 2l14 14M16 2L2 16"
-        stroke="currentColor"
-        stroke-width="1.5"
-        stroke-linecap="square"></path>
-    </svg>
-  </button>
-
-  <!-- Excerpt as title -->
-  <blockquote>
-    <span
-      aria-hidden="true"
-      class="block font-display italic leading-none text-[5rem] text-accent/25 -mb-4 -ml-1 select-none"
-      >&ldquo;</span
-    >
-    <p
-      id="modal-excerpt"
-      class="font-display italic font-light text-[clamp(1.5rem,3.2vw,2.5rem)] leading-[1.45] text-ink [overflow-wrap:anywhere] min-w-0 [text-wrap:pretty]"
-    >
-    </p>
-  </blockquote>
-
-  <!-- Attribution -->
-  <div class="flex flex-col gap-1">
-    <cite
-      id="modal-author"
-      class="block font-body not-italic text-[0.563rem] tracking-[0.14em] uppercase text-muted"
-    ></cite>
-    <span
-      id="modal-source"
-      class="block font-display italic text-[0.75rem] text-neutral"></span>
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 18 18"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M2 2l14 14M16 2L2 16"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="square"></path>
+      </svg>
+    </button>
   </div>
 
-  <!-- Full body -->
-  <div id="modal-body-wrapper" class="border-t border-rule pt-6">
-    <div
-      id="modal-body"
-      class="prose prose-sm max-w-[65ch]"
-    >
+  <!-- Scrollable content -->
+  <div class="overflow-y-auto flex-1 px-[clamp(2rem,6vw,4rem)] pb-[clamp(2rem,6vw,4rem)] flex flex-col gap-8">
+    <!-- Excerpt as title -->
+    <blockquote>
+      <span
+        aria-hidden="true"
+        class="block font-display italic leading-none text-[5rem] text-accent/25 -mb-4 -ml-1 select-none"
+        >&ldquo;</span
+      >
+      <p
+        id="modal-excerpt"
+        class="font-display italic font-light text-[clamp(1.5rem,3.2vw,2.5rem)] leading-[1.45] text-ink [overflow-wrap:anywhere] min-w-0 [text-wrap:pretty]"
+      >
+      </p>
+    </blockquote>
+
+    <!-- Attribution -->
+    <div class="flex flex-col gap-1.5">
+      <cite
+        id="modal-author"
+        class="block font-body not-italic text-[0.7rem] tracking-[0.14em] uppercase text-muted"
+      ></cite>
+      <span
+        id="modal-source"
+        class="block font-display italic text-[0.875rem] text-neutral"></span>
+    </div>
+
+    <!-- Full body -->
+    <div id="modal-body-wrapper" class="border-t border-rule pt-6">
+      <div
+        id="modal-body"
+        class="prose max-w-[65ch]"
+      >
+      </div>
     </div>
   </div>
 </dialog>
@@ -127,6 +133,13 @@
     --tw-prose-counters: var(--color-neutral);
     --tw-prose-links: var(--color-ink);
     font-family: var(--font-body);
+    /* Thai tone marks and above/below vowels need more vertical clearance.
+       1.9 gives Latin and Thai both enough room without over-spacing English. */
+    line-height: 1.9;
+  }
+
+  #modal-body p {
+    line-height: 1.9;
   }
 </style>
 
@@ -138,6 +151,7 @@
   const modalBody = document.getElementById("modal-body")!;
   const modalBodyWrapper = document.getElementById("modal-body-wrapper")!;
   const closeBtn = document.getElementById("modal-close")!;
+  const scrollArea = modal.querySelector<HTMLElement>(".overflow-y-auto")!;
 
   function openModal(card: HTMLElement) {
     modalExcerpt.textContent = card.dataset.excerpt?.trim() ?? "";
@@ -153,6 +167,7 @@
     }
     modalBodyWrapper.style.display = hasBody ? "" : "none";
 
+    scrollArea.scrollTop = 0;
     modal.showModal();
   }
 
