@@ -2,6 +2,18 @@
 import { site } from "@/data/site";
 
 const { pathname } = Astro.url;
+
+/** Strip trailing slashes so "/stoic/" and "/stoic" compare equal. */
+const normalize = (p: string) => p.replace(/\/+$/, "") || "/";
+const current = normalize(pathname);
+
+/** Active when the current path is the link's page or a descendant of it,
+ *  matching only on full path segments so "/stoic" never matches "/stoic-at-work". */
+const isActive = (href: string) => {
+  if (href.startsWith("/#")) return false;
+  const target = normalize(href);
+  return current === target || current.startsWith(target + "/");
+};
 ---
 
 <!-- ── Wordmark (scrolls away) ───────────────────────────────────────────── -->
@@ -25,8 +37,7 @@ const { pathname } = Astro.url;
 >
   {
     site.nav.sections.map(({ label, href }) => {
-      const isAnchor = href.startsWith("/#");
-      const active = isAnchor ? false : pathname.startsWith(href);
+      const active = isActive(href);
       return (
         <a
           href={href}

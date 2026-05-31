@@ -15,15 +15,17 @@ export const site = {
     { label: "Quotes", href: "/quotes" },
     { label: "Notes", href: "/notes" },
     { label: "Stoicism", href: "/stoic" },
+    { label: "Stoic at Work", href: "/stoic-at-work" },
   ],
 
   nav: {
     homeLabel: "Stoa — home",
     /** Scroll-anchor links (/#…) land on the home page sections; /stoic is a standalone page */
     sections: [
-      { label: "Quotes", href: "/#quotes" },
-      { label: "Notes", href: "/#notes" },
+      { label: "Quotes", href: "/quotes" },
+      { label: "Notes", href: "/notes" },
       { label: "Stoicism", href: "/stoic" },
+      { label: "Stoic at Work", href: "/stoic-at-work" },
     ],
   },
 } as const;
