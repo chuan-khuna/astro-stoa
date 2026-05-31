@@ -23,7 +23,7 @@ const {
       <button
         type="button"
         data-cs-add="in"
-        class="flex-1 font-body text-xs tracking-[0.12em] uppercase border border-rule px-3 py-1.5 text-muted hover:text-ink hover:border-neutral transition-colors"
+        class="flex-1 font-body text-xs tracking-[0.12em] uppercase px-3 py-1.5 bg-ink text-paper hover:bg-neutral transition-colors"
       >
         {inControlLabel}
       </button>
@@ -39,73 +39,144 @@ const {
 
   <div class="grid grid-cols-2 border-l border-t border-rule">
     <div class="border-r border-b border-rule p-3">
-      <p class="font-body text-xs tracking-[0.12em] uppercase text-muted mb-2.5">
+      <p
+        class="font-body text-xs tracking-[0.12em] uppercase text-muted mb-2.5"
+      >
         {inControlLabel}
       </p>
-      <ul data-cs-list="in" class="space-y-1.5"></ul>
+      <ul data-cs-list="in" class="space-y-1.5 min-h-6 transition-colors duration-150"></ul>
     </div>
     <div class="border-r border-b border-rule p-3">
-      <p class="font-body text-xs tracking-[0.12em] uppercase text-muted mb-2.5">
+      <p
+        class="font-body text-xs tracking-[0.12em] uppercase text-muted mb-2.5"
+      >
         {notInControlLabel}
       </p>
-      <ul data-cs-list="out" class="space-y-1.5"></ul>
+      <ul data-cs-list="out" class="space-y-1.5 min-h-6 transition-colors duration-150"></ul>
     </div>
   </div>
 </div>
 
 <script>
-  document.querySelectorAll<HTMLElement>("[data-control-sort]").forEach((root) => {
-    const input = root.querySelector<HTMLInputElement>("[data-cs-input]")!;
-    const lists: Record<string, HTMLElement> = {
-      in: root.querySelector<HTMLElement>('[data-cs-list="in"]')!,
-      out: root.querySelector<HTMLElement>('[data-cs-list="out"]')!,
-    };
+  document
+    .querySelectorAll<HTMLElement>("[data-control-sort]")
+    .forEach((root) => {
+      const input = root.querySelector<HTMLInputElement>("[data-cs-input]")!;
+      const lists: Record<string, HTMLElement> = {
+        in: root.querySelector<HTMLElement>('[data-cs-list="in"]')!,
+        out: root.querySelector<HTMLElement>('[data-cs-list="out"]')!,
+      };
 
-    const addItem = (kind: "in" | "out") => {
-      const text = input.value.trim();
-      if (!text) {
+      let dragged: HTMLElement | null = null;
+
+      const getDragAfter = (list: HTMLElement, y: number): HTMLElement | null =>
+        [...list.querySelectorAll<HTMLElement>("li:not([data-dragging])")].reduce<{
+          offset: number;
+          el: HTMLElement | null;
+        }>(
+          (closest, child) => {
+            const { top, height } = child.getBoundingClientRect();
+            const offset = y - top - height / 2;
+            return offset < 0 && offset > closest.offset
+              ? { offset, el: child }
+              : closest;
+          },
+          { offset: Number.NEGATIVE_INFINITY, el: null }
+        ).el;
+
+      const setColumnColor = (li: HTMLElement, kind: string) => {
+        li.classList.toggle("text-ink", kind === "in");
+        li.classList.toggle("text-muted", kind !== "in");
+      };
+
+      const makeDraggable = (li: HTMLElement) => {
+        li.draggable = true;
+        li.classList.add("cursor-grab", "active:cursor-grabbing");
+
+        li.addEventListener("dragstart", (e) => {
+          dragged = li;
+          li.dataset.dragging = "true";
+          requestAnimationFrame(() => li.classList.add("opacity-40"));
+          e.dataTransfer!.effectAllowed = "move";
+        });
+
+        li.addEventListener("dragend", () => {
+          dragged = null;
+          delete li.dataset.dragging;
+          li.classList.remove("opacity-40");
+          Object.values(lists).forEach((l) =>
+            l.classList.remove("bg-accent/5")
+          );
+        });
+      };
+
+      Object.entries(lists).forEach(([kind, list]) => {
+        list.addEventListener("dragover", (e) => {
+          if (!dragged) return;
+          e.preventDefault();
+          e.dataTransfer!.dropEffect = "move";
+          list.classList.add("bg-accent/5");
+          const after = getDragAfter(list, e.clientY);
+          if (after) list.insertBefore(dragged, after);
+          else list.appendChild(dragged);
+        });
+
+        list.addEventListener("dragleave", (e) => {
+          if (!list.contains(e.relatedTarget as Node))
+            list.classList.remove("bg-accent/5");
+        });
+
+        list.addEventListener("drop", (e) => {
+          e.preventDefault();
+          list.classList.remove("bg-accent/5");
+          if (dragged) setColumnColor(dragged, kind);
+        });
+      });
+
+      const addItem = (kind: "in" | "out") => {
+        const text = input.value.trim();
+        if (!text) {
+          input.focus();
+          return;
+        }
+
+        const li = document.createElement("li");
+        li.className =
+          "group flex items-center gap-2 font-body text-sm leading-snug";
+        setColumnColor(li, kind);
+
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.setAttribute("aria-label", "Remove");
+        remove.className =
+          "shrink-0 w-5 h-5 flex items-center justify-center text-sm text-muted/40 hover:text-accent transition-colors";
+        remove.textContent = "×";
+        remove.addEventListener("click", () => li.remove());
+
+        const span = document.createElement("span");
+        span.textContent = text;
+
+        li.append(remove, span);
+        lists[kind].appendChild(li);
+        makeDraggable(li);
+
+        input.value = "";
         input.focus();
-        return;
-      }
+      };
 
-      const li = document.createElement("li");
-      li.className =
-        "group flex items-start gap-2 font-body text-sm text-ink leading-snug";
-      // The in-control column gets an accent tick — that's where your energy belongs.
-      li.classList.add(kind === "in" ? "text-ink" : "text-muted");
+      root
+        .querySelectorAll<HTMLButtonElement>("[data-cs-add]")
+        .forEach((btn) =>
+          btn.addEventListener("click", () =>
+            addItem(btn.dataset.csAdd as "in" | "out"),
+          ),
+        );
 
-      const remove = document.createElement("button");
-      remove.type = "button";
-      remove.setAttribute("aria-label", "Remove");
-      remove.className =
-        "shrink-0 leading-none text-muted/40 hover:text-accent transition-colors";
-      remove.textContent = "×";
-      remove.addEventListener("click", () => li.remove());
-
-      const span = document.createElement("span");
-      span.textContent = text;
-
-      li.append(remove, span);
-      lists[kind].appendChild(li);
-
-      input.value = "";
-      input.focus();
-    };
-
-    root
-      .querySelectorAll<HTMLButtonElement>("[data-cs-add]")
-      .forEach((btn) =>
-        btn.addEventListener("click", () =>
-          addItem(btn.dataset.csAdd as "in" | "out"),
-        ),
-      );
-
-    // Enter files to "in my control" — the side worth acting on.
-    input.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        addItem("in");
-      }
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          addItem("in");
+        }
+      });
     });
-  });
 </script>

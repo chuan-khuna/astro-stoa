@@ -20,7 +20,7 @@ const { pathname } = Astro.url;
 <!-- ── Section links (sticky) ────────────────────────────────────────────── -->
 <nav
   id="site-nav"
-  class="sticky top-0 z-20 bg-paper border-b border-accent/25 px-[clamp(1rem,5vw,3rem)] flex items-center gap-8"
+  class="sticky top-0 z-20 bg-paper border-t border-b border-accent/25 px-[clamp(1rem,5vw,3rem)] flex items-center gap-8"
   aria-label="Site navigation"
 >
   {
@@ -49,7 +49,10 @@ const { pathname } = Astro.url;
   const nav = document.getElementById("site-nav");
   if (nav) {
     const set = () =>
-      document.documentElement.style.setProperty("--nav-h", nav.offsetHeight + "px");
+      document.documentElement.style.setProperty(
+        "--nav-h",
+        nav.offsetHeight + "px",
+      );
     set();
     new ResizeObserver(set).observe(nav);
   }
