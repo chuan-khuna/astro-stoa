@@ -6,16 +6,12 @@ import mdx from "@astrojs/mdx";
 import cloudflare from "@astrojs/cloudflare";
 
 export default defineConfig({
-  adapter: cloudflare({
-    imageService: "compile",
-    prerenderEnvironment: "node",
-  }),
   integrations: [mdx()],
   vite: {
     plugins: [tailwindcss()],
     resolve: {
       alias: {
-        "@": fileURLToPath(new URL("./src", import.meta.url)),
+        "@": "/src",
       },
     },
   },
