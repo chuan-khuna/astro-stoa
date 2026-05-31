@@ -62,8 +62,8 @@ export const whenFrustrated: StoicContent["whenFrustrated"] = {
         heading: "Name what actually happened",
         body: "Strip the event down to facts — no interpretation, no blame, no story. Just what occurred. This is harder than it sounds; the mind immediately wraps events in meaning. Try to describe it as a camera would record it.",
         bullets: [
-          'Use plain language. Leave out words like “unfair”, “as usual”, “always”.',
-          “Just: what happened, when, and who was involved.”,
+          "Use plain language. Leave out words like “unfair”, “as usual”, “always”.",
+          "Just: what happened, when, and who was involved.",
         ],
         widget: {
           type: "text",
@@ -72,7 +72,7 @@ export const whenFrustrated: StoicContent["whenFrustrated"] = {
       },
       {
         heading: "Ask: was that expectation mine to hold?",
-        body: "Many expectations are borrowed — from social norms, from how things \"should\" work, from past patterns. Some were never realistic. Others were placed on things entirely outside your control. This question cuts to the root.",
+        body: 'Many expectations are borrowed — from social norms, from how things "should" work, from past patterns. Some were never realistic. Others were placed on things entirely outside your control. This question cuts to the root.',
         bullets: [
           "Was this outcome within someone else's control, not yours?",
           "Were you counting on a person to act against their nature?",
