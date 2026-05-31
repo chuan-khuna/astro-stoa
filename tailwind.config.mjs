@@ -47,11 +47,6 @@ export default {
         highlight: "var(--color-highlight)",
         focus: "var(--color-focus)",
       },
-      fontFamily: {
-        display: "var(--font-spectral), var(--font-eb-garamond), var(--font-bai-jamjuree), serif",
-        body: "var(--font-alegreya-sans), var(--font-noto-sans-thai-looped), sans-serif",
-        mono: "var(--font-inconsolata)",
-      },
       borderRadius: {
         none: "0",
         DEFAULT: "0",
