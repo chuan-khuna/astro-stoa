@@ -6,21 +6,22 @@ p1_count: 2
 timestamp: 2026-05-30T03-23-03Z
 slug: src-pages-index-astro
 ---
+
 ### Design Health Score
 
-| # | Heuristic | Score | Key Issue |
-|---|-----------|-------|-----------|
-| 1 | Visibility of System Status | 2 | Modal open/close has no transition; dialog appears instantly. |
-| 2 | Match System / Real World | 4 | Language is natural; colophon metadata fits the register. |
-| 3 | User Control and Freedom | 3 | Modal has close button + backdrop click + Esc. No quote navigation inside modal. |
-| 4 | Consistency and Standards | 3 | Typography tokens consistent. data-body/data-excerpt naming is muddled. |
-| 5 | Error Prevention | 2 | Empty curly quotes rendered when excerpt is undefined. |
-| 6 | Recognition Rather Than Recall | 3 | Cards show cursor-pointer; no modal-open affordance on touch. |
-| 7 | Flexibility and Efficiency | 2 | No keyboard nav between quotes in modal; no share/copy action. |
-| 8 | Aesthetic and Minimalist Design | 3 | Clean. Modal rule+body section renders thin content when body == excerpt. |
-| 9 | Error Recovery | 1 | No empty state for zero quotes; modal script has no null-checks. |
-| 10 | Help and Documentation | 3 | Intentionally help-free (appropriate). No affordance for modal trigger. |
-| **Total** | | **26/40** | **Acceptable** |
+| #         | Heuristic                       | Score     | Key Issue                                                                        |
+| --------- | ------------------------------- | --------- | -------------------------------------------------------------------------------- |
+| 1         | Visibility of System Status     | 2         | Modal open/close has no transition; dialog appears instantly.                    |
+| 2         | Match System / Real World       | 4         | Language is natural; colophon metadata fits the register.                        |
+| 3         | User Control and Freedom        | 3         | Modal has close button + backdrop click + Esc. No quote navigation inside modal. |
+| 4         | Consistency and Standards       | 3         | Typography tokens consistent. data-body/data-excerpt naming is muddled.          |
+| 5         | Error Prevention                | 2         | Empty curly quotes rendered when excerpt is undefined.                           |
+| 6         | Recognition Rather Than Recall  | 3         | Cards show cursor-pointer; no modal-open affordance on touch.                    |
+| 7         | Flexibility and Efficiency      | 2         | No keyboard nav between quotes in modal; no share/copy action.                   |
+| 8         | Aesthetic and Minimalist Design | 3         | Clean. Modal rule+body section renders thin content when body == excerpt.        |
+| 9         | Error Recovery                  | 1         | No empty state for zero quotes; modal script has no null-checks.                 |
+| 10        | Help and Documentation          | 3         | Intentionally help-free (appropriate). No affordance for modal trigger.          |
+| **Total** |                                 | **26/40** | **Acceptable**                                                                   |
 
 ### Anti-Patterns Verdict
 
@@ -41,27 +42,32 @@ The typographic system is the strongest element. The grid-to-modal interaction i
 ### Priority Issues
 
 **[P1] No modal entrance transition**
+
 - Why: `showModal()` cuts in instantly. For a calm reading surface, a jarring snap-to is wrong in register.
 - Fix: Animate opacity + subtle translateY on `dialog[open]` via `@starting-style`. Backdrop fades separately. Under 200ms. Include `prefers-reduced-motion` alternative.
 - Command: $impeccable animate
 
 **[P1] Modal content redundant with card (accessibility P1 hidden here)**
+
 - Why: Modal shows excerpt already on the card, then repeats body starting with the same sentence. Modal should feel like more.
 - Also: Cards have no `tabindex`, no `role="button"`, no `aria-haspopup="dialog"`. Keyboard users cannot open the modal at all.
 - Fix: Either lead modal with full body only (suppress excerpt), or add keyboard interactivity (`tabindex="0"`, keydown handler, aria attributes) to cards.
 - Command: $impeccable shape / $impeccable harden
 
 **[P2] Empty curly quotes when excerpt is undefined**
+
 - Why: Renders `""` on cards with no excerpt field.
 - Fix: Guard with `{entry.data.excerpt && <p>…</p>}` or derive from first sentence of body.
 - Command: $impeccable harden
 
 **[P2] No touch affordance for modal trigger**
+
 - Why: cursor-pointer and hover color shift are invisible on touch. Mobile visitors have no signal that tapping opens a modal.
 - Fix: Small typographic cue (→ or ↗ at card bottom-right, appears on focus too) or thin underline on quote text.
 - Command: $impeccable delight
 
 **[P3] Modal uses ASCII quotes; card uses typographic quotes**
+
 - Why: `modalBodyP.textContent = '"${body}"'` uses U+0022. Card uses &ldquo;/&rdquo;. Inconsistent at the most visible element.
 - Fix: Use Unicode: `“${body}”` or set innerHTML with entities.
 - Command: $impeccable polish

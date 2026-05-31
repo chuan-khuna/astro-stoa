@@ -2,7 +2,8 @@ import type { StoicContent } from "@/data/stoic/types";
 
 export const whenFrustrated: StoicContent["whenFrustrated"] = {
   heading: "When You Feel Frustrated",
-  source: "On irritation and unmet expectations — Marcus Aurelius, <em>Meditations</em>",
+  source:
+    "On irritation and unmet expectations — Marcus Aurelius, <em>Meditations</em>",
   intro:
     'Frustration is almost always a collision between what you expected and what actually happened. The Stoics noticed that we rarely get frustrated at things themselves — <span class="bg-highlight/20">we get frustrated at our picture of how things <em>should</em> have gone.</span> That picture is entirely in your mind, and it can be revised. The situation remains; your grip on a particular outcome does not have to.',
   reminders: [
@@ -40,13 +41,19 @@ export const whenFrustrated: StoicContent["whenFrustrated"] = {
           "Take one slow breath from the belly, not the chest.",
           "Feel your feet on the floor. Notice the weight of your body.",
         ],
-        widget: { type: "timer", seconds: 60, labelStart: "Start", labelReset: "Reset", labelDone: "Done" },
+        widget: {
+          type: "timer",
+          seconds: 60,
+          labelStart: "Start",
+          labelReset: "Reset",
+          labelDone: "Done",
+        },
       },
       {
         heading: "Name what you expected",
         body: "Frustration rarely makes its cause explicit — you feel it without having articulated the expectation that was violated. Naming it forces a confrontation: was this expectation reasonable in the first place? Was it yours to hold?",
         bullets: [
-          "Be specific — not \"things to go well\" but exactly what you pictured.",
+          'Be specific — not "things to go well" but exactly what you pictured.',
           "Whose behaviour were you counting on? What outcome did you assume?",
         ],
         widget: { type: "text", placeholder: "What did I expect to happen?" },
@@ -55,14 +62,17 @@ export const whenFrustrated: StoicContent["whenFrustrated"] = {
         heading: "Name what actually happened",
         body: "Strip the event down to facts — no interpretation, no blame, no story. Just what occurred. This is harder than it sounds; the mind immediately wraps events in meaning. Try to describe it as a camera would record it.",
         bullets: [
-          'Use plain language. Leave out words like "unfair", "as usual", "always".',
-          "Just: what happened, when, and who was involved.",
+          'Use plain language. Leave out words like “unfair”, “as usual”, “always”.',
+          “Just: what happened, when, and who was involved.”,
         ],
-        widget: { type: "text", placeholder: "What actually happened — just the facts?" },
+        widget: {
+          type: "text",
+          placeholder: "What actually happened — just the facts?",
+        },
       },
       {
         heading: "Ask: was that expectation mine to hold?",
-        body: “Many expectations are borrowed — from social norms, from how things \”should\” work, from past patterns. Some were never realistic. Others were placed on things entirely outside your control. This question cuts to the root.”,
+        body: "Many expectations are borrowed — from social norms, from how things \"should\" work, from past patterns. Some were never realistic. Others were placed on things entirely outside your control. This question cuts to the root.",
         bullets: [
           "Was this outcome within someone else's control, not yours?",
           "Were you counting on a person to act against their nature?",
@@ -70,7 +80,8 @@ export const whenFrustrated: StoicContent["whenFrustrated"] = {
         ],
         widget: {
           type: "text",
-          placeholder: "Was this expectation realistic? Was it within my control?",
+          placeholder:
+            "Was this expectation realistic? Was it within my control?",
           rows: 3,
         },
       },
@@ -82,7 +93,11 @@ export const whenFrustrated: StoicContent["whenFrustrated"] = {
           "If nothing — what can I let go of right now?",
           "What would I advise a close friend to do in this situation?",
         ],
-        widget: { type: "text", placeholder: "What can I actually do from here?", rows: 2 },
+        widget: {
+          type: "text",
+          placeholder: "What can I actually do from here?",
+          rows: 2,
+        },
       },
     ],
     quote: {
