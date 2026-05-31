@@ -1,0 +1,11 @@
+{
+  "compatibility_date": "2026-05-30",
+  "compatibility_flags": ["global_fetch_strictly_public"],
+  "name": "altr-astro-stoa",
+  "assets": {
+    "directory": "./dist/client/",
+  },
+  "observability": {
+    "enabled": true,
+  },
+}
