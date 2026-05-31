@@ -2,21 +2,29 @@
 import { site } from "@/data/site";
 ---
 
-<footer class="mt-16 w-full border-t border-accent/25 border-b-2 border-b-accent/70" aria-label="Colophon">
-  <div class="px-[clamp(1rem,5vw,3rem)] pt-12 pb-20">
+<footer
+  class="mt-16 w-full border-t border-accent/25 border-b-2 border-b-accent/70"
+  aria-label="Colophon"
+>
+  <div class="bg-accent/5 px-[clamp(1rem,5vw,3rem)] pt-12 pb-20">
     <nav class="flex items-center gap-6 mb-6" aria-label="Footer navigation">
-      {site.footerNav.map(({ label, href }) => (
-        <a
-          href={href}
-          class="font-body text-[0.65rem] tracking-[0.14em] uppercase text-muted hover:text-ink transition-colors duration-[160ms]"
-        >
-          {label}
-        </a>
-      ))}
+      {
+        site.footerNav.map(({ label, href }) => (
+          <a
+            href={href}
+            class="font-body text-[0.65rem] tracking-[0.14em] uppercase text-muted hover:text-ink transition-colors duration-[160ms]"
+          >
+            {label}
+          </a>
+        ))
+      }
     </nav>
-    <p class="font-display italic text-sm text-muted max-w-[72ch] leading-[1.75]">
+    <p
+      class="font-display italic text-sm text-muted max-w-[72ch] leading-[1.75]"
+    >
       {site.name} &middot; {site.footer.tagline}
-      {site.footer.closingNote} {site.year}.
+      {site.footer.closingNote}
+      {site.year}.
     </p>
   </div>
 </footer>
