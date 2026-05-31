@@ -1,0 +1,37 @@
+---
+import Centre from "@/components/Centre.astro";
+import PracticeCard from "@/components/stoic/PracticeCard.astro";
+import type { StoicContent } from "@/data/stoic/types";
+
+interface Props {
+  content: StoicContent["whenTaskUndefined"];
+}
+
+const { content } = Astro.props;
+---
+
+<section class="border-t border-rule py-16">
+  <Centre>
+
+    <div class="max-w-3xl mb-10">
+      <h2 class="font-display italic text-[clamp(1.8rem,4vw,2.8rem)] leading-tight text-ink mb-3">
+        {content.heading}
+      </h2>
+      <p class="font-body text-sm tracking-[0.12em] uppercase text-muted mb-8" set:html={content.source} />
+      <p class="font-body text-md leading-relaxed text-ink" set:html={content.intro} />
+    </div>
+
+    <!-- Reminders grid -->
+    <div class="grid grid-cols-1 min-[48rem]:grid-cols-2 border-l border-t border-rule">
+      {content.reminders.map(({ label, detail }) => (
+        <div class="border-r border-b border-rule p-6">
+          <p class="font-display italic text-ink text-md leading-tight mb-2">{label}</p>
+          <p class="font-body text-sm text-muted leading-relaxed">{detail}</p>
+        </div>
+      ))}
+    </div>
+
+    <PracticeCard practice={content.practice} />
+
+  </Centre>
+</section>

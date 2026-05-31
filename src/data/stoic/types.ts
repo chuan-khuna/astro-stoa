@@ -111,4 +111,11 @@ export interface StoicContent {
     insights: { label: string; detail: string }[];
     practice: Practice;
   };
+  whenTaskUndefined: {
+    heading: string;
+    source: string;
+    intro: string;
+    reminders: { label: string; detail: string }[];
+    practice: Practice;
+  };
 }

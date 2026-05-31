@@ -6,6 +6,7 @@ import DichotomyOfControl from "@/components/stoic/sections/DichotomyOfControl.a
 import StoicTriangle from "@/components/stoic/sections/StoicTriangle.astro";
 import WhenFrustrated from "@/components/stoic/sections/WhenFrustrated.astro";
 import WhenAngry from "@/components/stoic/sections/WhenAngry.astro";
+import WhenTaskUndefined from "@/components/stoic/sections/WhenTaskUndefined.astro";
 import type { StoicContent } from "@/data/stoic/types";
 
 interface Props {
@@ -61,4 +62,8 @@ const { content } = Astro.props;
 
 <div id="when-angry">
   <WhenAngry content={content.whenAngry} />
+</div>
+
+<div id="when-task-undefined">
+  <WhenTaskUndefined content={content.whenTaskUndefined} />
 </div>
