@@ -39,8 +39,7 @@ src/
 
   components/stoic/
     StoicPage.astro           # orchestrator — renders header, toc, then each section
-    PracticeCard.astro        # shared practice step renderer (with widget dispatch)
-    sections/
+    sections/                 # one component per named section of the page
       TableOfContents.astro
       WhatIsStoic.astro
       DichotomyOfControl.astro
@@ -48,7 +47,9 @@ src/
       WhenFrustrated.astro
       WhenAngry.astro
       WhenTaskUndefined.astro
-    widgets/
+    shared/                   # layout components reused across multiple sections
+      PracticeCard.astro
+    widgets/                  # interactive leaf components embedded inside steps
       CountdownTimer.astro
       TextEntry.astro
       ControlSort.astro
@@ -108,6 +109,15 @@ Some strings contain inline HTML (`<em>`, `<span class="bg-highlight/20">`, `<br
 ---
 
 ## Component layer (`src/components/stoic/`)
+
+### Folder purposes
+
+| Folder | What goes here |
+|---|---|
+| *(root)* | `StoicPage.astro` — the single page-level orchestrator |
+| `sections/` | One component per named section of the page. Each renders a heading, prose, content layout, and optionally a `<PracticeCard>`. |
+| `shared/` | Layout components reused by more than one section. Not interactive on their own — they compose widgets inside them. |
+| `widgets/` | Interactive leaf components (`timer`, `text`, `control`). Each maps to a `StoicWidget` type and handles its own `<script>` interactivity. |
 
 ### `StoicPage.astro` — orchestrator
 
