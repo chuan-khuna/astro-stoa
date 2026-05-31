@@ -17,7 +17,7 @@ const topNotes = allNotes.slice(0, 10);
 <Layout title={site.name}>
   <main>
     <!-- Quotes section -->
-    <SectionTitle title="Quotes" />
+    <SectionTitle id="quotes" title="Quotes" />
 
     <div class="mx-4 grid grid-cols-1 min-[60rem]:grid-cols-2 border-l border-t border-rule [&>*:last-child:nth-child(odd)]:col-span-full" role="list">
       {topQuotes.map((entry) => <QuoteCard entry={entry} />)}
@@ -33,7 +33,7 @@ const topNotes = allNotes.slice(0, 10);
     </div>
 
     <!-- Notes section -->
-    <SectionTitle title="Notes" />
+    <SectionTitle id="notes" title="Notes" />
 
     {
       topNotes.length > 0 ? (

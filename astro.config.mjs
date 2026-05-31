@@ -60,5 +60,14 @@ export default defineConfig({
       weights: [400, 500],
       styles: ["normal"],
     },
+    {
+      provider: fontProviders.google(),
+      name: "EB Garamond",
+      cssVariable: "--font-eb-garamond",
+      weights: [400],
+      styles: ["normal", "italic"],
+      // Greek subset for the nameStylised δτοα lettermark in Nav
+      subsets: ["greek", "latin"],
+    },
   ],
 });

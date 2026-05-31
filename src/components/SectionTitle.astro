@@ -1,12 +1,13 @@
 ---
 interface Props {
   title: string;
+  id?: string;
 }
 
-const { title } = Astro.props;
+const { title, id } = Astro.props;
 ---
 
-<div class="px-[clamp(1rem,5vw,3rem)] pt-10 pb-5">
+<div id={id} class="px-[clamp(1rem,5vw,3rem)] pt-10 pb-5 scroll-mt-4">
   <div class="border-t border-dotted border-rule"></div>
   <p class="text-center font-body tracking-[0.14em] uppercase text-muted pt-3">
     {title}
