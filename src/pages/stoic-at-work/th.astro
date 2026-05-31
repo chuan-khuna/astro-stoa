@@ -1,0 +1,9 @@
+---
+import ProseLayout from "@/layouts/ProseLayout.astro";
+import StoicAtWorkPage from "@/components/stoic-at-work/StoicAtWorkPage.astro";
+import { th } from "@/data/stoic-at-work/th";
+---
+
+<ProseLayout title={th.meta.title} description={th.meta.description} narrow={false}>
+  <StoicAtWorkPage content={th} />
+</ProseLayout>

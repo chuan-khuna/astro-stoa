@@ -1,0 +1,72 @@
+---
+import Centre from "@/components/Centre.astro";
+import PracticeCard from "@/components/stoic/shared/PracticeCard.astro";
+import type { StoicAtWorkContent } from "@/data/stoic-at-work/types";
+
+interface Props {
+  content: StoicAtWorkContent["fastBrief"];
+}
+
+const { content } = Astro.props;
+const { whatToDo } = content;
+const eyebrow =
+  "font-body text-sm tracking-[0.12em] uppercase text-muted mb-3 mt-9 first:mt-0";
+---
+
+<section class="border-t border-rule py-16">
+  <Centre>
+    <div class="max-w-3xl">
+      <h2 class="font-display italic text-[clamp(1.8rem,4vw,2.8rem)] leading-tight text-ink mb-3">
+        {content.heading}
+      </h2>
+      <p class="font-body text-sm tracking-[0.12em] uppercase text-muted mb-8" set:html={content.source} />
+
+      <!-- Epigraph -->
+      <div class="border-l-2 border-accent/50 pl-6 py-1 mb-9">
+        <blockquote class="font-display italic text-lg text-ink leading-snug mb-2">
+          "{content.epigraph.text}"
+        </blockquote>
+        <cite class="font-body text-sm tracking-[0.1em] uppercase text-muted not-italic" set:html={content.epigraph.author} />
+      </div>
+
+      <!-- The situation -->
+      <p class={eyebrow}>{content.situationLabel}</p>
+      {content.situation.map((p) => (
+        <p class="font-body text-md leading-relaxed text-ink mb-5" set:html={p} />
+      ))}
+
+      <!-- How to think about it -->
+      <p class={eyebrow}>{content.howToThinkLabel}</p>
+      {content.howToThink.map((p) => (
+        <p class="font-body text-md leading-relaxed text-ink mb-5" set:html={p} />
+      ))}
+
+      <!-- What to do -->
+      <p class={eyebrow}>{content.whatToDoLabel}</p>
+      {whatToDo.intro && (
+        <p class="font-body text-md leading-relaxed text-ink mb-5" set:html={whatToDo.intro} />
+      )}
+      {whatToDo.template && (
+        <blockquote
+          class="border-l-2 border-neutral bg-paper-2 px-6 py-4 mb-5 font-display italic text-md text-ink leading-relaxed"
+          set:html={`&ldquo;${whatToDo.template}&rdquo;`}
+        />
+      )}
+      {whatToDo.bullets && (
+        <ul class="space-y-2.5 mb-5">
+          {whatToDo.bullets.map((bullet) => (
+            <li class="font-body text-md text-ink flex gap-2.5 leading-relaxed">
+              <span class="shrink-0 text-muted/40">—</span>
+              <span set:html={bullet} />
+            </li>
+          ))}
+        </ul>
+      )}
+      {whatToDo.outro && (
+        <p class="font-body text-md leading-relaxed text-ink mb-5" set:html={whatToDo.outro} />
+      )}
+    </div>
+
+    <PracticeCard practice={content.practice} />
+  </Centre>
+</section>

@@ -1,0 +1,35 @@
+---
+import Centre from "@/components/Centre.astro";
+import type { StoicAtWorkContent } from "@/data/stoic-at-work/types";
+
+interface Props {
+  content: StoicAtWorkContent["intro"];
+}
+
+const { content } = Astro.props;
+---
+
+<section class="py-16">
+  <Centre>
+    <div class="max-w-3xl">
+      <h2 class="font-display italic text-[clamp(1.8rem,4vw,2.8rem)] leading-tight text-ink mb-6">
+        {content.heading}
+      </h2>
+
+      <div class="border-l-2 border-accent/50 pl-6 py-1 mb-8">
+        <blockquote class="font-display italic text-lg text-ink leading-snug mb-2">
+          "{content.epigraph.text}"
+        </blockquote>
+        <cite class="font-body text-sm tracking-[0.1em] uppercase text-muted not-italic" set:html={content.epigraph.author} />
+      </div>
+
+      {content.situation.map((p) => (
+        <p class="font-body text-md leading-relaxed text-ink mb-5" set:html={p} />
+      ))}
+
+      {content.howToThink.map((p) => (
+        <p class="font-body text-md leading-relaxed text-ink mb-5" set:html={p} />
+      ))}
+    </div>
+  </Centre>
+</section>
