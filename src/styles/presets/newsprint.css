@@ -6,10 +6,12 @@
 
 @theme {
   /* ── Typography ── */
-  --font-display: var(--font-spectral), var(--font-eb-garamond), var(--font-bai-jamjuree), ui-serif, Georgia, serif;
+  --font-display:
+    var(--font-spectral), var(--font-eb-garamond), var(--font-bai-jamjuree),
+    ui-serif, Georgia, serif;
   --font-body:
-    var(--font-alegreya-sans), var(--font-noto-sans-thai-looped),
-    ui-sans-serif, system-ui, sans-serif;
+    var(--font-alegreya-sans), var(--font-noto-sans-thai-looped), ui-sans-serif,
+    system-ui, sans-serif;
   --font-mono: var(--font-inconsolata), ui-monospace, monospace;
 
   /* ── Colour (OKLCH, anchor hue 75, warm oat parchment) ── */

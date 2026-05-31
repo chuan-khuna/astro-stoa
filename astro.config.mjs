@@ -67,7 +67,7 @@ export default defineConfig({
       weights: [400],
       styles: ["normal", "italic"],
       // Greek subset for the nameStylised δτοα lettermark in Nav
-      subsets: ["greek", "latin"],
+      // subsets: ["greek", "latin"],
     },
   ],
 });
