@@ -2,7 +2,7 @@ import type { StoicContent } from "@/data/stoic/types";
 
 export const langSwitch: StoicContent["langSwitch"] = {
   label: "ภาษาไทย",
-  href: "/stoic-th",
+  href: "/stoic/th",
 };
 
 export const meta: StoicContent["meta"] = {
